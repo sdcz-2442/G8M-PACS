@@ -43,10 +43,6 @@ namespace G8_Starship
             this.lbl_networkstatus = new System.Windows.Forms.Label();
             this.btn_sendping = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbl_privatekey = new System.Windows.Forms.Label();
-            this.tbx_privatekey = new System.Windows.Forms.TextBox();
-            this.btn_generatecoordinates = new System.Windows.Forms.Button();
             this.lbl_port = new System.Windows.Forms.Panel();
             this.minimize_click = new System.Windows.Forms.PictureBox();
             this.maximize_click = new System.Windows.Forms.PictureBox();
@@ -57,7 +53,6 @@ namespace G8_Starship
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.lbl_port.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimize_click)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximize_click)).BeginInit();
@@ -245,55 +240,6 @@ namespace G8_Starship
             this.label2.TabIndex = 14;
             this.label2.Text = "Communication System";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lbl_privatekey);
-            this.groupBox1.Controls.Add(this.tbx_privatekey);
-            this.groupBox1.Controls.Add(this.btn_generatecoordinates);
-            this.groupBox1.Font = new System.Drawing.Font("HP Simplified Hans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.groupBox1.Location = new System.Drawing.Point(577, 85);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(321, 152);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Generate coordinates";
-            // 
-            // lbl_privatekey
-            // 
-            this.lbl_privatekey.AutoSize = true;
-            this.lbl_privatekey.Font = new System.Drawing.Font("HP Simplified Hans", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_privatekey.Location = new System.Drawing.Point(28, 41);
-            this.lbl_privatekey.Name = "lbl_privatekey";
-            this.lbl_privatekey.Size = new System.Drawing.Size(154, 22);
-            this.lbl_privatekey.TabIndex = 3;
-            this.lbl_privatekey.Text = "Insert Private Key";
-            // 
-            // tbx_privatekey
-            // 
-            this.tbx_privatekey.Location = new System.Drawing.Point(32, 86);
-            this.tbx_privatekey.Name = "tbx_privatekey";
-            this.tbx_privatekey.Size = new System.Drawing.Size(129, 35);
-            this.tbx_privatekey.TabIndex = 2;
-            // 
-            // btn_generatecoordinates
-            // 
-            this.btn_generatecoordinates.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
-            this.btn_generatecoordinates.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.btn_generatecoordinates.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
-            this.btn_generatecoordinates.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
-            this.btn_generatecoordinates.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_generatecoordinates.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_generatecoordinates.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
-            this.btn_generatecoordinates.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_generatecoordinates.Location = new System.Drawing.Point(180, 83);
-            this.btn_generatecoordinates.Name = "btn_generatecoordinates";
-            this.btn_generatecoordinates.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btn_generatecoordinates.Size = new System.Drawing.Size(113, 38);
-            this.btn_generatecoordinates.TabIndex = 1;
-            this.btn_generatecoordinates.Text = "Generate";
-            this.btn_generatecoordinates.UseVisualStyleBackColor = false;
-            // 
             // lbl_port
             // 
             this.lbl_port.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -390,7 +336,6 @@ namespace G8_Starship
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(11)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(940, 578);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.lbl_port);
             this.Controls.Add(this.panel1);
@@ -405,8 +350,6 @@ namespace G8_Starship
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.lbl_port.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.minimize_click)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximize_click)).EndInit();
@@ -425,11 +368,7 @@ namespace G8_Starship
         private System.Windows.Forms.PictureBox close_click;
         private System.Windows.Forms.PictureBox maximize_click;
         private System.Windows.Forms.PictureBox minimize_click;
-        private System.Windows.Forms.Button btn_generatecoordinates;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lbl_privatekey;
-        private System.Windows.Forms.TextBox tbx_privatekey;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btn_sendping;
         private System.Windows.Forms.ListBox lbx_console;

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G8_Methods", "G8_Methods\G8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G8_Planet", "G8_Planet\G8_Planet.csproj", "{323983E4-D9EE-4A29-A0FB-0870E051D2A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G8_DataAccess", "G8_DataAccess\G8_DataAccess.csproj", "{28ED577A-7614-4AE5-BCCB-6AC962E5414E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{323983E4-D9EE-4A29-A0FB-0870E051D2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{323983E4-D9EE-4A29-A0FB-0870E051D2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{323983E4-D9EE-4A29-A0FB-0870E051D2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28ED577A-7614-4AE5-BCCB-6AC962E5414E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28ED577A-7614-4AE5-BCCB-6AC962E5414E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28ED577A-7614-4AE5-BCCB-6AC962E5414E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28ED577A-7614-4AE5-BCCB-6AC962E5414E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

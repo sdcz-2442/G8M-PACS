@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SecureCoreModelStoreContainer" CdmEntityContainer="SecureCoreEntities">
+    <EntitySetMapping Name="Agencies">
+      <EntityTypeMapping TypeName="SecureCoreModel.Agency">
+        <MappingFragment StoreEntitySet="Agencies">
+          <ScalarProperty Name="idAgency" ColumnName="idAgency" />
+          <ScalarProperty Name="CodeAgency" ColumnName="CodeAgency" />
+          <ScalarProperty Name="DescAgency" ColumnName="DescAgency" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactSystems">
+      <EntityTypeMapping TypeName="SecureCoreModel.ContactSystem">
+        <MappingFragment StoreEntitySet="ContactSystem">
+          <ScalarProperty Name="IdSystem" ColumnName="IdSystem" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SystemValue" ColumnName="SystemValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DefinedRoutes">
+      <EntityTypeMapping TypeName="SecureCoreModel.DefinedRoute">
+        <MappingFragment StoreEntitySet="DefinedRoutes">
+          <ScalarProperty Name="idDefinedRoute" ColumnName="idDefinedRoute" />
+          <ScalarProperty Name="idPlanetOri" ColumnName="idPlanetOri" />
+          <ScalarProperty Name="idPlanetDest" ColumnName="idPlanetDest" />
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+          <ScalarProperty Name="RouteMap" ColumnName="RouteMap" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeliveryDatas">
+      <EntityTypeMapping TypeName="SecureCoreModel.DeliveryData">
+        <MappingFragment StoreEntitySet="DeliveryData">
+          <ScalarProperty Name="idDeliveryData" ColumnName="idDeliveryData" />
+          <ScalarProperty Name="CodeDelivery" ColumnName="CodeDelivery" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+          <ScalarProperty Name="idSpaceShip" ColumnName="idSpaceShip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factories">
+      <EntityTypeMapping TypeName="SecureCoreModel.Factory">
+        <MappingFragment StoreEntitySet="Factories">
+          <ScalarProperty Name="idFactory" ColumnName="idFactory" />
+          <ScalarProperty Name="codeFactory" ColumnName="codeFactory" />
+          <ScalarProperty Name="DescFactory" ColumnName="DescFactory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Filiations">
+      <EntityTypeMapping TypeName="SecureCoreModel.Filiation">
+        <MappingFragment StoreEntitySet="Filiations">
+          <ScalarProperty Name="idFiliation" ColumnName="idFiliation" />
+          <ScalarProperty Name="CodeFiliation" ColumnName="CodeFiliation" />
+          <ScalarProperty Name="DescFiliations" ColumnName="DescFiliations" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InnerEncryptions">
+      <EntityTypeMapping TypeName="SecureCoreModel.InnerEncryption">
+        <MappingFragment StoreEntitySet="InnerEncryption">
+          <ScalarProperty Name="idInnerEncryption" ColumnName="idInnerEncryption" />
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+          <ScalarProperty Name="ValidationCode" ColumnName="ValidationCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InnerEncryptionDatas">
+      <EntityTypeMapping TypeName="SecureCoreModel.InnerEncryptionData">
+        <MappingFragment StoreEntitySet="InnerEncryptionData">
+          <ScalarProperty Name="idInnerEncryptionData" ColumnName="idInnerEncryptionData" />
+          <ScalarProperty Name="IdInnerEncryption" ColumnName="IdInnerEncryption" />
+          <ScalarProperty Name="Word" ColumnName="Word" />
+          <ScalarProperty Name="Numbers" ColumnName="Numbers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MilitaryCamps">
+      <EntityTypeMapping TypeName="SecureCoreModel.MilitaryCamp">
+        <MappingFragment StoreEntitySet="MilitaryCamps">
+          <ScalarProperty Name="idMilitaryCamp" ColumnName="idMilitaryCamp" />
+          <ScalarProperty Name="CodeCamp" ColumnName="CodeCamp" />
+          <ScalarProperty Name="DescCamp" ColumnName="DescCamp" />
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewContacts">
+      <EntityTypeMapping TypeName="SecureCoreModel.NewContact">
+        <MappingFragment StoreEntitySet="NewContact">
+          <ScalarProperty Name="idContact" ColumnName="idContact" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OperationalAreas">
+      <EntityTypeMapping TypeName="SecureCoreModel.OperationalArea">
+        <MappingFragment StoreEntitySet="OperationalAreas">
+          <ScalarProperty Name="idOperationalArea" ColumnName="idOperationalArea" />
+          <ScalarProperty Name="CodeOperationalArea" ColumnName="CodeOperationalArea" />
+          <ScalarProperty Name="DescOperationalArea" ColumnName="DescOperationalArea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderInfoes">
+      <EntityTypeMapping TypeName="SecureCoreModel.OrderInfo">
+        <MappingFragment StoreEntitySet="OrderInfo">
+          <ScalarProperty Name="idOrderInfo" ColumnName="idOrderInfo" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="idAgency" ColumnName="idAgency" />
+          <ScalarProperty Name="idOperationalArea" ColumnName="idOperationalArea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="SecureCoreModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="codeOrder" ColumnName="codeOrder" />
+          <ScalarProperty Name="dateOrder" ColumnName="dateOrder" />
+          <ScalarProperty Name="IdPriority" ColumnName="IdPriority" />
+          <ScalarProperty Name="IdFactory" ColumnName="IdFactory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdersDetails">
+      <EntityTypeMapping TypeName="SecureCoreModel.OrdersDetail">
+        <MappingFragment StoreEntitySet="OrdersDetail">
+          <ScalarProperty Name="idOrderDetail" ColumnName="idOrderDetail" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+          <ScalarProperty Name="idReference" ColumnName="idReference" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlanetKeys">
+      <EntityTypeMapping TypeName="SecureCoreModel.PlanetKey">
+        <MappingFragment StoreEntitySet="PlanetKeys">
+          <ScalarProperty Name="idKey" ColumnName="idKey" />
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+          <ScalarProperty Name="XMLKey" ColumnName="XMLKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlanetRoutes">
+      <EntityTypeMapping TypeName="SecureCoreModel.PlanetRoute">
+        <MappingFragment StoreEntitySet="PlanetRoutes">
+          <ScalarProperty Name="idPlanetRoute" ColumnName="idPlanetRoute" />
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Planets">
+      <EntityTypeMapping TypeName="SecureCoreModel.Planet">
+        <MappingFragment StoreEntitySet="Planets">
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+          <ScalarProperty Name="CodePlanet" ColumnName="CodePlanet" />
+          <ScalarProperty Name="DescPlanet" ColumnName="DescPlanet" />
+          <ScalarProperty Name="idSector" ColumnName="idSector" />
+          <ScalarProperty Name="long" ColumnName="long" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="parsecs" ColumnName="parsecs" />
+          <ScalarProperty Name="idNatives" ColumnName="idNatives" />
+          <ScalarProperty Name="idFiliation" ColumnName="idFiliation" />
+          <ScalarProperty Name="PlanetPicture" ColumnName="PlanetPicture" />
+          <ScalarProperty Name="IPPlanet" ColumnName="IPPlanet" />
+          <ScalarProperty Name="PortPlanet" ColumnName="PortPlanet" />
+          <ScalarProperty Name="PortPlanet1" ColumnName="PortPlanet1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Priorities">
+      <EntityTypeMapping TypeName="SecureCoreModel.Priority">
+        <MappingFragment StoreEntitySet="Priority">
+          <ScalarProperty Name="idPriority" ColumnName="idPriority" />
+          <ScalarProperty Name="CodePriority" ColumnName="CodePriority" />
+          <ScalarProperty Name="DescPriority" ColumnName="DescPriority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="References">
+      <EntityTypeMapping TypeName="SecureCoreModel.Reference">
+        <MappingFragment StoreEntitySet="References">
+          <ScalarProperty Name="idReference" ColumnName="idReference" />
+          <ScalarProperty Name="codeReference" ColumnName="codeReference" />
+          <ScalarProperty Name="descReference" ColumnName="descReference" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="VideoExplode" ColumnName="VideoExplode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regions">
+      <EntityTypeMapping TypeName="SecureCoreModel.Region">
+        <MappingFragment StoreEntitySet="Regions">
+          <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+          <ScalarProperty Name="CodeRegion" ColumnName="CodeRegion" />
+          <ScalarProperty Name="DescRegion" ColumnName="DescRegion" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Routes">
+      <EntityTypeMapping TypeName="SecureCoreModel.Route">
+        <MappingFragment StoreEntitySet="Routes">
+          <ScalarProperty Name="idRoute" ColumnName="idRoute" />
+          <ScalarProperty Name="CodeRoute" ColumnName="CodeRoute" />
+          <ScalarProperty Name="DescRoute" ColumnName="DescRoute" />
+          <ScalarProperty Name="idPlanetOr" ColumnName="idPlanetOr" />
+          <ScalarProperty Name="idPlanetDest" ColumnName="idPlanetDest" />
+          <ScalarProperty Name="idRouteType" ColumnName="idRouteType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RouteTypes">
+      <EntityTypeMapping TypeName="SecureCoreModel.RouteType">
+        <MappingFragment StoreEntitySet="RouteTypes">
+          <ScalarProperty Name="idRouteType" ColumnName="idRouteType" />
+          <ScalarProperty Name="CodeRouteType" ColumnName="CodeRouteType" />
+          <ScalarProperty Name="DescRouteType" ColumnName="DescRouteType" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sectors">
+      <EntityTypeMapping TypeName="SecureCoreModel.Sector">
+        <MappingFragment StoreEntitySet="Sectors">
+          <ScalarProperty Name="idSector" ColumnName="idSector" />
+          <ScalarProperty Name="CodeSector" ColumnName="CodeSector" />
+          <ScalarProperty Name="DescSector" ColumnName="DescSector" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpaceShipCategories">
+      <EntityTypeMapping TypeName="SecureCoreModel.SpaceShipCategory">
+        <MappingFragment StoreEntitySet="SpaceShipCategories">
+          <ScalarProperty Name="idSpaceShipCategory" ColumnName="idSpaceShipCategory" />
+          <ScalarProperty Name="CodeSpaceShipCategory" ColumnName="CodeSpaceShipCategory" />
+          <ScalarProperty Name="DescSpaceShipCategory" ColumnName="DescSpaceShipCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpaceShips">
+      <EntityTypeMapping TypeName="SecureCoreModel.SpaceShip">
+        <MappingFragment StoreEntitySet="SpaceShips">
+          <ScalarProperty Name="idSpaceShip" ColumnName="idSpaceShip" />
+          <ScalarProperty Name="idSpaceShipType" ColumnName="idSpaceShipType" />
+          <ScalarProperty Name="CodeSpaceShip" ColumnName="CodeSpaceShip" />
+          <ScalarProperty Name="IPSpaceShip" ColumnName="IPSpaceShip" />
+          <ScalarProperty Name="PortSpaceShip" ColumnName="PortSpaceShip" />
+          <ScalarProperty Name="PortSpaceShip1" ColumnName="PortSpaceShip1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpaceShipTypes">
+      <EntityTypeMapping TypeName="SecureCoreModel.SpaceShipType">
+        <MappingFragment StoreEntitySet="SpaceShipTypes">
+          <ScalarProperty Name="idSpaceShipType" ColumnName="idSpaceShipType" />
+          <ScalarProperty Name="CodeSpaceShipType" ColumnName="CodeSpaceShipType" />
+          <ScalarProperty Name="DescSpaceShipType" ColumnName="DescSpaceShipType" />
+          <ScalarProperty Name="idFiliation" ColumnName="idFiliation" />
+          <ScalarProperty Name="idSpaceShipCategory" ColumnName="idSpaceShipCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Species">
+      <EntityTypeMapping TypeName="SecureCoreModel.Species">
+        <MappingFragment StoreEntitySet="Species">
+          <ScalarProperty Name="idSpecie" ColumnName="idSpecie" />
+          <ScalarProperty Name="CodeSpecie" ColumnName="CodeSpecie" />
+          <ScalarProperty Name="DescSpecie" ColumnName="DescSpecie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SecureCoreModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserCategories">
+      <EntityTypeMapping TypeName="SecureCoreModel.UserCategory">
+        <MappingFragment StoreEntitySet="UserCategories">
+          <ScalarProperty Name="idUserCategory" ColumnName="idUserCategory" />
+          <ScalarProperty Name="CodeCategory" ColumnName="CodeCategory" />
+          <ScalarProperty Name="DescCategory" ColumnName="DescCategory" />
+          <ScalarProperty Name="AccessLevel" ColumnName="AccessLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRanks">
+      <EntityTypeMapping TypeName="SecureCoreModel.UserRank">
+        <MappingFragment StoreEntitySet="UserRanks">
+          <ScalarProperty Name="idUserRank" ColumnName="idUserRank" />
+          <ScalarProperty Name="CodeRank" ColumnName="CodeRank" />
+          <ScalarProperty Name="DescRank" ColumnName="DescRank" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SecureCoreModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="CodeUser" ColumnName="CodeUser" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="idUserRank" ColumnName="idUserRank" />
+          <ScalarProperty Name="idUserCategory" ColumnName="idUserCategory" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="idPlanet" ColumnName="idPlanet" />
+          <ScalarProperty Name="idSpecie" ColumnName="idSpecie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuOptions">
+      <EntityTypeMapping TypeName="SecureCoreModel.MenuOption">
+        <MappingFragment StoreEntitySet="MenuOptions">
+          <ScalarProperty Name="idOpcio" ColumnName="idOpcio" />
+          <ScalarProperty Name="nomOpcio" ColumnName="nomOpcio" />
+          <ScalarProperty Name="ensamblat" ColumnName="ensamblat" />
+          <ScalarProperty Name="classe" ColumnName="classe" />
+          <ScalarProperty Name="nivellAcces" ColumnName="nivellAcces" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
