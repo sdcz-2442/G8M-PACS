@@ -1,4 +1,5 @@
-﻿using System;
+﻿using G8_Planet;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,8 @@ namespace G8_Starship
         private bool mouseDown;
         private Point lastLocation;
 
+        string xmlPath = @"C:\TCP-pruebas\TCPSettings.xml";
+
         Thread checkNetwork;
 
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
@@ -26,12 +29,12 @@ namespace G8_Starship
         public frm_spaceship()
         {
             InitializeComponent();
-            Control.CheckForIllegalCrossThreadCalls = false;
+            //Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void frm_spaceship_Load(object sender, EventArgs e)
         {
-            checkNetwork = new Thread(ComprobarRed);
+            lbl_networkstatus.Visible = false;
         }
 
         private void close_click_Click(object sender, EventArgs e)
@@ -80,60 +83,98 @@ namespace G8_Starship
 
         private void btn_sendping_Click(object sender, EventArgs e)
         {
+            checkNetwork = new Thread(ComprobarRed);
             checkNetwork.Start();
         }
 
         public void ComprobarRed()
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
+            lbx_console.Items.Clear();
+            btn_sendping.Enabled = false;
+            tbx_ipplanet.Enabled = false;
+            lbl_networkstatus.Visible = true;
+
             bool networkStatus = false;
             int pingCount = 0;
-            string ipPing = "192.168.1.1"; //get ping from database
+            string ipPing = tbx_ipplanet.Text; //get ping from planet
 
-
-            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (NetworkInterface adapter in nics)
+            try
             {
-                //si las redes son válidas
-                if ((adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet || adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211) && adapter.OperationalStatus == OperationalStatus.Up)
+                if (String.IsNullOrEmpty(tbx_ipplanet.Text))
                 {
-                    networkStatus = true;
-                }
-            }
-
-            for (int i = 1; i <= 10; i++)
-            {
-                Ping myPing = new Ping();
-                PingReply reply = myPing.Send(ipPing, 1000);
-
-                if (reply != null)
-                {
-
-                    lbx_console.Items.Add("Ping number " + i + ": " + reply.Status);
-                    if (reply.Status == IPStatus.Success)
+                    MessageBox.Show("Error: please insert ping");
+                    if (checkNetwork.IsAlive)
                     {
-                        pingCount++;
+                        btn_sendping.Enabled = true;
+                        tbx_ipplanet.Enabled = true;
+                        lbl_networkstatus.Visible = false;
                     }
                 }
-                Thread.Sleep(500);
-            }
+                else
+                {
 
-            //si hay alguna interfaz wifi o ethernet activo y se ha recibido respuesta de al menos la mitad de los pings
-            if (!networkStatus)
+                    NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+
+                    lbl_networkstatus.Text = "Pending";
+
+                    foreach (NetworkInterface adapter in nics)
+                    {
+                        //si las redes son válidas
+                        if ((adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet || adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211) && adapter.OperationalStatus == OperationalStatus.Up)
+                        {
+                            networkStatus = true;
+                        }
+                    }
+
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        Ping myPing = new Ping();
+                        PingReply reply = myPing.Send(ipPing, 1000);
+
+                        if (reply != null)
+                        {
+                            
+                            lbx_console.Items.Add("Ping number " + i + ": " + reply.Status);
+                            if (reply.Status == IPStatus.Success)
+                            {
+                                pingCount++;
+                            }
+                        }
+                        Thread.Sleep(2000);
+                    }
+
+                    if (!networkStatus)
+                    {
+                        lbl_networkstatus.Text = "KO";
+                        btn_sendping.Enabled = true;
+                        tbx_ipplanet.Enabled = true;
+                    }
+                    else if (pingCount < 5)
+                    {
+
+                        lbl_networkstatus.Text = "Waiting...";
+                        btn_sendping.Enabled = true;
+                        tbx_ipplanet.Enabled = true;
+                    }
+                    else
+                    {
+                        lbl_networkstatus.Text = "OK";
+                        btn_sendping.Enabled = true;
+                        tbx_ipplanet.Enabled = true;
+                    }
+
+                }
+            } catch (System.Threading.ThreadStateException)
             {
-                lbl_networkstatus.Text = "KO";
+                MessageBox.Show("Error2");
+                if (checkNetwork.IsAlive)
+                {
+                    btn_sendping.Enabled = true;
+                    tbx_ipplanet.Enabled = true;
+                    lbl_networkstatus.Visible = false;
+                }
             }
-            else if (pingCount < 5)
-            {
-
-                lbl_networkstatus.Text = "Waiting...";
-            }
-            else
-            {
-                lbl_networkstatus.Text = "OK";
-
-            }
-
-
         }
     }
 }

@@ -95,5 +95,11 @@
   <ItemGroup>
     <None Include="Resources\window_open_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\G8_Planet\G8_Planet.csproj">
+      <Project>{323983e4-d9ee-4a29-a0fb-0870e051d2a4}</Project>
+      <Name>G8_Planet</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

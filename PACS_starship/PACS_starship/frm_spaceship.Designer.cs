@@ -30,15 +30,16 @@ namespace G8_Starship
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tbx_ipplanet = new System.Windows.Forms.TextBox();
             this.lbx_console = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lbl_networkstatus = new System.Windows.Forms.Label();
             this.btn_sendping = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbl_privatekey = new System.Windows.Forms.Label();
             this.tbx_privatekey = new System.Windows.Forms.TextBox();
             this.btn_generatecoordinates = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.topbar = new System.Windows.Forms.Panel();
             this.minimize_click = new System.Windows.Forms.PictureBox();
             this.maximize_click = new System.Windows.Forms.PictureBox();
@@ -47,6 +48,7 @@ namespace G8_Starship
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btn_openplanet = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.topbar.SuspendLayout();
@@ -58,6 +60,7 @@ namespace G8_Starship
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(12)))), ((int)(((byte)(31)))));
+            this.panel1.Controls.Add(this.tbx_ipplanet);
             this.panel1.Controls.Add(this.lbx_console);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.lbl_networkstatus);
@@ -65,8 +68,16 @@ namespace G8_Starship
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(-1, 34);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(377, 187);
+            this.panel1.Size = new System.Drawing.Size(426, 279);
             this.panel1.TabIndex = 0;
+            // 
+            // tbx_ipplanet
+            // 
+            this.tbx_ipplanet.Location = new System.Drawing.Point(32, 51);
+            this.tbx_ipplanet.Multiline = true;
+            this.tbx_ipplanet.Name = "tbx_ipplanet";
+            this.tbx_ipplanet.Size = new System.Drawing.Size(215, 28);
+            this.tbx_ipplanet.TabIndex = 4;
             // 
             // lbx_console
             // 
@@ -74,10 +85,10 @@ namespace G8_Starship
             this.lbx_console.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbx_console.ForeColor = System.Drawing.Color.White;
             this.lbx_console.FormattingEnabled = true;
-            this.lbx_console.Location = new System.Drawing.Point(17, 94);
+            this.lbx_console.Location = new System.Drawing.Point(32, 124);
             this.lbx_console.Margin = new System.Windows.Forms.Padding(1);
             this.lbx_console.Name = "lbx_console";
-            this.lbx_console.Size = new System.Drawing.Size(310, 67);
+            this.lbx_console.Size = new System.Drawing.Size(376, 145);
             this.lbx_console.TabIndex = 18;
             // 
             // label3
@@ -86,7 +97,7 @@ namespace G8_Starship
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.label3.Location = new System.Drawing.Point(164, 51);
+            this.label3.Location = new System.Drawing.Point(28, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 23);
             this.label3.TabIndex = 17;
@@ -96,13 +107,14 @@ namespace G8_Starship
             // 
             this.lbl_networkstatus.AutoSize = true;
             this.lbl_networkstatus.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_networkstatus.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_networkstatus.Font = new System.Drawing.Font("Leelawadee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_networkstatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.lbl_networkstatus.Location = new System.Drawing.Point(235, 51);
+            this.lbl_networkstatus.Location = new System.Drawing.Point(99, 96);
             this.lbl_networkstatus.Name = "lbl_networkstatus";
-            this.lbl_networkstatus.Size = new System.Drawing.Size(35, 23);
+            this.lbl_networkstatus.Size = new System.Drawing.Size(72, 19);
             this.lbl_networkstatus.TabIndex = 16;
-            this.lbl_networkstatus.Text = "OK";            // 
+            this.lbl_networkstatus.Text = "Waiting...";
+            // 
             // btn_sendping
             // 
             this.btn_sendping.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
@@ -113,14 +125,26 @@ namespace G8_Starship
             this.btn_sendping.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sendping.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
             this.btn_sendping.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_sendping.Location = new System.Drawing.Point(17, 48);
+            this.btn_sendping.Location = new System.Drawing.Point(265, 51);
             this.btn_sendping.Name = "btn_sendping";
             this.btn_sendping.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btn_sendping.Size = new System.Drawing.Size(129, 31);
+            this.btn_sendping.Size = new System.Drawing.Size(129, 28);
             this.btn_sendping.TabIndex = 15;
             this.btn_sendping.Text = "Network Request";
             this.btn_sendping.UseVisualStyleBackColor = false;
             this.btn_sendping.Click += new System.EventHandler(this.btn_sendping_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
+            this.label2.Location = new System.Drawing.Point(26, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(300, 33);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Communication System";
             // 
             // groupBox1
             // 
@@ -129,7 +153,7 @@ namespace G8_Starship
             this.groupBox1.Controls.Add(this.btn_generatecoordinates);
             this.groupBox1.Font = new System.Drawing.Font("HP Simplified Hans", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.groupBox1.Location = new System.Drawing.Point(428, 354);
+            this.groupBox1.Location = new System.Drawing.Point(577, 85);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(321, 152);
             this.groupBox1.TabIndex = 2;
@@ -169,18 +193,7 @@ namespace G8_Starship
             this.btn_generatecoordinates.Size = new System.Drawing.Size(113, 38);
             this.btn_generatecoordinates.TabIndex = 1;
             this.btn_generatecoordinates.Text = "Generate";
-            this.btn_generatecoordinates.UseVisualStyleBackColor = false;            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Bahnschrift", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.label2.Location = new System.Drawing.Point(11, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(300, 33);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Communication System";
+            this.btn_generatecoordinates.UseVisualStyleBackColor = false;
             // 
             // topbar
             // 
@@ -267,10 +280,28 @@ namespace G8_Starship
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(12)))), ((int)(((byte)(31)))));
-            this.panel4.Location = new System.Drawing.Point(394, 176);
+            this.panel4.Location = new System.Drawing.Point(680, 176);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(546, 159);
+            this.panel4.Size = new System.Drawing.Size(260, 159);
             this.panel4.TabIndex = 15;
+            // 
+            // btn_openplanet
+            // 
+            this.btn_openplanet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.btn_openplanet.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.btn_openplanet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_openplanet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_openplanet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_openplanet.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_openplanet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.btn_openplanet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_openplanet.Location = new System.Drawing.Point(799, 478);
+            this.btn_openplanet.Name = "btn_openplanet";
+            this.btn_openplanet.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_openplanet.Size = new System.Drawing.Size(129, 28);
+            this.btn_openplanet.TabIndex = 19;
+            this.btn_openplanet.Text = "Network Request";
+            this.btn_openplanet.UseVisualStyleBackColor = false;
             // 
             // frm_spaceship
             // 
@@ -278,10 +309,11 @@ namespace G8_Starship
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(11)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(940, 518);
+            this.Controls.Add(this.btn_openplanet);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.topbar);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_spaceship";
             this.Opacity = 0.99D;
@@ -320,5 +352,7 @@ namespace G8_Starship
         private System.Windows.Forms.ListBox lbx_console;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbl_networkstatus;
+        private System.Windows.Forms.TextBox tbx_ipplanet;
+        private System.Windows.Forms.Button btn_openplanet;
     }
 }
