@@ -94,6 +94,9 @@ namespace G8_Starship
             btn_sendping.Enabled = false;
             tbx_ipplanet.Enabled = false;
             lbl_networkstatus.Visible = true;
+            cbx_messages.Enabled = false;
+            btn_sendmessages.Enabled = false;
+            tbx_port.Enabled = false;
 
             bool networkStatus = false;
             int pingCount = 0;
@@ -109,6 +112,9 @@ namespace G8_Starship
                         btn_sendping.Enabled = true;
                         tbx_ipplanet.Enabled = true;
                         lbl_networkstatus.Visible = false;
+                        cbx_messages.Enabled = true;
+                        btn_sendmessages.Enabled = true;
+                        tbx_port.Enabled = true;
                     }
                 }
                 else
@@ -149,6 +155,9 @@ namespace G8_Starship
                         lbl_networkstatus.Text = "KO";
                         btn_sendping.Enabled = true;
                         tbx_ipplanet.Enabled = true;
+                        cbx_messages.Enabled = true;
+                        btn_sendmessages.Enabled = true;
+                        tbx_port.Enabled = true;
                     }
                     else if (pingCount < 5)
                     {
@@ -156,24 +165,24 @@ namespace G8_Starship
                         lbl_networkstatus.Text = "Waiting...";
                         btn_sendping.Enabled = true;
                         tbx_ipplanet.Enabled = true;
+                        cbx_messages.Enabled = true;
+                        btn_sendmessages.Enabled = true;
+                        tbx_port.Enabled = true;
                     }
                     else
                     {
                         lbl_networkstatus.Text = "OK";
                         btn_sendping.Enabled = true;
                         tbx_ipplanet.Enabled = true;
+                        cbx_messages.Enabled = true;
+                        btn_sendmessages.Enabled = true;
+                        tbx_port.Enabled = true;
                     }
 
                 }
             } catch (System.Threading.ThreadStateException)
             {
                 MessageBox.Show("Error2");
-                if (checkNetwork.IsAlive)
-                {
-                    btn_sendping.Enabled = true;
-                    tbx_ipplanet.Enabled = true;
-                    lbl_networkstatus.Visible = false;
-                }
             }
         }
     }

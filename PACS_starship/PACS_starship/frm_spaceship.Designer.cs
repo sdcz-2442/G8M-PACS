@@ -30,6 +30,13 @@ namespace G8_Starship
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbx_port = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_sendmessages = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbx_messages = new System.Windows.Forms.ComboBox();
             this.tbx_ipplanet = new System.Windows.Forms.TextBox();
             this.lbx_console = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,7 +47,7 @@ namespace G8_Starship
             this.lbl_privatekey = new System.Windows.Forms.Label();
             this.tbx_privatekey = new System.Windows.Forms.TextBox();
             this.btn_generatecoordinates = new System.Windows.Forms.Button();
-            this.topbar = new System.Windows.Forms.Panel();
+            this.lbl_port = new System.Windows.Forms.Panel();
             this.minimize_click = new System.Windows.Forms.PictureBox();
             this.maximize_click = new System.Windows.Forms.PictureBox();
             this.close_click = new System.Windows.Forms.PictureBox();
@@ -48,20 +55,13 @@ namespace G8_Starship
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.topbar.SuspendLayout();
+            this.lbl_port.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimize_click)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximize_click)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_click)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -69,7 +69,7 @@ namespace G8_Starship
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(12)))), ((int)(((byte)(31)))));
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.tbx_port);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.tbx_ipplanet);
             this.panel1.Controls.Add(this.lbx_console);
@@ -81,6 +81,94 @@ namespace G8_Starship
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(370, 536);
             this.panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
+            this.label5.Location = new System.Drawing.Point(224, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(49, 23);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Port:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
+            this.label4.Location = new System.Drawing.Point(28, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 23);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "IP:";
+            // 
+            // tbx_port
+            // 
+            this.tbx_port.Location = new System.Drawing.Point(279, 53);
+            this.tbx_port.Multiline = true;
+            this.tbx_port.Name = "tbx_port";
+            this.tbx_port.Size = new System.Drawing.Size(73, 22);
+            this.tbx_port.TabIndex = 19;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btn_sendmessages);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.cbx_messages);
+            this.groupBox2.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
+            this.groupBox2.Location = new System.Drawing.Point(32, 308);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(320, 210);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Transmissions";
+            // 
+            // btn_sendmessages
+            // 
+            this.btn_sendmessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.btn_sendmessages.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.btn_sendmessages.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_sendmessages.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_sendmessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sendmessages.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sendmessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.btn_sendmessages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_sendmessages.Location = new System.Drawing.Point(239, 64);
+            this.btn_sendmessages.Name = "btn_sendmessages";
+            this.btn_sendmessages.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_sendmessages.Size = new System.Drawing.Size(55, 31);
+            this.btn_sendmessages.TabIndex = 19;
+            this.btn_sendmessages.Text = "Send Message";
+            this.btn_sendmessages.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Leelawadee", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
+            this.label1.Location = new System.Drawing.Point(19, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 18);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Select message:";
+            // 
+            // cbx_messages
+            // 
+            this.cbx_messages.FormattingEnabled = true;
+            this.cbx_messages.Items.AddRange(new object[] {
+            "ER - Entry Requirement",
+            "VR - Validation Result",
+            "VK - Validation Key"});
+            this.cbx_messages.Location = new System.Drawing.Point(23, 64);
+            this.cbx_messages.Name = "cbx_messages";
+            this.cbx_messages.Size = new System.Drawing.Size(198, 31);
+            this.cbx_messages.TabIndex = 0;
             // 
             // tbx_ipplanet
             // 
@@ -206,25 +294,25 @@ namespace G8_Starship
             this.btn_generatecoordinates.Text = "Generate";
             this.btn_generatecoordinates.UseVisualStyleBackColor = false;
             // 
-            // topbar
+            // lbl_port
             // 
-            this.topbar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lbl_port.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.topbar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.topbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(6)))), ((int)(((byte)(14)))));
-            this.topbar.Controls.Add(this.minimize_click);
-            this.topbar.Controls.Add(this.maximize_click);
-            this.topbar.Controls.Add(this.close_click);
-            this.topbar.Controls.Add(this.panel3);
-            this.topbar.Controls.Add(this.panel2);
-            this.topbar.Controls.Add(this.flowLayoutPanel2);
-            this.topbar.Location = new System.Drawing.Point(0, 0);
-            this.topbar.Name = "topbar";
-            this.topbar.Size = new System.Drawing.Size(940, 28);
-            this.topbar.TabIndex = 13;
-            this.topbar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topbar_MouseDown);
-            this.topbar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topbar_MouseMove);
-            this.topbar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.topbar_MouseUp);
+            this.lbl_port.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.lbl_port.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(6)))), ((int)(((byte)(14)))));
+            this.lbl_port.Controls.Add(this.minimize_click);
+            this.lbl_port.Controls.Add(this.maximize_click);
+            this.lbl_port.Controls.Add(this.close_click);
+            this.lbl_port.Controls.Add(this.panel3);
+            this.lbl_port.Controls.Add(this.panel2);
+            this.lbl_port.Controls.Add(this.flowLayoutPanel2);
+            this.lbl_port.Location = new System.Drawing.Point(0, 0);
+            this.lbl_port.Name = "lbl_port";
+            this.lbl_port.Size = new System.Drawing.Size(940, 28);
+            this.lbl_port.TabIndex = 13;
+            this.lbl_port.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topbar_MouseDown);
+            this.lbl_port.MouseMove += new System.Windows.Forms.MouseEventHandler(this.topbar_MouseMove);
+            this.lbl_port.MouseUp += new System.Windows.Forms.MouseEventHandler(this.topbar_MouseUp);
             // 
             // minimize_click
             // 
@@ -296,94 +384,6 @@ namespace G8_Starship
             this.panel4.Size = new System.Drawing.Size(260, 159);
             this.panel4.TabIndex = 15;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.comboBox1);
-            this.groupBox2.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.groupBox2.Location = new System.Drawing.Point(32, 308);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(320, 210);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Transmissions";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "ER - Entry Requirement",
-            "VR - Validation Result",
-            "VK - Validation Key"});
-            this.comboBox1.Location = new System.Drawing.Point(23, 64);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(198, 31);
-            this.comboBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Leelawadee", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.label1.Location = new System.Drawing.Point(19, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 18);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Select message:";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(239, 64);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(55, 31);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Send Message";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(279, 53);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(73, 22);
-            this.textBox1.TabIndex = 19;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.label4.Location = new System.Drawing.Point(28, 51);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 23);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "IP:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.label5.Location = new System.Drawing.Point(224, 52);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 23);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Port:";
-            // 
             // frm_spaceship
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,7 +392,7 @@ namespace G8_Starship
             this.ClientSize = new System.Drawing.Size(940, 578);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.topbar);
+            this.Controls.Add(this.lbl_port);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -403,14 +403,14 @@ namespace G8_Starship
             this.Load += new System.EventHandler(this.frm_spaceship_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.topbar.ResumeLayout(false);
+            this.lbl_port.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.minimize_click)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximize_click)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_click)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -418,7 +418,7 @@ namespace G8_Starship
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel topbar;
+        private System.Windows.Forms.Panel lbl_port;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
@@ -438,10 +438,10 @@ namespace G8_Starship
         private System.Windows.Forms.TextBox tbx_ipplanet;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbx_messages;
+        private System.Windows.Forms.Button btn_sendmessages;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbx_port;
     }
 }
