@@ -140,6 +140,7 @@ namespace G8_Starship
             this.btn_sendmessages.TabIndex = 19;
             this.btn_sendmessages.Text = "Send Message";
             this.btn_sendmessages.UseVisualStyleBackColor = false;
+            this.btn_sendmessages.Click += new System.EventHandler(this.btn_sendmessages_Click);
             // 
             // label1
             // 
@@ -163,8 +164,7 @@ namespace G8_Starship
             this.cbx_messages.Location = new System.Drawing.Point(23, 64);
             this.cbx_messages.Name = "cbx_messages";
             this.cbx_messages.Size = new System.Drawing.Size(198, 31);
-            this.cbx_messages.TabIndex = 0;
-            // 
+            this.cbx_messages.TabIndex = 0;            // 
             // tbx_ipplanet
             // 
             this.tbx_ipplanet.Location = new System.Drawing.Point(64, 52);

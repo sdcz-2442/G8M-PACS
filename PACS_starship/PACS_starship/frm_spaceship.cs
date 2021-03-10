@@ -26,6 +26,17 @@ namespace G8_Starship
 
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
 
+        string fileName = "";
+        string filePath = @"C:\";
+        string fileContent = "";
+
+        public static string encryptedMessage;
+        public static byte[] encryptedArray;
+
+        RSACryptoServiceProvider rsaEnc = new RSACryptoServiceProvider();
+
+        byte[] encryptedText;
+
         public frm_spaceship()
         {
             InitializeComponent();
@@ -184,6 +195,51 @@ namespace G8_Starship
             {
                 MessageBox.Show("Error2");
             }
+        }
+
+        private void btn_sendmessages_Click(object sender, EventArgs e)
+        {
+            //TODO: TIPOS DE MENSAJES
+            string messagetype = ""; //seleccion de la combobox???
+            if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
+            {
+                //TODO: obtener xml de la bbdd
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.InitialDirectory = @"C:\";
+                    openFileDialog.Filter = "Xml files (*.xml)|*.xml" + "|" + "All files (*.*)|*.*";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = openFileDialog.FileName;
+                        fileName = openFileDialog.SafeFileName;
+                        Stream fileStream = openFileDialog.OpenFile();
+
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            fileContent = reader.ReadToEnd();
+                        }
+
+                        //MessageBox.Show("File " + fileName + " on hold.");
+                    }
+                }
+
+                //DESENCRIPTAR CON CLAVE PRIVADA
+                string cryptedText = ""; //TODO: poner una textbox para mostrar el mensaje al usuario?
+                //tbx_crypted.Text = frmEncriptar.encryptedMessage;
+                //TODO: cambiar en la siguiente línea el array de bytes encriptado
+                //encryptedText = frmEncriptar.encryptedArray;
+                //desencriptar el mensaje cifrado
+                //byte[] decryptedtex = Decryption(encryptedText,
+                //rsa.ExportParameters(true), false);
+                //convertir array de bytes en string
+                //tbx_decrypted.Text = ByteConverter.GetString(decryptedtex);
+            }
+
+            //TODO: casos IF para cada tipo de mensaje
         }
     }
 }
