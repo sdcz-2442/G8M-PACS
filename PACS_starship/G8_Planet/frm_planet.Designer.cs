@@ -199,7 +199,7 @@ namespace G8_Planet
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(70, 46);
+            this.button1.Location = new System.Drawing.Point(42, 49);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 23);
             this.button1.TabIndex = 21;
@@ -208,7 +208,7 @@ namespace G8_Planet
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(247, 46);
+            this.button2.Location = new System.Drawing.Point(170, 49);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 23);
             this.button2.TabIndex = 22;
