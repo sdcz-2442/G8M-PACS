@@ -239,7 +239,7 @@ namespace G8_Planet
             // lbl_port
             // 
             this.lbl_port.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.lbl_port.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(6)))), ((int)(((byte)(14)))));
+            this.lbl_port.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
             this.lbl_port.Controls.Add(this.minimize_click);
             this.lbl_port.Controls.Add(this.maximize_click);
             this.lbl_port.Controls.Add(this.close_click);
@@ -251,6 +251,7 @@ namespace G8_Planet
             this.lbl_port.Name = "lbl_port";
             this.lbl_port.Size = new System.Drawing.Size(1344, 28);
             this.lbl_port.TabIndex = 23;
+            this.lbl_port.Paint += new System.Windows.Forms.PaintEventHandler(this.lbl_port_Paint);
             // 
             // minimize_click
             // 
@@ -284,8 +285,8 @@ namespace G8_Planet
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.panel3.Location = new System.Drawing.Point(1, 14);
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.panel3.Location = new System.Drawing.Point(694, 14);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(650, 1);
             this.panel3.TabIndex = 15;
@@ -293,8 +294,8 @@ namespace G8_Planet
             // panel2
             // 
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.panel2.Location = new System.Drawing.Point(-1, 8);
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.panel2.Location = new System.Drawing.Point(595, 8);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(750, 2);
             this.panel2.TabIndex = 14;
@@ -302,8 +303,8 @@ namespace G8_Planet
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(496, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(850, 4);
             this.flowLayoutPanel2.TabIndex = 13;

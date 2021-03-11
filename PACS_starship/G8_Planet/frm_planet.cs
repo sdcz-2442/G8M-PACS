@@ -160,5 +160,10 @@ namespace G8_Planet
                 }
             }
         }
+
+        private void lbl_port_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
