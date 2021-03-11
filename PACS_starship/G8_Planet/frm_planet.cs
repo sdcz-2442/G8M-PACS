@@ -118,27 +118,17 @@ namespace G8_Planet
 
         private void btn_generate_Click(object sender, EventArgs e)
         {
-            string keycontainer = tbx_container.Text;
-            string routeXML = tbx_routeXML.Text;
-
+            string TextKeyName = tbx_container.Text;
+            CspParameters cspp = new CspParameters();
+            string keyName = TextKeyName;
+            cspp.KeyContainerName = keyName;
+            rsa = new RSACryptoServiceProvider(cspp);
+            string publicKey = rsa.ToXmlString(false);
+            string pathfinal = @filePath + @"\Clau.xml";
+            File.WriteAllText(pathfinal, publicKey);
 
 
             //TODO: crear clave planeta
-
-
-            //Creo contenedor de claves
-            CspParameters cspp = new CspParameters();
-            cspp.KeyContainerName = keycontainer;
-            //Crear las claves, pasándole keycontainer como parámetro
-            rsa = new RSACryptoServiceProvider(cspp);
-
-            //Persisto clave privada
-            rsa.PersistKeyInCsp = true;
-            string publicKey = rsa.ToXmlString(false);
-
-            //Guardar clave pública en fichero especificado
-            File.WriteAllText(routeXML, publicKey);
-
 
             //TODO: guardar claves en BBDD!!!!
         }
