@@ -240,6 +240,7 @@ namespace G8_Planet
             // 
             this.lbl_port.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.lbl_port.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
+            this.lbl_port.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_port.Controls.Add(this.minimize_click);
             this.lbl_port.Controls.Add(this.maximize_click);
             this.lbl_port.Controls.Add(this.close_click);
@@ -256,7 +257,7 @@ namespace G8_Planet
             // minimize_click
             // 
             this.minimize_click.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minimize_click.Location = new System.Drawing.Point(1278, 4);
+            this.minimize_click.Location = new System.Drawing.Point(1276, 4);
             this.minimize_click.Name = "minimize_click";
             this.minimize_click.Size = new System.Drawing.Size(15, 15);
             this.minimize_click.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -266,7 +267,7 @@ namespace G8_Planet
             // maximize_click
             // 
             this.maximize_click.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.maximize_click.Location = new System.Drawing.Point(1299, 4);
+            this.maximize_click.Location = new System.Drawing.Point(1297, 4);
             this.maximize_click.Name = "maximize_click";
             this.maximize_click.Size = new System.Drawing.Size(15, 15);
             this.maximize_click.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -276,7 +277,8 @@ namespace G8_Planet
             // close_click
             // 
             this.close_click.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.close_click.Location = new System.Drawing.Point(1323, 4);
+            this.close_click.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.close_click.Location = new System.Drawing.Point(1321, 4);
             this.close_click.Name = "close_click";
             this.close_click.Size = new System.Drawing.Size(15, 15);
             this.close_click.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -286,6 +288,7 @@ namespace G8_Planet
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Location = new System.Drawing.Point(694, 14);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(650, 1);
@@ -295,6 +298,7 @@ namespace G8_Planet
             // 
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(595, 8);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(750, 2);
@@ -304,6 +308,7 @@ namespace G8_Planet
             // 
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+            this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(496, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(850, 4);
