@@ -311,5 +311,10 @@ namespace G8_Starship
             //15.Ho reenviarà cap el planeta.
             lbx_events.Items.Add("Hola");
         }
+
+        private void tbx_pubkey_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

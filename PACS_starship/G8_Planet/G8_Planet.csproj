@@ -95,5 +95,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\G8_DataAccess\G8_DataAccess.csproj">
+      <Project>{28ed577a-7614-4ae5-bccb-6ac962e5414e}</Project>
+      <Name>G8_DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\G8_Methods\G8_Methods.csproj">
+      <Project>{4251111b-7b39-41aa-8311-e73457cee377}</Project>
+      <Name>G8_Methods</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

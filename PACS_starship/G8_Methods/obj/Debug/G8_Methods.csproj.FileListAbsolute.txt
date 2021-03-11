@@ -1,0 +1,6 @@
+D:\Proyectos\github\G8M-PACS\PACS_starship\G8_Methods\bin\Debug\G8_Methods.dll
+D:\Proyectos\github\G8M-PACS\PACS_starship\G8_Methods\bin\Debug\G8_Methods.pdb
+D:\Proyectos\github\G8M-PACS\PACS_starship\G8_Methods\obj\Debug\G8_Methods.csprojAssemblyReference.cache
+D:\Proyectos\github\G8M-PACS\PACS_starship\G8_Methods\obj\Debug\G8_Methods.csproj.CoreCompileInputs.cache
+D:\Proyectos\github\G8M-PACS\PACS_starship\G8_Methods\obj\Debug\G8_Methods.dll
+D:\Proyectos\github\G8M-PACS\PACS_starship\G8_Methods\obj\Debug\G8_Methods.pdb

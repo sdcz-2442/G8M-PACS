@@ -10,7 +10,7 @@ using System.Configuration;
 
 namespace G8_DataAccess
 {
-    class DataAccess
+    public class DataAccess
     {
         public SqlConnection conn;
         public DataSet dts;
@@ -34,7 +34,7 @@ namespace G8_DataAccess
 
         public string connectionString()
         {
-            string connectString = ConfigurationManager.ConnectionStrings["G8_Starship.Properties.Settings.SecureCoreConnectionString"].ToString();
+            string connectString = ConfigurationManager.ConnectionStrings["G8_Planet.Properties.Settings.SecureCoreConnectionString"].ToString();
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
 
             connectString = "Data Source = " + Environment.MachineName.ToString() + connectString.Substring(connectString.IndexOf('\\')); //Manually set computer name

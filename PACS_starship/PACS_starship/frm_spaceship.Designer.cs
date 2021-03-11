@@ -53,10 +53,10 @@ namespace G8_Starship
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.tbx_pubkey = new System.Windows.Forms.TextBox();
             this.btn_steps = new System.Windows.Forms.Button();
             this.lbx_events = new System.Windows.Forms.ListBox();
             this.btn_open = new System.Windows.Forms.Button();
-            this.tbx_pubkey = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.lbl_port.SuspendLayout();
@@ -88,11 +88,11 @@ namespace G8_Starship
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.label5.Location = new System.Drawing.Point(224, 52);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 23);
+            this.label5.Size = new System.Drawing.Size(63, 29);
             this.label5.TabIndex = 21;
             this.label5.Text = "Port:";
             // 
@@ -100,11 +100,11 @@ namespace G8_Starship
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.label4.Location = new System.Drawing.Point(28, 51);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 23);
+            this.label4.Size = new System.Drawing.Size(41, 29);
             this.label4.TabIndex = 20;
             this.label4.Text = "IP:";
             // 
@@ -118,12 +118,13 @@ namespace G8_Starship
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.btn_sendmessages);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cbx_messages);
-            this.groupBox2.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.groupBox2.Location = new System.Drawing.Point(32, 340);
             this.groupBox2.Name = "groupBox2";
@@ -136,11 +137,11 @@ namespace G8_Starship
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.label6.Location = new System.Drawing.Point(18, 111);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 23);
+            this.label6.Size = new System.Drawing.Size(90, 29);
             this.label6.TabIndex = 21;
             this.label6.Text = "Output:";
             // 
@@ -148,11 +149,11 @@ namespace G8_Starship
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Leelawadee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.label7.Location = new System.Drawing.Point(92, 114);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 19);
+            this.label7.Size = new System.Drawing.Size(59, 25);
             this.label7.TabIndex = 20;
             this.label7.Text = "None";
             // 
@@ -179,11 +180,11 @@ namespace G8_Starship
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Leelawadee", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.label1.Location = new System.Drawing.Point(19, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 18);
+            this.label1.Size = new System.Drawing.Size(149, 24);
             this.label1.TabIndex = 18;
             this.label1.Text = "Select message:";
             // 
@@ -196,7 +197,7 @@ namespace G8_Starship
             "VK - Validation Key"});
             this.cbx_messages.Location = new System.Drawing.Point(23, 64);
             this.cbx_messages.Name = "cbx_messages";
-            this.cbx_messages.Size = new System.Drawing.Size(218, 31);
+            this.cbx_messages.Size = new System.Drawing.Size(218, 37);
             this.cbx_messages.TabIndex = 4;
             // 
             // tbx_ipplanet
@@ -209,14 +210,16 @@ namespace G8_Starship
             // 
             // lbx_console
             // 
+            this.lbx_console.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbx_console.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(12)))), ((int)(((byte)(31)))));
             this.lbx_console.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbx_console.ForeColor = System.Drawing.Color.White;
             this.lbx_console.FormattingEnabled = true;
+            this.lbx_console.ItemHeight = 17;
             this.lbx_console.Location = new System.Drawing.Point(32, 156);
             this.lbx_console.Margin = new System.Windows.Forms.Padding(1);
             this.lbx_console.Name = "lbx_console";
-            this.lbx_console.Size = new System.Drawing.Size(320, 171);
+            this.lbx_console.Size = new System.Drawing.Size(320, 155);
             this.lbx_console.TabIndex = 0;
             this.lbx_console.TabStop = false;
             // 
@@ -224,11 +227,11 @@ namespace G8_Starship
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.label3.Location = new System.Drawing.Point(28, 123);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 23);
+            this.label3.Size = new System.Drawing.Size(85, 29);
             this.label3.TabIndex = 17;
             this.label3.Text = "Status:";
             // 
@@ -236,11 +239,11 @@ namespace G8_Starship
             // 
             this.lbl_networkstatus.AutoSize = true;
             this.lbl_networkstatus.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_networkstatus.Font = new System.Drawing.Font("Leelawadee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_networkstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_networkstatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.lbl_networkstatus.Location = new System.Drawing.Point(99, 126);
             this.lbl_networkstatus.Name = "lbl_networkstatus";
-            this.lbl_networkstatus.Size = new System.Drawing.Size(72, 19);
+            this.lbl_networkstatus.Size = new System.Drawing.Size(93, 25);
             this.lbl_networkstatus.TabIndex = 16;
             this.lbl_networkstatus.Text = "Waiting...";
             // 
@@ -271,7 +274,7 @@ namespace G8_Starship
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.label2.Location = new System.Drawing.Point(26, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(300, 33);
+            this.label2.Size = new System.Drawing.Size(378, 41);
             this.label2.TabIndex = 14;
             this.label2.Text = "Communication System";
             // 
@@ -366,8 +369,20 @@ namespace G8_Starship
             this.panel4.Size = new System.Drawing.Size(285, 159);
             this.panel4.TabIndex = 15;
             // 
+            // tbx_pubkey
+            // 
+            this.tbx_pubkey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbx_pubkey.Location = new System.Drawing.Point(14, 14);
+            this.tbx_pubkey.Margin = new System.Windows.Forms.Padding(4);
+            this.tbx_pubkey.Multiline = true;
+            this.tbx_pubkey.Name = "tbx_pubkey";
+            this.tbx_pubkey.Size = new System.Drawing.Size(258, 129);
+            this.tbx_pubkey.TabIndex = 34;
+            this.tbx_pubkey.TextChanged += new System.EventHandler(this.tbx_pubkey_TextChanged);
+            // 
             // btn_steps
             // 
+            this.btn_steps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_steps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
             this.btn_steps.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
             this.btn_steps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
@@ -387,19 +402,22 @@ namespace G8_Starship
             // 
             // lbx_events
             // 
+            this.lbx_events.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbx_events.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(12)))), ((int)(((byte)(31)))));
             this.lbx_events.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbx_events.ForeColor = System.Drawing.Color.White;
             this.lbx_events.FormattingEnabled = true;
+            this.lbx_events.ItemHeight = 17;
             this.lbx_events.Location = new System.Drawing.Point(428, 46);
             this.lbx_events.Margin = new System.Windows.Forms.Padding(1);
             this.lbx_events.Name = "lbx_events";
-            this.lbx_events.Size = new System.Drawing.Size(223, 496);
+            this.lbx_events.Size = new System.Drawing.Size(223, 495);
             this.lbx_events.TabIndex = 21;
             this.lbx_events.TabStop = false;
             // 
             // btn_open
             // 
+            this.btn_open.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_open.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
             this.btn_open.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
             this.btn_open.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
@@ -416,18 +434,9 @@ namespace G8_Starship
             this.btn_open.Text = "Open";
             this.btn_open.UseVisualStyleBackColor = false;
             // 
-            // tbx_pubkey
-            // 
-            this.tbx_pubkey.Location = new System.Drawing.Point(14, 14);
-            this.tbx_pubkey.Margin = new System.Windows.Forms.Padding(4);
-            this.tbx_pubkey.Multiline = true;
-            this.tbx_pubkey.Name = "tbx_pubkey";
-            this.tbx_pubkey.Size = new System.Drawing.Size(258, 129);
-            this.tbx_pubkey.TabIndex = 34;
-            // 
             // frm_spaceship
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(11)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(940, 578);

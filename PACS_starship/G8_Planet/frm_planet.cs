@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using G8_DataAccess;
 
 namespace G8_Planet
 {
@@ -162,6 +163,35 @@ namespace G8_Planet
         }
 
         private void lbl_port_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frm_planet_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'secureCoreDataSet.Planets' Puede moverla o quitarla según sea necesario.
+            G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
+            DataSet dts;
+
+            dataAccess.connectToDDBB();
+            dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC","Planets");
+            comboBox1.DisplayMember = "DescPlanet";
+            comboBox1.ValueMember = "idPlanet";
+            comboBox1.DataSource = dts.Tables["Planets"];
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnl_keys_Paint(object sender, PaintEventArgs e)
         {
 
         }
