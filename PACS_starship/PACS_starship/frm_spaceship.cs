@@ -34,6 +34,7 @@ namespace G8_Starship
         public static byte[] encryptedArray;
 
         RSACryptoServiceProvider rsaEnc = new RSACryptoServiceProvider();
+        RSACryptoServiceProvider Rsaencrypt = new RSACryptoServiceProvider();
 
         byte[] encryptedText;
 
@@ -108,6 +109,8 @@ namespace G8_Starship
             cbx_messages.Enabled = false;
             btn_sendmessages.Enabled = false;
             tbx_port.Enabled = false;
+            btn_sendmessages.Enabled = false;
+            cbx_messages.Enabled = false;
 
             bool networkStatus = false;
             int pingCount = 0;
@@ -126,6 +129,8 @@ namespace G8_Starship
                         cbx_messages.Enabled = true;
                         btn_sendmessages.Enabled = true;
                         tbx_port.Enabled = true;
+                        btn_sendmessages.Enabled = true;
+                        cbx_messages.Enabled = true;
                     }
                 }
                 else
@@ -169,6 +174,8 @@ namespace G8_Starship
                         cbx_messages.Enabled = true;
                         btn_sendmessages.Enabled = true;
                         tbx_port.Enabled = true;
+                        btn_sendmessages.Enabled = false;
+                        cbx_messages.Enabled = false;
                     }
                     else if (pingCount < 5)
                     {
@@ -179,6 +186,8 @@ namespace G8_Starship
                         cbx_messages.Enabled = true;
                         btn_sendmessages.Enabled = true;
                         tbx_port.Enabled = true;
+                        btn_sendmessages.Enabled = false;
+                        cbx_messages.Enabled = false;
                     }
                     else
                     {
@@ -188,6 +197,8 @@ namespace G8_Starship
                         cbx_messages.Enabled = true;
                         btn_sendmessages.Enabled = true;
                         tbx_port.Enabled = true;
+                        btn_sendmessages.Enabled = true;
+                        cbx_messages.Enabled = true;
                     }
 
                 }
@@ -200,7 +211,18 @@ namespace G8_Starship
         private void btn_sendmessages_Click(object sender, EventArgs e)
         {
             //TODO: TIPOS DE MENSAJES
-            string messagetype = ""; //seleccion de la combobox???
+
+            //ER - Entry Requirement
+            //(missatge VK- Validation Key)
+
+
+            ///mensajes del planeta 
+            /////(missatge VR - Validation Result)
+            ///(missatge VR - Validation Result)
+            ///(missatge VR - Validation Result)
+            //
+
+            string messagetype = cbx_messages.Text; //seleccion de la combobox???
             if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
             {
                 //TODO: obtener xml de la bbdd
@@ -237,9 +259,56 @@ namespace G8_Starship
                 //rsa.ExportParameters(true), false);
                 //convertir array de bytes en string
                 //tbx_decrypted.Text = ByteConverter.GetString(decryptedtex);
+            } else if (messagetype ==  "VK - Validation Key")
+            {
+                string validationkey = "";
+                string encrpyted_validationkey = "";
+                //una vez recibido el mensaje de VR-Validation result
+                //Bajar validationkey de BBDD
+
+                //encriptar validationkey con la clave pública
+
+                UnicodeEncoding ByteConverter = new UnicodeEncoding();
+                byte[] dataToEncrypt = ByteConverter.GetBytes(validationkey);
+                byte[] encryptedData;
+                byte[] decryptedData;
+
+                encryptedData = Rsaencrypt.Encrypt(dataToEncrypt, false);
+
+                //textcryptosend = encryptedData;
+                encrpyted_validationkey = ByteConverter.GetString(encryptedData);
+
+                //TODO: enviar clave encriptada al planeta vía TCP-IP
+
+                MessageBox.Show("OK");
+                //encriptado el código de validación, enviar al planeta para que lo desencripte utilizando su clave privada
+                //La nau es baixa de la BBDD(taula InnerEncryption) el codi de validació del planeta de
+                //destí i l’encripta amb la clau pública del planeta que s’haurà descarregat de Secure
+                //Core en format XML(la descarrega de la clau pública es pot haver fet amb
+                //anterioritat)
+                //7.Un cop encriptat el codi de validació, l’envia al planeta per tal que aquest es
+                //desencripti utilitzant la seva clau privada. (missatge VK - Validation Key)
+
+
+                //l’encripta amb la clau pública del planeta que s’haurà descarregat de Secure
+                //Core en format XML(la descarrega de la clau pública es pot haver fet amb
+                //anterioritat)
+
+            } else
+            {
+                MessageBox.Show("Error");
             }
 
             //TODO: casos IF para cada tipo de mensaje
+        }
+
+        private void btn_steps_Click(object sender, EventArgs e)
+        {
+            //La nau descomprimirà el fitxer i utilitzarà la codificació obtinguda de Secure Core per
+            //transformar les seqüències de números en seqüencies de lletres, convertirà les tres
+            //cadenes de lletres en una de sola, i ho guardarà en un fitxer anomenat PACSSOL.txt
+            //15.Ho reenviarà cap el planeta.
+            lbx_events.Items.Add("Hola");
         }
     }
 }

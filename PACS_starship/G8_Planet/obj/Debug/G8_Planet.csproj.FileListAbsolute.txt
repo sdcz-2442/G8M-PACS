@@ -1,0 +1,10 @@
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\bin\Debug\G8_Planet.exe.config
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\bin\Debug\G8_Planet.exe
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\bin\Debug\G8_Planet.pdb
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\obj\Debug\G8_Planet.csprojAssemblyReference.cache
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\obj\Debug\G8_Planet.frm_planet.resources
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\obj\Debug\G8_Planet.Properties.Resources.resources
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\obj\Debug\G8_Planet.csproj.GenerateResource.cache
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\obj\Debug\G8_Planet.csproj.CoreCompileInputs.cache
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\obj\Debug\G8_Planet.exe
+C:\Users\samantha\Documents\GitHub\G8M-PACS\PACS_starship\G8_Planet\obj\Debug\G8_Planet.pdb

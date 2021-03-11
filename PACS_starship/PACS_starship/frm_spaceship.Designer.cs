@@ -34,6 +34,8 @@ namespace G8_Starship
             this.label4 = new System.Windows.Forms.Label();
             this.tbx_port = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.btn_sendmessages = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbx_messages = new System.Windows.Forms.ComboBox();
@@ -51,6 +53,9 @@ namespace G8_Starship
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btn_steps = new System.Windows.Forms.Button();
+            this.lbx_events = new System.Windows.Forms.ListBox();
+            this.btn_open = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.lbl_port.SuspendLayout();
@@ -74,7 +79,7 @@ namespace G8_Starship
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(-1, 34);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(370, 536);
+            this.panel1.Size = new System.Drawing.Size(401, 536);
             this.panel1.TabIndex = 0;
             // 
             // label5
@@ -107,21 +112,47 @@ namespace G8_Starship
             this.tbx_port.Multiline = true;
             this.tbx_port.Name = "tbx_port";
             this.tbx_port.Size = new System.Drawing.Size(73, 22);
-            this.tbx_port.TabIndex = 19;
+            this.tbx_port.TabIndex = 2;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.btn_sendmessages);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cbx_messages);
             this.groupBox2.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
-            this.groupBox2.Location = new System.Drawing.Point(32, 308);
+            this.groupBox2.Location = new System.Drawing.Point(32, 340);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(320, 210);
+            this.groupBox2.Size = new System.Drawing.Size(320, 178);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Transmissions";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Leelawadee", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
+            this.label6.Location = new System.Drawing.Point(18, 111);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 23);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Output:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Leelawadee", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
+            this.label7.Location = new System.Drawing.Point(92, 114);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 19);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "None";
             // 
             // btn_sendmessages
             // 
@@ -133,11 +164,11 @@ namespace G8_Starship
             this.btn_sendmessages.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sendmessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
             this.btn_sendmessages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_sendmessages.Location = new System.Drawing.Point(239, 64);
+            this.btn_sendmessages.Location = new System.Drawing.Point(247, 64);
             this.btn_sendmessages.Name = "btn_sendmessages";
             this.btn_sendmessages.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.btn_sendmessages.Size = new System.Drawing.Size(55, 31);
-            this.btn_sendmessages.TabIndex = 19;
+            this.btn_sendmessages.TabIndex = 5;
             this.btn_sendmessages.Text = "Send Message";
             this.btn_sendmessages.UseVisualStyleBackColor = false;
             this.btn_sendmessages.Click += new System.EventHandler(this.btn_sendmessages_Click);
@@ -163,15 +194,16 @@ namespace G8_Starship
             "VK - Validation Key"});
             this.cbx_messages.Location = new System.Drawing.Point(23, 64);
             this.cbx_messages.Name = "cbx_messages";
-            this.cbx_messages.Size = new System.Drawing.Size(198, 31);
-            this.cbx_messages.TabIndex = 0;            // 
+            this.cbx_messages.Size = new System.Drawing.Size(218, 31);
+            this.cbx_messages.TabIndex = 4;
+            // 
             // tbx_ipplanet
             // 
             this.tbx_ipplanet.Location = new System.Drawing.Point(64, 52);
             this.tbx_ipplanet.Multiline = true;
             this.tbx_ipplanet.Name = "tbx_ipplanet";
             this.tbx_ipplanet.Size = new System.Drawing.Size(151, 22);
-            this.tbx_ipplanet.TabIndex = 4;
+            this.tbx_ipplanet.TabIndex = 1;
             // 
             // lbx_console
             // 
@@ -182,8 +214,9 @@ namespace G8_Starship
             this.lbx_console.Location = new System.Drawing.Point(32, 156);
             this.lbx_console.Margin = new System.Windows.Forms.Padding(1);
             this.lbx_console.Name = "lbx_console";
-            this.lbx_console.Size = new System.Drawing.Size(320, 132);
-            this.lbx_console.TabIndex = 18;
+            this.lbx_console.Size = new System.Drawing.Size(320, 171);
+            this.lbx_console.TabIndex = 0;
+            this.lbx_console.TabStop = false;
             // 
             // label3
             // 
@@ -223,7 +256,7 @@ namespace G8_Starship
             this.btn_sendping.Name = "btn_sendping";
             this.btn_sendping.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.btn_sendping.Size = new System.Drawing.Size(129, 28);
-            this.btn_sendping.TabIndex = 15;
+            this.btn_sendping.TabIndex = 3;
             this.btn_sendping.Text = "Network Request";
             this.btn_sendping.UseVisualStyleBackColor = false;
             this.btn_sendping.Click += new System.EventHandler(this.btn_sendping_Click);
@@ -330,12 +363,65 @@ namespace G8_Starship
             this.panel4.Size = new System.Drawing.Size(260, 159);
             this.panel4.TabIndex = 15;
             // 
+            // btn_steps
+            // 
+            this.btn_steps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.btn_steps.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.btn_steps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_steps.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_steps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_steps.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_steps.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.btn_steps.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_steps.Location = new System.Drawing.Point(717, 105);
+            this.btn_steps.Name = "btn_steps";
+            this.btn_steps.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_steps.Size = new System.Drawing.Size(75, 31);
+            this.btn_steps.TabIndex = 7;
+            this.btn_steps.Text = "Next";
+            this.btn_steps.UseVisualStyleBackColor = false;
+            this.btn_steps.Click += new System.EventHandler(this.btn_steps_Click);
+            // 
+            // lbx_events
+            // 
+            this.lbx_events.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(12)))), ((int)(((byte)(31)))));
+            this.lbx_events.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbx_events.ForeColor = System.Drawing.Color.White;
+            this.lbx_events.FormattingEnabled = true;
+            this.lbx_events.Location = new System.Drawing.Point(441, 59);
+            this.lbx_events.Margin = new System.Windows.Forms.Padding(1);
+            this.lbx_events.Name = "lbx_events";
+            this.lbx_events.Size = new System.Drawing.Size(253, 288);
+            this.lbx_events.TabIndex = 21;
+            this.lbx_events.TabStop = false;
+            // 
+            // btn_open
+            // 
+            this.btn_open.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.btn_open.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.btn_open.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_open.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_open.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_open.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_open.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.btn_open.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_open.Location = new System.Drawing.Point(717, 59);
+            this.btn_open.Name = "btn_open";
+            this.btn_open.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_open.Size = new System.Drawing.Size(75, 31);
+            this.btn_open.TabIndex = 6;
+            this.btn_open.Text = "Open";
+            this.btn_open.UseVisualStyleBackColor = false;
+            // 
             // frm_spaceship
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(11)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(940, 578);
+            this.Controls.Add(this.btn_open);
+            this.Controls.Add(this.lbx_events);
+            this.Controls.Add(this.btn_steps);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.lbl_port);
             this.Controls.Add(this.panel1);
@@ -382,5 +468,10 @@ namespace G8_Starship
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbx_port;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btn_steps;
+        private System.Windows.Forms.ListBox lbx_events;
+        private System.Windows.Forms.Button btn_open;
     }
 }
