@@ -47,6 +47,7 @@ namespace G8_Starship
         private void frm_spaceship_Load(object sender, EventArgs e)
         {
             lbl_networkstatus.Visible = false;
+            tbx_pubkey.Enabled = false;
         }
 
         private void close_click_Click(object sender, EventArgs e)

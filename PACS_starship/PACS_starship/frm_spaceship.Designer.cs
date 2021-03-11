@@ -56,12 +56,14 @@ namespace G8_Starship
             this.btn_steps = new System.Windows.Forms.Button();
             this.lbx_events = new System.Windows.Forms.ListBox();
             this.btn_open = new System.Windows.Forms.Button();
+            this.tbx_pubkey = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.lbl_port.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimize_click)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximize_click)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_click)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -358,9 +360,10 @@ namespace G8_Starship
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(12)))), ((int)(((byte)(31)))));
-            this.panel4.Location = new System.Drawing.Point(680, 176);
+            this.panel4.Controls.Add(this.tbx_pubkey);
+            this.panel4.Location = new System.Drawing.Point(655, 176);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(260, 159);
+            this.panel4.Size = new System.Drawing.Size(285, 159);
             this.panel4.TabIndex = 15;
             // 
             // btn_steps
@@ -373,7 +376,7 @@ namespace G8_Starship
             this.btn_steps.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_steps.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
             this.btn_steps.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_steps.Location = new System.Drawing.Point(717, 105);
+            this.btn_steps.Location = new System.Drawing.Point(674, 105);
             this.btn_steps.Name = "btn_steps";
             this.btn_steps.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.btn_steps.Size = new System.Drawing.Size(75, 31);
@@ -388,10 +391,10 @@ namespace G8_Starship
             this.lbx_events.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbx_events.ForeColor = System.Drawing.Color.White;
             this.lbx_events.FormattingEnabled = true;
-            this.lbx_events.Location = new System.Drawing.Point(441, 59);
+            this.lbx_events.Location = new System.Drawing.Point(428, 46);
             this.lbx_events.Margin = new System.Windows.Forms.Padding(1);
             this.lbx_events.Name = "lbx_events";
-            this.lbx_events.Size = new System.Drawing.Size(253, 288);
+            this.lbx_events.Size = new System.Drawing.Size(223, 496);
             this.lbx_events.TabIndex = 21;
             this.lbx_events.TabStop = false;
             // 
@@ -405,13 +408,22 @@ namespace G8_Starship
             this.btn_open.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_open.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
             this.btn_open.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_open.Location = new System.Drawing.Point(717, 59);
+            this.btn_open.Location = new System.Drawing.Point(674, 68);
             this.btn_open.Name = "btn_open";
             this.btn_open.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
             this.btn_open.Size = new System.Drawing.Size(75, 31);
             this.btn_open.TabIndex = 6;
             this.btn_open.Text = "Open";
             this.btn_open.UseVisualStyleBackColor = false;
+            // 
+            // tbx_pubkey
+            // 
+            this.tbx_pubkey.Location = new System.Drawing.Point(14, 14);
+            this.tbx_pubkey.Margin = new System.Windows.Forms.Padding(4);
+            this.tbx_pubkey.Multiline = true;
+            this.tbx_pubkey.Name = "tbx_pubkey";
+            this.tbx_pubkey.Size = new System.Drawing.Size(258, 129);
+            this.tbx_pubkey.TabIndex = 34;
             // 
             // frm_spaceship
             // 
@@ -440,6 +452,8 @@ namespace G8_Starship
             ((System.ComponentModel.ISupportInitialize)(this.minimize_click)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximize_click)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_click)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -473,5 +487,6 @@ namespace G8_Starship
         private System.Windows.Forms.Button btn_steps;
         private System.Windows.Forms.ListBox lbx_events;
         private System.Windows.Forms.Button btn_open;
+        private System.Windows.Forms.TextBox tbx_pubkey;
     }
 }
