@@ -69,7 +69,7 @@ namespace G8_Planet
             this.groupBox1.Controls.Add(this.btn_connect);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(20, 249);
+            this.groupBox1.Location = new System.Drawing.Point(20, 202);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -143,7 +143,7 @@ namespace G8_Planet
             this.pnl_keys.Controls.Add(this.tbx_container);
             this.pnl_keys.Controls.Add(this.label3);
             this.pnl_keys.Controls.Add(this.label4);
-            this.pnl_keys.Location = new System.Drawing.Point(624, 146);
+            this.pnl_keys.Location = new System.Drawing.Point(624, 99);
             this.pnl_keys.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_keys.Name = "pnl_keys";
             this.pnl_keys.Size = new System.Drawing.Size(669, 182);
@@ -210,7 +210,7 @@ namespace G8_Planet
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(70, 156);
+            this.comboBox1.Location = new System.Drawing.Point(70, 109);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(483, 24);
@@ -218,7 +218,7 @@ namespace G8_Planet
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(211, 188);
+            this.button1.Location = new System.Drawing.Point(211, 141);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(167, 28);
@@ -228,7 +228,7 @@ namespace G8_Planet
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(386, 188);
+            this.button2.Location = new System.Drawing.Point(386, 141);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(167, 28);
