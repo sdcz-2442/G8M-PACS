@@ -251,7 +251,7 @@ namespace G8_Planet
                 //lbx_mostrarletras.Items.Add(itemKey);
                 //lbx_mostrarnumeros.Items.Add(itemValue.ToString().PadLeft(5, '0'));
 
-                dts = dataAccess.getByQuery("INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers) VALUES ("+idInnerEncryption+", '"+ item.Key.ToString()+ "', "+item.Value.ToString()+")", "InnerEncryptionData");
+                dts = dataAccess.getByQuery("INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers) VALUES ("+idInnerEncryption+", '"+ item.Key.ToString()+ "', '"+item.Value.ToString()+"')", "InnerEncryptionData");
             }
             
         }
@@ -295,7 +295,7 @@ namespace G8_Planet
 
             while (numeros_aleatorios.Count() < 26)
             {
-                numero = rnd.Next(100000);
+                numero = rnd.Next(1000);
 
                 if (!numeros_aleatorios.Contains(numero))
                 {
@@ -306,7 +306,7 @@ namespace G8_Planet
 
             foreach (String leter in alphabet)
             {
-                coordenades.Add(leter, numeros_aleatorios.Dequeue().ToString().PadLeft(5, '0'));
+                coordenades.Add(leter, numeros_aleatorios.Dequeue().ToString().PadLeft(3, '0'));
             }
 
             return coordenades;
