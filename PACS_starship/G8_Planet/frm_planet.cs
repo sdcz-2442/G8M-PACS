@@ -18,6 +18,9 @@ namespace G8_Planet
 {
     public partial class frm_planet : Form
     {
+        public string nameOwnPlanet;
+        public string idOwnPlanet;
+        public string codeOwnPlanet;
 
         public string ipMissatge = "192.168.1.1";
 
@@ -28,6 +31,7 @@ namespace G8_Planet
 
         RSACryptoServiceProvider rsa;
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
+        G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
 
         byte[] encryptedText;
 
@@ -170,13 +174,26 @@ namespace G8_Planet
 
         private void button1_Click(object sender, EventArgs e)
         {
+            DataSet dts;
 
+            nameOwnPlanet = comboBox1.Text;
+
+            dataAccess.connectToDDBB();
+            dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '"+nameOwnPlanet+"'", "Planets");
+
+            if (dts.Tables[0].Rows.Count == 0)
+            {
+                return;
+            }
+            idOwnPlanet = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+            codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
         }
+
+
 
         private void frm_planet_Load(object sender, EventArgs e)
         {
             // TODO: esta línea de código carga datos en la tabla 'secureCoreDataSet.Planets' Puede moverla o quitarla según sea necesario.
-            G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
             DataSet dts;
 
             dataAccess.connectToDDBB();
@@ -184,6 +201,7 @@ namespace G8_Planet
             comboBox1.DisplayMember = "DescPlanet";
             comboBox1.ValueMember = "idPlanet";
             comboBox1.DataSource = dts.Tables["Planets"];
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -195,5 +213,104 @@ namespace G8_Planet
         {
 
         }
-    }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Genero innerEncryptionCode
+            string validationCode = GetRandom();
+            string idInnerEncryption;
+
+            DataSet dts;
+
+            //Inserto innerEncriptionCode en BBDD
+            dataAccess.connectToDDBB();
+            dts = dataAccess.getByQuery("INSERT INTO InnerEncryption(idPlanet, ValidationCode) VALUES("+idOwnPlanet+", "+ validationCode + ")", "InnerEncryption");
+
+
+            //coger id del nuevo registro
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE ValidationCode = '" + validationCode + "'", "InnerEncryption");
+
+            if (dts.Tables[0].Rows.Count == 0)
+            {
+                return;
+            }
+            idInnerEncryption = dts.Tables[0].Rows[0]["idInnerEncryption"].ToString();
+
+
+            //Generar coordenades
+            Dictionary<String, String> coordenades = generateDictionary();
+
+            //Insertar coordenades en la BBDD
+
+            for (int index = 0; index < coordenades.Count; index++)
+            {
+                var item = coordenades.ElementAt(index);
+                string itemKey = item.Key;
+                string itemValue = item.Value;
+
+                //lbx_mostrarletras.Items.Add(itemKey);
+                //lbx_mostrarnumeros.Items.Add(itemValue.ToString().PadLeft(5, '0'));
+
+                dts = dataAccess.getByQuery("INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers) VALUES ("+idInnerEncryption+", '"+ item.Key.ToString()+ "', "+item.Value.ToString()+")", "InnerEncryptionData");
+            }
+            
+        }
+
+        private static string GetRandom()
+        {
+            int min = 0;
+            int max = 9;
+            int currentDigit = 0;
+            string numberCode = "";
+
+            for (int i = 0; i < 12; i++)
+            {
+                using (System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
+                {
+                    byte[] randomNumber = new byte[4];
+                    rng.GetBytes(randomNumber);
+                    int value = BitConverter.ToInt32(randomNumber, 0);
+                    currentDigit = Math.Abs(value % max + min);
+                    numberCode = numberCode + currentDigit;
+                }
+
+            }
+
+            return numberCode;
+        }
+
+        static Dictionary<string, string> generateDictionary()
+        {
+            Dictionary<String, String> coordenades = new Dictionary<string, string>();
+            List<string> alphabet = new List<string>();
+            Queue<int> numeros_aleatorios = new Queue<int>();
+
+            var rnd = new Random();
+            int numero;
+
+            for (char c = 'A'; c <= 'Z'; c++)
+            {
+                alphabet.Add("" + c);
+            }
+
+            while (numeros_aleatorios.Count() < 26)
+            {
+                numero = rnd.Next(100000);
+
+                if (!numeros_aleatorios.Contains(numero))
+                {
+                    numeros_aleatorios.Enqueue(numero);
+                }
+
+            }
+
+            foreach (String leter in alphabet)
+            {
+                coordenades.Add(leter, numeros_aleatorios.Dequeue().ToString().PadLeft(5, '0'));
+            }
+
+            return coordenades;
+
+        }
+}
 }

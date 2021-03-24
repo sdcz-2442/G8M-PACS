@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using G8_DataAccess;
+
 
 namespace G8_Starship
 {
@@ -228,27 +230,41 @@ namespace G8_Starship
             {
                 //TODO: obtener xml de la bbdd
 
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                {
-                    openFileDialog.InitialDirectory = @"C:\";
-                    openFileDialog.Filter = "Xml files (*.xml)|*.xml" + "|" + "All files (*.*)|*.*";
-                    openFileDialog.FilterIndex = 2;
-                    openFileDialog.RestoreDirectory = true;
+                //                En aquest cas la tripulació de la nau es connectarà a la base de dades Secure Core i obtindrà
+                //per una banda el codi de validació del planeta destí del proper viatge interestel·lar(taula
+                //InnerEncryption) i per altra banda la clau pública del planeta en format XML(taula PlanetKeys)
+                //Un cop es disposa d’aquestes dades, cal encriptar el codi de validació utilitzant RSA i la clau
+                //pública del planeta.
+                //Aquest codi encriptat s’enviarà posteriorment per TCP-IP al planeta. Ara es pot fer amb una
+                //propietat tal i com s’ha fet en els exercicis d’entrenament previs.
 
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        filePath = openFileDialog.FileName;
-                        fileName = openFileDialog.SafeFileName;
-                        Stream fileStream = openFileDialog.OpenFile();
+                G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
+                DataSet dts;
 
-                        using (StreamReader reader = new StreamReader(fileStream))
-                        {
-                            fileContent = reader.ReadToEnd();
-                        }
+                dataAccess.connectToDDBB();
+                dts = dataAccess.getByQuery("SELECT ValidationCode FROM InnerEncryption", "InnerEncryption");
 
-                        //MessageBox.Show("File " + fileName + " on hold.");
-                    }
-                }
+                //using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                //{
+                //    openFileDialog.InitialDirectory = @"C:\";
+                //    openFileDialog.Filter = "Xml files (*.xml)|*.xml" + "|" + "All files (*.*)|*.*";
+                //    openFileDialog.FilterIndex = 2;
+                //    openFileDialog.RestoreDirectory = true;
+
+                //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                //    {
+                //        filePath = openFileDialog.FileName;
+                //        fileName = openFileDialog.SafeFileName;
+                //        Stream fileStream = openFileDialog.OpenFile();
+
+                //        using (StreamReader reader = new StreamReader(fileStream))
+                //        {
+                //            fileContent = reader.ReadToEnd();
+                //        }
+
+                //        //MessageBox.Show("File " + fileName + " on hold.");
+                //    }
+                //}
 
                 //DESENCRIPTAR CON CLAVE PRIVADA
                 string cryptedText = ""; //TODO: poner una textbox para mostrar el mensaje al usuario?
