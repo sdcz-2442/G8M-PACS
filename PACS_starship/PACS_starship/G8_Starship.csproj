@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frm_selectspaceship.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_selectspaceship.Designer.cs">
+      <DependentUpon>frm_selectspaceship.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_spaceship.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SecureCoreDataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frm_selectspaceship.resx">
+      <DependentUpon>frm_selectspaceship.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_spaceship.resx">
       <DependentUpon>frm_spaceship.cs</DependentUpon>
     </EmbeddedResource>

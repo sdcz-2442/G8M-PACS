@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PACS_starship;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace G8_Starship
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_spaceship());
+            Application.Run(new frm_selectspaceship());
         }
     }
 }

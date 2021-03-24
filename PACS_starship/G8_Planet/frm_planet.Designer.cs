@@ -54,6 +54,7 @@ namespace G8_Planet
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_identificadorplaneta = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.pnl_keys.SuspendLayout();
             this.lbl_port.SuspendLayout();
@@ -72,9 +73,9 @@ namespace G8_Planet
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(52, 142);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(434, 296);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -93,7 +94,7 @@ namespace G8_Planet
             // 
             this.txb_port.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
             this.txb_port.Location = new System.Drawing.Point(56, 42);
-            this.txb_port.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txb_port.Margin = new System.Windows.Forms.Padding(2);
             this.txb_port.Name = "txb_port";
             this.txb_port.Size = new System.Drawing.Size(74, 20);
             this.txb_port.TabIndex = 4;
@@ -103,7 +104,7 @@ namespace G8_Planet
             this.btn_desconnect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
             this.btn_desconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_desconnect.Location = new System.Drawing.Point(286, 42);
-            this.btn_desconnect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_desconnect.Margin = new System.Windows.Forms.Padding(2);
             this.btn_desconnect.Name = "btn_desconnect";
             this.btn_desconnect.Size = new System.Drawing.Size(86, 23);
             this.btn_desconnect.TabIndex = 3;
@@ -115,7 +116,7 @@ namespace G8_Planet
             this.btn_connect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
             this.btn_connect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_connect.Location = new System.Drawing.Point(194, 42);
-            this.btn_connect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_connect.Margin = new System.Windows.Forms.Padding(2);
             this.btn_connect.Name = "btn_connect";
             this.btn_connect.Size = new System.Drawing.Size(88, 23);
             this.btn_connect.TabIndex = 2;
@@ -221,7 +222,7 @@ namespace G8_Planet
             this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(52, 54);
+            this.comboBox1.Location = new System.Drawing.Point(51, 24);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(363, 34);
             this.comboBox1.TabIndex = 20;
@@ -274,7 +275,7 @@ namespace G8_Planet
             // 
             this.minimize_click.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.minimize_click.Location = new System.Drawing.Point(988, 3);
-            this.minimize_click.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minimize_click.Margin = new System.Windows.Forms.Padding(2);
             this.minimize_click.Name = "minimize_click";
             this.minimize_click.Size = new System.Drawing.Size(11, 12);
             this.minimize_click.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -285,7 +286,7 @@ namespace G8_Planet
             // 
             this.maximize_click.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.maximize_click.Location = new System.Drawing.Point(1004, 3);
-            this.maximize_click.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.maximize_click.Margin = new System.Windows.Forms.Padding(2);
             this.maximize_click.Name = "maximize_click";
             this.maximize_click.Size = new System.Drawing.Size(11, 12);
             this.maximize_click.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -297,7 +298,7 @@ namespace G8_Planet
             this.close_click.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.close_click.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.close_click.Location = new System.Drawing.Point(1022, 3);
-            this.close_click.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.close_click.Margin = new System.Windows.Forms.Padding(2);
             this.close_click.Name = "close_click";
             this.close_click.Size = new System.Drawing.Size(12, 13);
             this.close_click.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -309,7 +310,7 @@ namespace G8_Planet
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Location = new System.Drawing.Point(570, 15);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(488, 3);
             this.panel3.TabIndex = 15;
@@ -320,7 +321,7 @@ namespace G8_Planet
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(494, 9);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(563, 4);
             this.panel2.TabIndex = 14;
@@ -331,7 +332,7 @@ namespace G8_Planet
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(420, 2);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(638, 5);
             this.flowLayoutPanel2.TabIndex = 13;
@@ -339,6 +340,7 @@ namespace G8_Planet
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lbl_identificadorplaneta);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.pnl_keys);
@@ -347,6 +349,14 @@ namespace G8_Planet
             this.panel1.Size = new System.Drawing.Size(1058, 529);
             this.panel1.TabIndex = 24;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // lbl_identificadorplaneta
+            // 
+            this.lbl_identificadorplaneta.AutoSize = true;
+            this.lbl_identificadorplaneta.Location = new System.Drawing.Point(188, 65);
+            this.lbl_identificadorplaneta.Name = "lbl_identificadorplaneta";
+            this.lbl_identificadorplaneta.Size = new System.Drawing.Size(0, 13);
+            this.lbl_identificadorplaneta.TabIndex = 21;
             // 
             // frm_planet
             // 
@@ -372,6 +382,7 @@ namespace G8_Planet
             ((System.ComponentModel.ISupportInitialize)(this.maximize_click)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_click)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -403,5 +414,6 @@ namespace G8_Planet
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lbl_identificadorplaneta;
     }
 }

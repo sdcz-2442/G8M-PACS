@@ -21,7 +21,7 @@ namespace G8_Starship
     {
         private bool mouseDown;
         private Point lastLocation;
-
+        public string projectName = "PACS_starship";
         string xmlPath = @"C:\TCP-pruebas\TCPSettings.xml";
 
         Thread checkNetwork;
@@ -241,8 +241,8 @@ namespace G8_Starship
                 G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
                 DataSet dts;
 
-                dataAccess.connectToDDBB();
-                dts = dataAccess.getByQuery("SELECT ValidationCode FROM InnerEncryption", "InnerEncryption");
+                dataAccess.connectToDDBB(projectName);
+                dts = dataAccess.getByQuery("SELECT ValidationCode FROM InnerEncryption", projectName);
 
                 //using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 //{

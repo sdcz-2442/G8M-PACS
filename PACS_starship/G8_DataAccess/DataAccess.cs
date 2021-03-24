@@ -14,6 +14,7 @@ namespace G8_DataAccess
     {
         public SqlConnection conn;
         public DataSet dts;
+        //public string projectName;
 
         public void encryptConnectionString()
         {
@@ -32,9 +33,9 @@ namespace G8_DataAccess
 
         }
 
-        public string connectionString()
+        public string connectionString(string ProjectName)
         {
-            string connectString = ConfigurationManager.ConnectionStrings["G8_Planet.Properties.Settings.SecureCoreConnectionString"].ToString();
+            string connectString = ConfigurationManager.ConnectionStrings[ProjectName+ ".Properties.Settings.SecureCoreConnectionString"].ToString();
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
 
             connectString = "Data Source = " + Environment.MachineName.ToString() + connectString.Substring(connectString.IndexOf('\\')); //Manually set computer name
@@ -42,18 +43,18 @@ namespace G8_DataAccess
             return connectString;
         }
 
-        public void connectToDDBB()
+        public void connectToDDBB(string ProjectName)
         {
             string cnx;
-            cnx = connectionString();
+            cnx = connectionString(ProjectName);
             conn = new SqlConnection(cnx);
         }
 
-        public DataSet getByTable(string table_name)
+        public DataSet getByTable(string table_name, string ProjectName)
         {
             dts = new DataSet();
 
-            connectToDDBB();
+            connectToDDBB(ProjectName);
 
             SqlDataAdapter adapter;
 
@@ -69,9 +70,9 @@ namespace G8_DataAccess
             return dts;
         }
 
-        public DataSet getByQuery(string consulta)
+        public DataSet getByQuery(string consulta, string ProjectName)
         {
-            connectToDDBB();
+            connectToDDBB(ProjectName);
 
             SqlDataAdapter adapter;
 
@@ -88,9 +89,9 @@ namespace G8_DataAccess
             return dataset_portarperconsulta;
         }
 
-        public DataSet getByQuery(string consulta, string dataset_name)
+        public DataSet getByQuery(string consulta, string dataset_name, string ProjectName)
         {
-            connectToDDBB();
+            connectToDDBB(ProjectName);
 
             SqlDataAdapter adapter;
 
@@ -107,11 +108,11 @@ namespace G8_DataAccess
             return dataset_portarperconsulta;
         }
 
-        public bool updateDDBB(DataSet dts, string bbdd_tablename)
+        public bool updateDDBB(DataSet dts, string bbdd_tablename, string ProjectName)
         {
             bool correct = false;
 
-            connectToDDBB();
+            connectToDDBB(ProjectName);
             conn.Open();
 
             string query = "select * from " + bbdd_tablename;
@@ -132,7 +133,7 @@ namespace G8_DataAccess
             return correct;
         }
 
-        public void executeQuery(string consulta)
+        public void executeQuery(string consulta, string ProjectName)
         {
             string query = consulta;
 
@@ -144,9 +145,9 @@ namespace G8_DataAccess
             conn.Close();
         }
 
-        public string GetTableData(string nomCamp, string query)
+        public string GetTableData(string nomCamp, string query, string ProjectName)
         {
-            connectToDDBB();
+            connectToDDBB(ProjectName);
 
             SqlDataAdapter adapterLocal = new SqlDataAdapter(query, conn);
 

@@ -18,6 +18,7 @@ namespace G8_Planet
 {
     public partial class frm_planet : Form
     {
+        public string ProjectName = "G8_Planet";
         public string nameOwnPlanet;
         public string idOwnPlanet;
         public string codeOwnPlanet;
@@ -126,7 +127,7 @@ namespace G8_Planet
             string TextKeyName = tbx_container.Text;
             CspParameters cspp = new CspParameters();
             string keyName = TextKeyName;
-            cspp.KeyContainerName = keyName;
+            cspp.KeyContainerName = codeOwnPlanet;
             rsa = new RSACryptoServiceProvider(cspp);
             string publicKey = rsa.ToXmlString(false);
             string pathfinal = @filePath + @"\Clau.xml";
@@ -176,10 +177,12 @@ namespace G8_Planet
         {
             DataSet dts;
 
+            lbl_identificadorplaneta.Text = "";
+
             nameOwnPlanet = comboBox1.Text;
 
-            dataAccess.connectToDDBB();
-            dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '"+nameOwnPlanet+"'", "Planets");
+            dataAccess.connectToDDBB(ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '"+nameOwnPlanet+"'", "Planets", ProjectName);
 
             if (dts.Tables[0].Rows.Count == 0)
             {
@@ -187,6 +190,15 @@ namespace G8_Planet
             }
             idOwnPlanet = dts.Tables[0].Rows[0]["idPlanet"].ToString();
             codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
+
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = '" + idOwnPlanet + "'", "Planets", ProjectName);
+
+            if (dts.Tables[0].Rows.Count == 0)
+            {
+                return;
+            }
+
+            lbl_identificadorplaneta.Text = dts.Tables[0].Rows[0]["ValidationCode"].ToString();
         }
 
 
@@ -196,8 +208,8 @@ namespace G8_Planet
             // TODO: esta línea de código carga datos en la tabla 'secureCoreDataSet.Planets' Puede moverla o quitarla según sea necesario.
             DataSet dts;
 
-            dataAccess.connectToDDBB();
-            dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC","Planets");
+            dataAccess.connectToDDBB(ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC","Planets", ProjectName);
             comboBox1.DisplayMember = "DescPlanet";
             comboBox1.ValueMember = "idPlanet";
             comboBox1.DataSource = dts.Tables["Planets"];
@@ -223,7 +235,7 @@ namespace G8_Planet
             DataSet dts;
 
             //Inserto innerEncriptionCode en BBDD
-            dataAccess.connectToDDBB();
+            dataAccess.connectToDDBB(ProjectName);
             dts = dataAccess.getByQuery("INSERT INTO InnerEncryption(idPlanet, ValidationCode) VALUES("+idOwnPlanet+", "+ validationCode + ")", "InnerEncryption");
 
 
