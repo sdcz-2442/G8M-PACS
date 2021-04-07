@@ -133,7 +133,6 @@ namespace G8_Planet
             string pathfinal = @filePath + @"\Clau.xml";
             File.WriteAllText(pathfinal, publicKey);
 
-
             //TODO: crear clave planeta
 
             //TODO: guardar claves en BBDD!!!!

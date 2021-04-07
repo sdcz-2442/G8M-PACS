@@ -38,10 +38,7 @@ namespace G8_Planet
             this.label1 = new System.Windows.Forms.Label();
             this.pnl_keys = new System.Windows.Forms.Panel();
             this.btn_generate = new System.Windows.Forms.Button();
-            this.btn_routeXML = new System.Windows.Forms.Button();
-            this.tbx_routeXML = new System.Windows.Forms.TextBox();
             this.tbx_container = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -55,6 +52,8 @@ namespace G8_Planet
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_identificadorplaneta = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbx_routeXML = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.pnl_keys.SuspendLayout();
             this.lbl_port.SuspendLayout();
@@ -148,7 +147,6 @@ namespace G8_Planet
             this.pnl_keys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_keys.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_keys.Controls.Add(this.btn_generate);
-            this.pnl_keys.Controls.Add(this.btn_routeXML);
             this.pnl_keys.Controls.Add(this.tbx_routeXML);
             this.pnl_keys.Controls.Add(this.tbx_container);
             this.pnl_keys.Controls.Add(this.label3);
@@ -171,26 +169,6 @@ namespace G8_Planet
             this.btn_generate.UseVisualStyleBackColor = false;
             this.btn_generate.Click += new System.EventHandler(this.btn_generate_Click);
             // 
-            // btn_routeXML
-            // 
-            this.btn_routeXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
-            this.btn_routeXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_routeXML.Location = new System.Drawing.Point(436, 78);
-            this.btn_routeXML.Name = "btn_routeXML";
-            this.btn_routeXML.Size = new System.Drawing.Size(34, 23);
-            this.btn_routeXML.TabIndex = 6;
-            this.btn_routeXML.Text = "...";
-            this.btn_routeXML.UseVisualStyleBackColor = false;
-            this.btn_routeXML.Click += new System.EventHandler(this.btn_routeXML_Click);
-            // 
-            // tbx_routeXML
-            // 
-            this.tbx_routeXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
-            this.tbx_routeXML.Location = new System.Drawing.Point(142, 80);
-            this.tbx_routeXML.Name = "tbx_routeXML";
-            this.tbx_routeXML.Size = new System.Drawing.Size(288, 20);
-            this.tbx_routeXML.TabIndex = 5;
-            // 
             // tbx_container
             // 
             this.tbx_container.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
@@ -198,15 +176,6 @@ namespace G8_Planet
             this.tbx_container.Name = "tbx_container";
             this.tbx_container.Size = new System.Drawing.Size(127, 20);
             this.tbx_container.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 83);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Fixer XML Public Key";
             // 
             // label4
             // 
@@ -358,6 +327,23 @@ namespace G8_Planet
             this.lbl_identificadorplaneta.Size = new System.Drawing.Size(0, 13);
             this.lbl_identificadorplaneta.TabIndex = 21;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(29, 83);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Fixer XML Public Key";
+            // 
+            // tbx_routeXML
+            // 
+            this.tbx_routeXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
+            this.tbx_routeXML.Location = new System.Drawing.Point(142, 80);
+            this.tbx_routeXML.Name = "tbx_routeXML";
+            this.tbx_routeXML.Size = new System.Drawing.Size(288, 20);
+            this.tbx_routeXML.TabIndex = 5;
+            // 
             // frm_planet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,10 +384,7 @@ namespace G8_Planet
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnl_keys;
         private System.Windows.Forms.Button btn_generate;
-        private System.Windows.Forms.Button btn_routeXML;
-        private System.Windows.Forms.TextBox tbx_routeXML;
         private System.Windows.Forms.TextBox tbx_container;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
@@ -415,5 +398,7 @@ namespace G8_Planet
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbl_identificadorplaneta;
+        private System.Windows.Forms.TextBox tbx_routeXML;
+        private System.Windows.Forms.Label label3;
     }
 }
