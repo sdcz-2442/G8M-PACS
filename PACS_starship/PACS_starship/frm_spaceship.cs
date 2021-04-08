@@ -13,19 +13,28 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using G8_DataAccess;
-
+using PACS_starship;
 
 namespace G8_Starship
 {
     public partial class frm_spaceship : Form
     {
+
+        public string spaceshipCode;
+        public string spaceshipId;
+        public string spaceshipIP;
+        public string spaceshipPort1;
+        public string spaceshipPort2;
+
+
         private bool mouseDown;
         private Point lastLocation;
-        public string projectName = "PACS_starship";
+        public string ProjectName = "PACS_starship";
         string xmlPath = @"C:\TCP-pruebas\TCPSettings.xml";
 
         Thread checkNetwork;
 
+        G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
 
         string fileName = "";
@@ -34,6 +43,9 @@ namespace G8_Starship
 
         public static string encryptedMessage;
         public static byte[] encryptedArray;
+        public string namePlanetDelivery;
+        public string idPlanetDelivery;
+        public string idOwnSpaceship;
 
         RSACryptoServiceProvider rsaEnc = new RSACryptoServiceProvider();
         RSACryptoServiceProvider Rsaencrypt = new RSACryptoServiceProvider();
@@ -50,6 +62,15 @@ namespace G8_Starship
         {
             lbl_networkstatus.Visible = false;
             tbx_pubkey.Enabled = false;
+
+            DataSet dts;
+
+            dataAccess.connectToDDBB(ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC", "Planets", ProjectName);
+            cbx_selectplanet.DisplayMember = "DescPlanet";
+            cbx_selectplanet.ValueMember = "idPlanet";
+            cbx_selectplanet.DataSource = dts.Tables["Planets"];
+
         }
 
         private void close_click_Click(object sender, EventArgs e)
@@ -228,88 +249,39 @@ namespace G8_Starship
             string messagetype = cbx_messages.Text; //seleccion de la combobox???
             if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
             {
-                //TODO: obtener xml de la bbdd
+                //Select planet
 
-                //                En aquest cas la tripulació de la nau es connectarà a la base de dades Secure Core i obtindrà
-                //per una banda el codi de validació del planeta destí del proper viatge interestel·lar(taula
-                //InnerEncryption) i per altra banda la clau pública del planeta en format XML(taula PlanetKeys)
-                //Un cop es disposa d’aquestes dades, cal encriptar el codi de validació utilitzant RSA i la clau
-                //pública del planeta.
-                //Aquest codi encriptat s’enviarà posteriorment per TCP-IP al planeta. Ara es pot fer amb una
-                //propietat tal i com s’ha fet en els exercicis d’entrenament previs.
-
-                G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
                 DataSet dts;
 
-                dataAccess.connectToDDBB(projectName);
-                dts = dataAccess.getByQuery("SELECT ValidationCode FROM InnerEncryption", projectName);
+                namePlanetDelivery = cbx_selectplanet.Text;
 
-                //using (OpenFileDialog openFileDialog = new OpenFileDialog())
-                //{
-                //    openFileDialog.InitialDirectory = @"C:\";
-                //    openFileDialog.Filter = "Xml files (*.xml)|*.xml" + "|" + "All files (*.*)|*.*";
-                //    openFileDialog.FilterIndex = 2;
-                //    openFileDialog.RestoreDirectory = true;
+                dataAccess.connectToDDBB(ProjectName);
+                dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + namePlanetDelivery + "'", "Planets", ProjectName);
 
-                //    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                //    {
-                //        filePath = openFileDialog.FileName;
-                //        fileName = openFileDialog.SafeFileName;
-                //        Stream fileStream = openFileDialog.OpenFile();
+                if (dts.Tables[0].Rows.Count == 0)
+                {
+                    return;
+                }
+                idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
 
-                //        using (StreamReader reader = new StreamReader(fileStream))
-                //        {
-                //            fileContent = reader.ReadToEnd();
-                //        }
+                //DataSet dts;
 
-                //        //MessageBox.Show("File " + fileName + " on hold.");
-                //    }
-                //}
+                //dataAccess.connectToDDBB(ProjectName);
+                //dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC", "Planets", ProjectName);
+                //cbx_selectplanet.DisplayMember = "DescPlanet";
+                //cbx_selectplanet.ValueMember = "idPlanet";
+                //cbx_selectplanet.DataSource = dts.Tables["Planets"];
 
-                //DESENCRIPTAR CON CLAVE PRIVADA
-                string cryptedText = ""; //TODO: poner una textbox para mostrar el mensaje al usuario?
-                //tbx_crypted.Text = frmEncriptar.encryptedMessage;
-                //TODO: cambiar en la siguiente línea el array de bytes encriptado
-                //encryptedText = frmEncriptar.encryptedArray;
-                //desencriptar el mensaje cifrado
-                //byte[] decryptedtex = Decryption(encryptedText,
-                //rsa.ExportParameters(true), false);
-                //convertir array de bytes en string
-                //tbx_decrypted.Text = ByteConverter.GetString(decryptedtex);
+                //codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
+
+                //ERSSSSSSSSSSSSCCCCCCCCCCCC
+                //                On
+                //                ER Tipus de missatge(Entry Requirement).És un literal(2 caràcters ER)
+                //SSSSSSSSSSSS representa l’identificador de la nau(12 caràcters)
+                //CCCCCCCCCCCC representa l’identificador de l’entrega(12 caràcters)
             } else if (messagetype ==  "VK - Validation Key")
             {
-                string validationkey = "";
-                string encrpyted_validationkey = "";
-                //una vez recibido el mensaje de VR-Validation result
-                //Bajar validationkey de BBDD
 
-                //encriptar validationkey con la clave pública
-
-                UnicodeEncoding ByteConverter = new UnicodeEncoding();
-                byte[] dataToEncrypt = ByteConverter.GetBytes(validationkey);
-                byte[] encryptedData;
-                byte[] decryptedData;
-
-                encryptedData = Rsaencrypt.Encrypt(dataToEncrypt, false);
-
-                //textcryptosend = encryptedData;
-                encrpyted_validationkey = ByteConverter.GetString(encryptedData);
-
-                //TODO: enviar clave encriptada al planeta vía TCP-IP
-
-                MessageBox.Show("OK");
-                //encriptado el código de validación, enviar al planeta para que lo desencripte utilizando su clave privada
-                //La nau es baixa de la BBDD(taula InnerEncryption) el codi de validació del planeta de
-                //destí i l’encripta amb la clau pública del planeta que s’haurà descarregat de Secure
-                //Core en format XML(la descarrega de la clau pública es pot haver fet amb
-                //anterioritat)
-                //7.Un cop encriptat el codi de validació, l’envia al planeta per tal que aquest es
-                //desencripti utilitzant la seva clau privada. (missatge VK - Validation Key)
-
-
-                //l’encripta amb la clau pública del planeta que s’haurà descarregat de Secure
-                //Core en format XML(la descarrega de la clau pública es pot haver fet amb
-                //anterioritat)
 
             } else
             {
@@ -321,11 +293,25 @@ namespace G8_Starship
 
         private void btn_steps_Click(object sender, EventArgs e)
         {
-            //La nau descomprimirà el fitxer i utilitzarà la codificació obtinguda de Secure Core per
-            //transformar les seqüències de números en seqüencies de lletres, convertirà les tres
-            //cadenes de lletres en una de sola, i ho guardarà en un fitxer anomenat PACSSOL.txt
-            //15.Ho reenviarà cap el planeta.
-            lbx_events.Items.Add("Hola");
+            //            //La nau es baixa de la BBDD (taula InnerEncryption) el codi de validació del planeta de
+            //            destí i l’encripta amb la clau pública del planeta que s’haurà descarregat de Secure
+            //Core en format XML(la descarrega de la clau pública es pot haver fet amb
+            //anterioritat)
+            //lbx_events.Items.Add("Hola");
+
+
+            //bajarse codigo validacion planeta
+            //SELECT * FROM InnerEncryption
+            DataSet dts;
+            dataAccess.connectToDDBB(ProjectName);
+           //dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = " + idOwnPlanet, ProjectName);
+
+
+            //bajarse clave publica planeta
+
+            //encriptar codigo validacion planeta
+
+            //poner mensaje para enviar VK
         }
 
         private void tbx_pubkey_TextChanged(object sender, EventArgs e)

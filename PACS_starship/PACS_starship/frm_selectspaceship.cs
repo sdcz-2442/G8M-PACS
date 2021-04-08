@@ -16,7 +16,7 @@ namespace PACS_starship
     {
         public string projectName = "PACS_starship";
         public string spaceshipCode;
-        public string spaceshipId;
+        public string spaceshipIdSelected;
         public string spaceshipIP;
         public string spaceshipPort1;
         public string spaceshipPort2;
@@ -42,10 +42,11 @@ namespace PACS_starship
 
             dts = dataAccess.getByQuery("SELECT * FROM SpaceShips WHERE CodeSpaceShip = '" + spaceshipCode+"'", "Spaceships", projectName);
 
-            spaceshipId = dts.Tables[0].Rows[0]["idSpaceShip"].ToString();
+            spaceshipIdSelected = dts.Tables[0].Rows[0]["idSpaceShip"].ToString();
             spaceshipIP = dts.Tables[0].Rows[0]["IPSpaceShip"].ToString();
             spaceshipPort1 = dts.Tables[0].Rows[0]["PortSpaceShip"].ToString();
             spaceshipPort2 = dts.Tables[0].Rows[0]["PortSpaceship1"].ToString();
+
 
             this.Hide();
             new frm_spaceship().Show();

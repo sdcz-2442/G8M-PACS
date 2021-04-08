@@ -25,7 +25,6 @@ namespace G8_Planet
 
         public string ipMissatge = "192.168.1.1";
 
-
         string fileName = "";
         string filePath = @"C:\";
         string fileContent = "";
@@ -124,18 +123,26 @@ namespace G8_Planet
 
         private void btn_generate_Click(object sender, EventArgs e)
         {
-            string TextKeyName = tbx_container.Text;
+            DataSet dts;
+            dataAccess.connectToDDBB(ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = " + idOwnPlanet, ProjectName);
+
+
+            if (dts.Tables[0].Rows.Count == 0)
+            {
+                return;
+            }
+            string InnerEncryptionCode = dts.Tables[0].Rows[0]["ValidationCode"].ToString();
+
             CspParameters cspp = new CspParameters();
-            string keyName = TextKeyName;
-            cspp.KeyContainerName = codeOwnPlanet;
+            string keyName = InnerEncryptionCode;
+            cspp.KeyContainerName = keyName;
             rsa = new RSACryptoServiceProvider(cspp);
             string publicKey = rsa.ToXmlString(false);
-            string pathfinal = @filePath + @"\Clau.xml";
-            File.WriteAllText(pathfinal, publicKey);
+            rsa.PersistKeyInCsp = false;
+            rsa.Clear();
 
-            //TODO: crear clave planeta
-
-            //TODO: guardar claves en BBDD!!!!
+            dts = dataAccess.getByQuery("INSERT INTO PlanetKeys(idPlanet, XMLKey) VALUES(" + idOwnPlanet + ", '" + publicKey + "')", ProjectName);
         }
 
         private void btn_routeXML_Click(object sender, EventArgs e)
