@@ -33,7 +33,7 @@ namespace G8_Planet
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
         G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
 
-        byte[] encryptedText;
+       // byte[] encryptedText;
 
         public frm_planet()
         {
@@ -242,7 +242,7 @@ namespace G8_Planet
 
             //Inserto innerEncriptionCode en BBDD
             dataAccess.connectToDDBB(ProjectName);
-            dts = dataAccess.getByQuery("INSERT INTO InnerEncryption(idPlanet, ValidationCode) VALUES("+idOwnPlanet+", "+ validationCode + ")", "InnerEncryption");
+            dts = dataAccess.getByQuery("INSERT INTO InnerEncryption(idPlanet, ValidationCode) VALUES("+idOwnPlanet+", "+ validationCode + ")", ProjectName);
 
 
             //coger id del nuevo registro

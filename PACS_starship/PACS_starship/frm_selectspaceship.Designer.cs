@@ -32,8 +32,6 @@ namespace PACS_starship
             this.label1 = new System.Windows.Forms.Label();
             this.tbx_spaceshipname = new System.Windows.Forms.TextBox();
             this.btn_selectspaceship = new System.Windows.Forms.Button();
-            this.lbl_1 = new System.Windows.Forms.Label();
-            this.lbl_2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -63,31 +61,11 @@ namespace PACS_starship
             this.btn_selectspaceship.UseVisualStyleBackColor = true;
             this.btn_selectspaceship.Click += new System.EventHandler(this.btn_selectspaceship_Click);
             // 
-            // lbl_1
-            // 
-            this.lbl_1.AutoSize = true;
-            this.lbl_1.Location = new System.Drawing.Point(77, 123);
-            this.lbl_1.Name = "lbl_1";
-            this.lbl_1.Size = new System.Drawing.Size(88, 13);
-            this.lbl_1.TabIndex = 3;
-            this.lbl_1.Text = "Spaceship Code:";
-            // 
-            // lbl_2
-            // 
-            this.lbl_2.AutoSize = true;
-            this.lbl_2.Location = new System.Drawing.Point(77, 146);
-            this.lbl_2.Name = "lbl_2";
-            this.lbl_2.Size = new System.Drawing.Size(88, 13);
-            this.lbl_2.TabIndex = 4;
-            this.lbl_2.Text = "Spaceship Code:";
-            // 
             // frm_selectspaceship
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 234);
-            this.Controls.Add(this.lbl_2);
-            this.Controls.Add(this.lbl_1);
             this.Controls.Add(this.btn_selectspaceship);
             this.Controls.Add(this.tbx_spaceshipname);
             this.Controls.Add(this.label1);
@@ -104,7 +82,5 @@ namespace PACS_starship
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbx_spaceshipname;
         private System.Windows.Forms.Button btn_selectspaceship;
-        private System.Windows.Forms.Label lbl_1;
-        private System.Windows.Forms.Label lbl_2;
     }
 }

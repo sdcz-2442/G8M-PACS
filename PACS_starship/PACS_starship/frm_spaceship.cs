@@ -20,11 +20,11 @@ namespace G8_Starship
     public partial class frm_spaceship : Form
     {
 
-        public string spaceshipCode;
-        public string spaceshipId;
-        public string spaceshipIP;
-        public string spaceshipPort1;
-        public string spaceshipPort2;
+        public string spaceshipCode = "FC-G1SP";
+        public int spaceshipId = 4;
+        public string spaceshipIP = "";
+        public string spaceshipPort1 = "";
+        public string spaceshipPort2 = "";
 
 
         private bool mouseDown;
@@ -250,9 +250,11 @@ namespace G8_Starship
             if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
             {
                 //Select planet
+                string entryRequirementMessage = "ER" + spaceshipCode;
 
                 DataSet dts;
 
+                //Selecciono planeta
                 namePlanetDelivery = cbx_selectplanet.Text;
 
                 dataAccess.connectToDDBB(ProjectName);
@@ -263,6 +265,18 @@ namespace G8_Starship
                     return;
                 }
                 idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+                //Selecciono delivery SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+                dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + idOwnSpaceship + " AND idPlanet = "+idPlanetDelivery, "Planets", ProjectName);
+
+                if (dts.Tables[0].Rows.Count == 0)
+                {
+                    return;
+                }
+                idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+                //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+
 
                 //DataSet dts;
 
@@ -279,7 +293,8 @@ namespace G8_Starship
                 //                ER Tipus de missatge(Entry Requirement).És un literal(2 caràcters ER)
                 //SSSSSSSSSSSS representa l’identificador de la nau(12 caràcters)
                 //CCCCCCCCCCCC representa l’identificador de l’entrega(12 caràcters)
-            } else if (messagetype ==  "VK - Validation Key")
+            }
+            else if (messagetype ==  "VK - Validation Key")
             {
 
 
@@ -304,7 +319,8 @@ namespace G8_Starship
             //SELECT * FROM InnerEncryption
             DataSet dts;
             dataAccess.connectToDDBB(ProjectName);
-           //dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = " + idOwnPlanet, ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idPlanet = " + idPlanetDelivery + "AND idPlanet = "+idOwnSpaceship, ProjectName);
+            //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
 
 
             //bajarse clave publica planeta
