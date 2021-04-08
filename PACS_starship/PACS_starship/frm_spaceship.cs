@@ -56,6 +56,14 @@ namespace G8_Starship
         {
             InitializeComponent();
             //Control.CheckForIllegalCrossThreadCalls = false;
+
+            string newid = frm_selectspaceship.spaceshipIdSelected;
+            string newid2 = frm_selectspaceship.spaceshipIP;
+            string newid3 = frm_selectspaceship.spaceshipPort1;
+            string newid4 = frm_selectspaceship.spaceshipPort2;
+
+
+
         }
 
         private void frm_spaceship_Load(object sender, EventArgs e)

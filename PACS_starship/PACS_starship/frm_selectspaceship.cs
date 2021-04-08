@@ -15,11 +15,11 @@ namespace PACS_starship
     public partial class frm_selectspaceship : Form
     {
         public string projectName = "PACS_starship";
-        public string spaceshipCode;
-        public string spaceshipIdSelected;
-        public string spaceshipIP;
-        public string spaceshipPort1;
-        public string spaceshipPort2;
+        public static string spaceshipCode;
+        public static string spaceshipIdSelected;
+        public static string spaceshipIP;
+        public static string spaceshipPort1;
+        public static string spaceshipPort2;
 
         public frm_selectspaceship()
         {
