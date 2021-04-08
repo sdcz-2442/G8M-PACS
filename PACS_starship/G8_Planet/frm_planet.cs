@@ -188,7 +188,7 @@ namespace G8_Planet
             nameOwnPlanet = comboBox1.Text;
 
             dataAccess.connectToDDBB(ProjectName);
-            dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '"+nameOwnPlanet+"'", "Planets", ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + nameOwnPlanet + "'", ProjectName);
 
             if (dts.Tables[0].Rows.Count == 0)
             {
@@ -197,7 +197,8 @@ namespace G8_Planet
             idOwnPlanet = dts.Tables[0].Rows[0]["idPlanet"].ToString();
             codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
 
-            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = '" + idOwnPlanet + "'", "Planets", ProjectName);
+
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = '" + idOwnPlanet + "'", ProjectName);
 
             if (dts.Tables[0].Rows.Count == 0)
             {
@@ -246,7 +247,7 @@ namespace G8_Planet
 
 
             //coger id del nuevo registro
-            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE ValidationCode = '" + validationCode + "'", "InnerEncryption");
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE ValidationCode = '" + validationCode + "'", ProjectName);
 
             if (dts.Tables[0].Rows.Count == 0)
             {

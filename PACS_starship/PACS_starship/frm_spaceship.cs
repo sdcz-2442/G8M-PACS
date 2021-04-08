@@ -267,7 +267,7 @@ namespace G8_Starship
                 idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
 
                 //Selecciono delivery SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
-                dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + idOwnSpaceship + " AND idPlanet = "+idPlanetDelivery, "Planets", ProjectName);
+                dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + spaceshipId + " AND idPlanet = "+idPlanetDelivery, "Planets", ProjectName);
 
                 if (dts.Tables[0].Rows.Count == 0)
                 {
@@ -308,26 +308,71 @@ namespace G8_Starship
 
         private void btn_steps_Click(object sender, EventArgs e)
         {
-            //            //La nau es baixa de la BBDD (taula InnerEncryption) el codi de validació del planeta de
-            //            destí i l’encripta amb la clau pública del planeta que s’haurà descarregat de Secure
-            //Core en format XML(la descarrega de la clau pública es pot haver fet amb
-            //anterioritat)
+
             //lbx_events.Items.Add("Hola");
 
-
             //bajarse codigo validacion planeta
-            //SELECT * FROM InnerEncryption
             DataSet dts;
             dataAccess.connectToDDBB(ProjectName);
-            dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idPlanet = " + idPlanetDelivery + "AND idPlanet = "+idOwnSpaceship, ProjectName);
-            //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = " + idPlanetDelivery, ProjectName);
 
+            if (dts.Tables[0].Rows.Count == 0)
+            {
+                return;
+            }
+            string ValidationCode = dts.Tables[0].Rows[0]["ValidationCode"].ToString();
 
             //bajarse clave publica planeta
+            dts = dataAccess.getByQuery("SELECT * FROM PlanetKeys WHERE idPlanet = " + idPlanetDelivery, ProjectName);
+
+            if (dts.Tables[0].Rows.Count == 0)
+            {
+                return;
+            }
+            string publicKeyXML = dts.Tables[0].Rows[0]["XMLKey"].ToString();
+
 
             //encriptar codigo validacion planeta
+            //MessageBox.Show(publicKeyXML);
+            rsaEnc.FromXmlString(publicKeyXML);
+            UnicodeEncoding ByteConverter = new UnicodeEncoding();
+            byte[] plaintext;
+            byte[] encryptedtext;
+
+            //tbx_original - mensaje a encriptar 
+            //tbx_crypted - mensaje encriptado
+
+            //convertir el texto plano en un un array de bytes 
+            plaintext = ByteConverter.GetBytes(ValidationCode);
+            //encriptar
+            encryptedtext = Encryption(plaintext, rsaEnc.ExportParameters(false), false);
+            encryptedArray = encryptedtext;
+            //convertir a texto para mostrarlo en textbox
+            string cryptedValidacionCode = ByteConverter.GetString(encryptedtext);
+
+            MessageBox.Show(cryptedValidacionCode);
+
 
             //poner mensaje para enviar VK
+        }
+
+        static public byte[] Encryption(byte[] Data, RSAParameters RSAKey, bool DoOAEPPadding)
+        {
+            try
+            {
+                byte[] encryptedData;
+                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                {
+                    RSA.ImportParameters(RSAKey);
+                    encryptedData = RSA.Encrypt(Data, DoOAEPPadding);
+                }
+                return encryptedData;
+            }
+            catch (CryptographicException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
         private void tbx_pubkey_TextChanged(object sender, EventArgs e)
