@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using G8_DataAccess;
 using PACS_starship;
+using System.Net.Sockets;
 
 namespace G8_Starship
 {
@@ -70,6 +71,16 @@ namespace G8_Starship
             cbx_selectplanet.DisplayMember = "DescPlanet";
             cbx_selectplanet.ValueMember = "idPlanet";
             cbx_selectplanet.DataSource = dts.Tables["Planets"];
+
+            dts = dataAccess.getByQuery("SELECT * FROM DeliveryData ORDER BY CodeDelivery ASC", "DeliveryData", ProjectName);
+            cbx_codedelivery.DisplayMember = "CodeDelivery";
+            cbx_codedelivery.ValueMember = "idDeliveryData";
+            cbx_codedelivery.DataSource = dts.Tables["DeliveryData"];
+
+            dts = dataAccess.getByQuery("SELECT * FROM DeliveryData ORDER BY CodeDelivery ASC", "DeliveryData", ProjectName);
+            cbx_deliverydate.DisplayMember = "DeliveryDate";
+            cbx_deliverydate.ValueMember = "idDeliveryData";
+            cbx_deliverydate.DataSource = dts.Tables["DeliveryData"];
 
         }
 
@@ -245,63 +256,142 @@ namespace G8_Starship
             ///(missatge VR - Validation Result)
             ///(missatge VR - Validation Result)
             //
-
             string messagetype = cbx_messages.Text; //seleccion de la combobox???
-            if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
+
+            try
             {
-                //Select planet
-                string entryRequirementMessage = "ER" + spaceshipCode;
-
-                DataSet dts;
-
-                //Selecciono planeta
-                namePlanetDelivery = cbx_selectplanet.Text;
-
-                dataAccess.connectToDDBB(ProjectName);
-                dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + namePlanetDelivery + "'", "Planets", ProjectName);
-
-                if (dts.Tables[0].Rows.Count == 0)
+                TcpClient client = new TcpClient("127.0.0.1", Convert.ToInt32("6699"));
+                if (messagetype == "")
                 {
-                    return;
+                    MessageBox.Show("El missatge no ha de estar buit");
                 }
-                idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
-
-                //Selecciono delivery SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
-                dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + spaceshipId + " AND idPlanet = "+idPlanetDelivery, "Planets", ProjectName);
-
-                if (dts.Tables[0].Rows.Count == 0)
+                else
                 {
-                    return;
+
+                    if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
+                    {
+                        //Select planet
+                        string entryRequirementMessage = "ER" + spaceshipCode;
+
+                        DataSet dts;
+
+                        //Selecciono planeta
+                        namePlanetDelivery = cbx_selectplanet.Text;
+
+                        dataAccess.connectToDDBB(ProjectName);
+                        dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + namePlanetDelivery + "'", "Planets", ProjectName);
+
+                        if (dts.Tables[0].Rows.Count == 0)
+                        {
+                            return;
+                        }
+                        idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+                        //Selecciono delivery SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+                        dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + spaceshipId + " AND idPlanet = " + idPlanetDelivery, "Planets", ProjectName);
+
+                        if (dts.Tables[0].Rows.Count == 0)
+                        {
+                            return;
+                        }
+                        idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+                        Byte[] dades = Encoding.ASCII.GetBytes("Prueba");
+                        NetworkStream ns = client.GetStream();
+                        ns.Write(dades, 0, dades.Length);
+
+                        //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+
+
+                        //DataSet dts;
+
+                        //dataAccess.connectToDDBB(ProjectName);
+                        //dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC", "Planets", ProjectName);
+                        //cbx_selectplanet.DisplayMember = "DescPlanet";
+                        //cbx_selectplanet.ValueMember = "idPlanet";
+                        //cbx_selectplanet.DataSource = dts.Tables["Planets"];
+
+                        //codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
+
+                        //ERSSSSSSSSSSSSCCCCCCCCCCCC
+                        //                On
+                        //                ER Tipus de missatge(Entry Requirement).És un literal(2 caràcters ER)
+                        //SSSSSSSSSSSS representa l’identificador de la nau(12 caràcters)
+                        //CCCCCCCCCCCC representa l’identificador de l’entrega(12 caràcters)
+                    }
+                    else if (messagetype == "VK - Validation Key")
+                    {
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error");
+                    }
                 }
-                idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
-
-                //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
-
-
-                //DataSet dts;
-
-                //dataAccess.connectToDDBB(ProjectName);
-                //dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC", "Planets", ProjectName);
-                //cbx_selectplanet.DisplayMember = "DescPlanet";
-                //cbx_selectplanet.ValueMember = "idPlanet";
-                //cbx_selectplanet.DataSource = dts.Tables["Planets"];
-
-                //codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
-
-                //ERSSSSSSSSSSSSCCCCCCCCCCCC
-                //                On
-                //                ER Tipus de missatge(Entry Requirement).És un literal(2 caràcters ER)
-                //SSSSSSSSSSSS representa l’identificador de la nau(12 caràcters)
-                //CCCCCCCCCCCC representa l’identificador de l’entrega(12 caràcters)
             }
-            else if (messagetype ==  "VK - Validation Key")
+            catch
             {
-
-
-            } else
-            {
-                MessageBox.Show("Error");
+                MessageBox.Show("Servidor no accessible");
             }
+
+
+
+            //if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
+            //{
+            //    //Select planet
+            //    string entryRequirementMessage = "ER" + spaceshipCode;
+
+            //    DataSet dts;
+
+            //    //Selecciono planeta
+            //    namePlanetDelivery = cbx_selectplanet.Text;
+
+            //    dataAccess.connectToDDBB(ProjectName);
+            //    dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + namePlanetDelivery + "'", "Planets", ProjectName);
+
+            //    if (dts.Tables[0].Rows.Count == 0)
+            //    {
+            //        return;
+            //    }
+            //    idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+            //    //Selecciono delivery SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+            //    dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + spaceshipId + " AND idPlanet = "+idPlanetDelivery, "Planets", ProjectName);
+
+            //    if (dts.Tables[0].Rows.Count == 0)
+            //    {
+            //        return;
+            //    }
+            //    idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+            //    //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+
+
+            //    //DataSet dts;
+
+            //    //dataAccess.connectToDDBB(ProjectName);
+            //    //dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC", "Planets", ProjectName);
+            //    //cbx_selectplanet.DisplayMember = "DescPlanet";
+            //    //cbx_selectplanet.ValueMember = "idPlanet";
+            //    //cbx_selectplanet.DataSource = dts.Tables["Planets"];
+
+            //    //codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
+
+            //    //ERSSSSSSSSSSSSCCCCCCCCCCCC
+            //    //                On
+            //    //                ER Tipus de missatge(Entry Requirement).És un literal(2 caràcters ER)
+            //    //SSSSSSSSSSSS representa l’identificador de la nau(12 caràcters)
+            //    //CCCCCCCCCCCC representa l’identificador de l’entrega(12 caràcters)
+            //}
+            //else if (messagetype ==  "VK - Validation Key")
+            //{
+
+
+            //} else
+            //{
+            //    MessageBox.Show("Error");
+            //}
 
             //TODO: casos IF para cada tipo de mensaje
         }

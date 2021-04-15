@@ -42,17 +42,6 @@ namespace G8_Planet
         }
 
         Thread comprobarConexion;
-
-        private void btn_connect_Click(object sender, EventArgs e)
-        {
-            if (!IsConnected)
-            {
-                comprobarConexion = new Thread(conectarServer);
-                comprobarConexion.Start();
-                IsConnected = true;
-            }
-
-        }
         Boolean IsConnected;
         TcpClient client;
         TcpListener Listener = null;
@@ -67,6 +56,7 @@ namespace G8_Planet
 
                 while (IsConnected)
                 {
+
                     if (Listener.Pending())
                     {
                         client = Listener.AcceptTcpClient();
@@ -331,5 +321,15 @@ namespace G8_Planet
             return coordenades;
 
         }
-}
+
+        private void btn_connect_Click(object sender, EventArgs e)
+        {
+            if (!IsConnected)
+            {
+                comprobarConexion = new Thread(conectarServer);
+                comprobarConexion.Start();
+                IsConnected = true;
+            }
+        }
+    }
 }

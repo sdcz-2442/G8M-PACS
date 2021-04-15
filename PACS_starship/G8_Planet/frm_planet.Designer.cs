@@ -38,7 +38,9 @@ namespace G8_Planet
             this.label1 = new System.Windows.Forms.Label();
             this.pnl_keys = new System.Windows.Forms.Panel();
             this.btn_generate = new System.Windows.Forms.Button();
+            this.tbx_routeXML = new System.Windows.Forms.TextBox();
             this.tbx_container = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -52,8 +54,6 @@ namespace G8_Planet
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_identificadorplaneta = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbx_routeXML = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.pnl_keys.SuspendLayout();
             this.lbl_port.SuspendLayout();
@@ -121,6 +121,7 @@ namespace G8_Planet
             this.btn_connect.TabIndex = 2;
             this.btn_connect.Text = "Connectar";
             this.btn_connect.UseVisualStyleBackColor = false;
+            this.btn_connect.Click += new System.EventHandler(this.btn_connect_Click);
             // 
             // label2
             // 
@@ -169,6 +170,14 @@ namespace G8_Planet
             this.btn_generate.UseVisualStyleBackColor = false;
             this.btn_generate.Click += new System.EventHandler(this.btn_generate_Click);
             // 
+            // tbx_routeXML
+            // 
+            this.tbx_routeXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
+            this.tbx_routeXML.Location = new System.Drawing.Point(142, 80);
+            this.tbx_routeXML.Name = "tbx_routeXML";
+            this.tbx_routeXML.Size = new System.Drawing.Size(288, 20);
+            this.tbx_routeXML.TabIndex = 5;
+            // 
             // tbx_container
             // 
             this.tbx_container.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
@@ -176,6 +185,15 @@ namespace G8_Planet
             this.tbx_container.Name = "tbx_container";
             this.tbx_container.Size = new System.Drawing.Size(127, 20);
             this.tbx_container.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(29, 83);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Fixer XML Public Key";
             // 
             // label4
             // 
@@ -326,23 +344,6 @@ namespace G8_Planet
             this.lbl_identificadorplaneta.Name = "lbl_identificadorplaneta";
             this.lbl_identificadorplaneta.Size = new System.Drawing.Size(0, 13);
             this.lbl_identificadorplaneta.TabIndex = 21;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 83);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Fixer XML Public Key";
-            // 
-            // tbx_routeXML
-            // 
-            this.tbx_routeXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
-            this.tbx_routeXML.Location = new System.Drawing.Point(142, 80);
-            this.tbx_routeXML.Name = "tbx_routeXML";
-            this.tbx_routeXML.Size = new System.Drawing.Size(288, 20);
-            this.tbx_routeXML.TabIndex = 5;
             // 
             // frm_planet
             // 
