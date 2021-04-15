@@ -118,6 +118,7 @@ namespace G8_Starship
             this.tbx_port.Name = "tbx_port";
             this.tbx_port.Size = new System.Drawing.Size(73, 22);
             this.tbx_port.TabIndex = 2;
+            this.tbx_port.TextChanged += new System.EventHandler(this.tbx_port_TextChanged);
             // 
             // groupBox2
             // 

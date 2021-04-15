@@ -260,7 +260,7 @@ namespace G8_Starship
 
             try
             {
-                TcpClient client = new TcpClient("127.0.0.1", Convert.ToInt32("6699"));
+                TcpClient client = new TcpClient("127.0.0.1", Convert.ToInt32("4000"));
                 if (messagetype == "")
                 {
                     MessageBox.Show("El missatge no ha de estar buit");
@@ -301,15 +301,6 @@ namespace G8_Starship
                         ns.Write(dades, 0, dades.Length);
 
                         //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
-
-
-                        //DataSet dts;
-
-                        //dataAccess.connectToDDBB(ProjectName);
-                        //dts = dataAccess.getByQuery("SELECT * FROM Planets ORDER BY DescPlanet ASC", "Planets", ProjectName);
-                        //cbx_selectplanet.DisplayMember = "DescPlanet";
-                        //cbx_selectplanet.ValueMember = "idPlanet";
-                        //cbx_selectplanet.DataSource = dts.Tables["Planets"];
 
                         //codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
 
@@ -466,6 +457,11 @@ namespace G8_Starship
         }
 
         private void tbx_pubkey_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbx_port_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -53,6 +53,8 @@ namespace G8_Planet
             {
                 Listener = new TcpListener(IPAddress.Any, Convert.ToInt32(txb_port.Text));
                 Listener.Start();
+                TcpClient client = new TcpClient();
+                client = null;
 
                 while (IsConnected)
                 {
@@ -61,7 +63,7 @@ namespace G8_Planet
                     {
                         client = Listener.AcceptTcpClient();
                         ns = client.GetStream();
-                        Byte[] buffer = new byte[256];
+                        Byte[] buffer = new byte[1024];
 
                         string data = "";
                         ns.Read(buffer, 0, buffer.Length);
