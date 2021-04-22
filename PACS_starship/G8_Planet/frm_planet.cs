@@ -261,8 +261,8 @@ namespace G8_Planet
 
                 //lbx_mostrarletras.Items.Add(itemKey);
                 //lbx_mostrarnumeros.Items.Add(itemValue.ToString().PadLeft(5, '0'));
-
-                dts = dataAccess.getByQuery("INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers) VALUES ("+idInnerEncryption+", '"+ item.Key.ToString()+ "', '"+item.Value.ToString()+"')", "InnerEncryptionData");
+                //INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers)                                               VALUES (17, '1','1')
+                dts = dataAccess.getByQuery("INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers) VALUES ("+idInnerEncryption+", '"+ item.Key.ToString()+"','"+item.Value.ToString()+"')", ProjectName);
             }
             
         }
