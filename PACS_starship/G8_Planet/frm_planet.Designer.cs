@@ -401,5 +401,6 @@ namespace G8_Planet
         private System.Windows.Forms.Label lbl_identificadorplaneta;
         private System.Windows.Forms.TextBox tbx_routeXML;
         private System.Windows.Forms.Label label3;
-    }
+		private System.Windows.Forms.Button btn_genArch;
+	}
 }

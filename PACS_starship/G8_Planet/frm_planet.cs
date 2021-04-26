@@ -29,6 +29,8 @@ namespace G8_Planet
         string filePath = @"C:\";
         string fileContent = "";
 
+        string docSuma = "";
+
         RSACryptoServiceProvider rsa;
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
         G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
@@ -261,8 +263,8 @@ namespace G8_Planet
 
                 //lbx_mostrarletras.Items.Add(itemKey);
                 //lbx_mostrarnumeros.Items.Add(itemValue.ToString().PadLeft(5, '0'));
-                //INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers)                                               VALUES (17, '1','1')
-                dts = dataAccess.getByQuery("INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers) VALUES ("+idInnerEncryption+", '"+ item.Key.ToString()+"','"+item.Value.ToString()+"')", ProjectName);
+
+                dts = dataAccess.getByQuery("INSERT INTO InnerEncryptionData(IdInnerEncryption, Word, Numbers) VALUES ("+idInnerEncryption+", '"+ item.Key.ToString()+ "', '"+item.Value.ToString()+"')", ProjectName);
             }
             
         }
@@ -334,4 +336,68 @@ namespace G8_Planet
             }
         }
     }
+        private void btn_genArch_Click(object sender, EventArgs e)
+        {
+            string doc1 = "", doc2 = "", doc3 = "";
+
+            doc1 = generarLetras(doc1);
+            doc2 = generarLetras(doc2);
+            doc3 = generarLetras(doc3);
+            docSuma = doc1 + doc2 + doc3;
+            //MessageBox.Show("Documentos generados");
+
+            doc1 = traducirArchivos(doc1);
+            doc2 = traducirArchivos(doc2);
+            doc3 = traducirArchivos(doc3);
+            //MessageBox.Show("Documentos traducidos");
+
+            generarArchivos(doc1, "doc1");
+            generarArchivos(doc2, "doc2");
+            generarArchivos(doc3, "doc3");
+            MessageBox.Show("Documentos guardados");
+        }
+        string generarLetras(string doc)
+        {
+            Random rand = new Random();
+            for (int i = 0; i < 100000; i++)
+            {
+                int numero = rand.Next(26);
+                char letra = (char)(((int)'A') + numero);
+                doc += letra;
+            }
+            return doc;
+        }
+        void generarArchivos(string doc, string nombreDocumento)
+        {
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs\\" + nombreDocumento + ".txt";
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.Write(doc);
+                }
+            }
+        }
+        string traducirArchivos(string doc)
+        {
+            string docTraducido = "";
+
+            DataSet dts;
+            dataAccess.connectToDDBB(ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryptionData ORDER BY Word ASC", "InnerEncryptionData", ProjectName);
+            Dictionary<string, string> dict = dts.Tables[0].AsEnumerable()
+            .ToDictionary<DataRow, string, string>(row => row[2].ToString(),
+                                       row => row[3].ToString());
+
+            for (int i = 0; i < doc.Length; i++)
+            {
+                string letra = doc[i].ToString();
+                docTraducido += dict[letra];
+            }
+
+            return docTraducido;
+        }
+
+    }
+
 }
