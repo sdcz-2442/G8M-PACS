@@ -335,7 +335,7 @@ namespace G8_Planet
                 IsConnected = true;
             }
         }
-    }
+    
         private void btn_genArch_Click(object sender, EventArgs e)
         {
             string doc1 = "", doc2 = "", doc3 = "";
