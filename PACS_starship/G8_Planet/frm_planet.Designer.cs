@@ -53,13 +53,14 @@ namespace G8_Planet
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbl_identificadorplaneta = new System.Windows.Forms.Label();
+            this.btn_sendmessages = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbx_port = new System.Windows.Forms.TextBox();
             this.tbx_ipplanet = new System.Windows.Forms.TextBox();
             this.btn_sendping = new System.Windows.Forms.Button();
-            this.btn_sendmessages = new System.Windows.Forms.Button();
+            this.lbl_identificadorplaneta = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.pnl_keys.SuspendLayout();
             this.lbl_port.SuspendLayout();
@@ -92,7 +93,7 @@ namespace G8_Planet
             this.lbx_Missatges.FormattingEnabled = true;
             this.lbx_Missatges.ItemHeight = 16;
             this.lbx_Missatges.Location = new System.Drawing.Point(77, 181);
-            this.lbx_Missatges.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbx_Missatges.Margin = new System.Windows.Forms.Padding(4);
             this.lbx_Missatges.Name = "lbx_Missatges";
             this.lbx_Missatges.Size = new System.Drawing.Size(436, 164);
             this.lbx_Missatges.TabIndex = 5;
@@ -159,7 +160,7 @@ namespace G8_Planet
             this.pnl_keys.Controls.Add(this.label3);
             this.pnl_keys.Controls.Add(this.label4);
             this.pnl_keys.Location = new System.Drawing.Point(688, 54);
-            this.pnl_keys.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnl_keys.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_keys.Name = "pnl_keys";
             this.pnl_keys.Size = new System.Drawing.Size(669, 182);
             this.pnl_keys.TabIndex = 19;
@@ -170,7 +171,7 @@ namespace G8_Planet
             this.btn_generate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
             this.btn_generate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_generate.Location = new System.Drawing.Point(449, 130);
-            this.btn_generate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_generate.Margin = new System.Windows.Forms.Padding(4);
             this.btn_generate.Name = "btn_generate";
             this.btn_generate.Size = new System.Drawing.Size(124, 28);
             this.btn_generate.TabIndex = 7;
@@ -182,7 +183,7 @@ namespace G8_Planet
             // 
             this.tbx_routeXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
             this.tbx_routeXML.Location = new System.Drawing.Point(189, 98);
-            this.tbx_routeXML.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_routeXML.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_routeXML.Name = "tbx_routeXML";
             this.tbx_routeXML.Size = new System.Drawing.Size(383, 22);
             this.tbx_routeXML.TabIndex = 5;
@@ -191,7 +192,7 @@ namespace G8_Planet
             // 
             this.tbx_container.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
             this.tbx_container.Location = new System.Drawing.Point(189, 44);
-            this.tbx_container.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbx_container.Margin = new System.Windows.Forms.Padding(4);
             this.tbx_container.Name = "tbx_container";
             this.tbx_container.Size = new System.Drawing.Size(168, 22);
             this.tbx_container.TabIndex = 4;
@@ -222,7 +223,7 @@ namespace G8_Planet
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(68, 30);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(483, 39);
             this.comboBox1.TabIndex = 20;
@@ -233,7 +234,7 @@ namespace G8_Planet
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(211, 142);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(167, 39);
             this.button1.TabIndex = 21;
@@ -246,7 +247,7 @@ namespace G8_Planet
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(173)))), ((int)(((byte)(235)))));
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(387, 142);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(167, 39);
             this.button2.TabIndex = 22;
@@ -342,6 +343,7 @@ namespace G8_Planet
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.btn_sendmessages);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label6);
@@ -353,20 +355,30 @@ namespace G8_Planet
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.pnl_keys);
             this.panel1.Location = new System.Drawing.Point(0, 27);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1410, 651);
             this.panel1.TabIndex = 24;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // lbl_identificadorplaneta
+            // btn_sendmessages
             // 
-            this.lbl_identificadorplaneta.AutoSize = true;
-            this.lbl_identificadorplaneta.Location = new System.Drawing.Point(251, 80);
-            this.lbl_identificadorplaneta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_identificadorplaneta.Name = "lbl_identificadorplaneta";
-            this.lbl_identificadorplaneta.Size = new System.Drawing.Size(0, 17);
-            this.lbl_identificadorplaneta.TabIndex = 21;
+            this.btn_sendmessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.btn_sendmessages.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.btn_sendmessages.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_sendmessages.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_sendmessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sendmessages.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sendmessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.btn_sendmessages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_sendmessages.Location = new System.Drawing.Point(1070, 320);
+            this.btn_sendmessages.Name = "btn_sendmessages";
+            this.btn_sendmessages.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_sendmessages.Size = new System.Drawing.Size(146, 31);
+            this.btn_sendmessages.TabIndex = 27;
+            this.btn_sendmessages.Text = "Send Message";
+            this.btn_sendmessages.UseVisualStyleBackColor = false;
+            this.btn_sendmessages.Click += new System.EventHandler(this.btn_sendmessages_Click);
             // 
             // label5
             // 
@@ -426,24 +438,33 @@ namespace G8_Planet
             this.btn_sendping.Text = "Network Request";
             this.btn_sendping.UseVisualStyleBackColor = false;
             // 
-            // btn_sendmessages
+            // lbl_identificadorplaneta
             // 
-            this.btn_sendmessages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
-            this.btn_sendmessages.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
-            this.btn_sendmessages.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
-            this.btn_sendmessages.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
-            this.btn_sendmessages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_sendmessages.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_sendmessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
-            this.btn_sendmessages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_sendmessages.Location = new System.Drawing.Point(1070, 320);
-            this.btn_sendmessages.Name = "btn_sendmessages";
-            this.btn_sendmessages.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btn_sendmessages.Size = new System.Drawing.Size(83, 31);
-            this.btn_sendmessages.TabIndex = 27;
-            this.btn_sendmessages.Text = "Send Message";
-            this.btn_sendmessages.UseVisualStyleBackColor = false;
-            this.btn_sendmessages.Click += new System.EventHandler(this.btn_sendmessages_Click);
+            this.lbl_identificadorplaneta.AutoSize = true;
+            this.lbl_identificadorplaneta.Location = new System.Drawing.Point(251, 80);
+            this.lbl_identificadorplaneta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_identificadorplaneta.Name = "lbl_identificadorplaneta";
+            this.lbl_identificadorplaneta.Size = new System.Drawing.Size(0, 17);
+            this.lbl_identificadorplaneta.TabIndex = 21;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(1070, 373);
+            this.button3.Name = "button3";
+            this.button3.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.button3.Size = new System.Drawing.Size(146, 31);
+            this.button3.TabIndex = 28;
+            this.button3.Text = "Send File";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // frm_planet
             // 
@@ -457,7 +478,7 @@ namespace G8_Planet
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_planet";
             this.Text = "frm_planet";
             this.Load += new System.EventHandler(this.frm_planet_Load);
@@ -509,5 +530,6 @@ namespace G8_Planet
         private System.Windows.Forms.TextBox tbx_ipplanet;
         private System.Windows.Forms.Button btn_sendping;
         private System.Windows.Forms.Button btn_sendmessages;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -410,6 +411,56 @@ namespace G8_Planet
                 networkStream.Close();
             
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    tcP_Client1._portClient = "8000";
+                    byte[] data = File.ReadAllBytes(file.FileName);
+                    tcP_Client1.sendFile(data);
+                }
+                catch (IOException)
+                {
+                    Console.WriteLine("TCP Client Form: Error loding file");
+                }
+
+            }
+        }
+
+        private void getListWords(int idPlanet)
+        {
+            int idInnerEncryption = database.getIdFromTable("InnerEncryption", "idInnerEncryption", "idPlanet", idPlanet);
+            DataSet dataSet;
+            string query = "select Word, Numbers from InnerEncryptionData where IdInnerEncryption = " + idInnerEncryption;
+
+            dataSet = database.portarPerConsultar(query);
+
+            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            {
+                string letra = dataSet.Tables[0].Rows[i]["Word"].ToString();
+                string numero = dataSet.Tables[0].Rows[i]["Numbers"].ToString();
+                listaFinal.Add(new Codificacion(letra, numero));
+            }
+        }
+
+        private void FileForValidate()
+        {
+            if (Directory.Exists(createfolder))
+            {
+                Directory.Delete(createfolder, true);
+            }
+            DirectoryInfo di = Directory.CreateDirectory(createfolder);
+            ZipFile.ExtractToDirectory(zipPath, rutatresficheros);
+
+            thrReadFile = new Thread(readFile);
+            thrReadFile.Start();
+        }
+
+
     }
 
 }
