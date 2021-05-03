@@ -336,7 +336,7 @@ namespace G8_Planet
             }
         }
     
-        private void btn_genArch_Click(object sender, EventArgs e)
+        private void btn_genArc_Click(object sender, EventArgs e)
         {
             string doc1 = "", doc2 = "", doc3 = "";
 
@@ -354,7 +354,7 @@ namespace G8_Planet
             generarArchivos(doc1, "doc1");
             generarArchivos(doc2, "doc2");
             generarArchivos(doc3, "doc3");
-            MessageBox.Show("Documentos guardados");
+            MessageBox.Show("Documents guardats");
         }
         string generarLetras(string doc)
         {
@@ -397,7 +397,26 @@ namespace G8_Planet
 
             return docTraducido;
         }
+        string desTraducirArchivos(string doc)
+        {
+            string docDestraducido = "";
 
+            DataSet dts;
+            dataAccess.connectToDDBB(ProjectName);
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryptionData ORDER BY Word ASC", "InnerEncryptionData", ProjectName);
+            Dictionary<string, string> dict = dts.Tables[0].AsEnumerable()
+            .ToDictionary<DataRow, string, string>(row => row[3].ToString(),
+                                       row => row[2].ToString());
+
+            for (int i = 0; i < doc.Length; i += 3)
+            {
+                string code = doc[i].ToString() + doc[i+1].ToString() + doc[i+2].ToString();
+                docDestraducido += dict[code].ToString();
+            }
+
+            return docDestraducido;
+        }
+        
         private void btn_sendmessages_Click(object sender, EventArgs e)
         {
            
