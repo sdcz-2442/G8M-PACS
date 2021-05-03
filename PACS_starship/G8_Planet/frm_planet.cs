@@ -398,6 +398,18 @@ namespace G8_Planet
             return docTraducido;
         }
 
+        private void btn_sendmessages_Click(object sender, EventArgs e)
+        {
+           
+                string doc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                byte[] file = File.ReadAllBytes(doc + filedir)
+                byte[] fileBuffer = new byte[file.Length];
+                TcpClient clientSocket = new TcpClient(ip, port);
+                NetworkStream networkStream = clientSocket.GetStream();
+                networkStream.Write(file.ToArray(), 0, fileBuffer.GetLength(0));
+                networkStream.Close();
+            
+        }
     }
 
 }
