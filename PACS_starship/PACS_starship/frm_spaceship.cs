@@ -596,9 +596,10 @@ namespace G8_Starship
                 //else
                 //{
 
-                    Byte[] dades = Encoding.ASCII.GetBytes(fileName);
+                    Byte[] dades = Encoding.ASCII.GetBytes(filePath);
                     NetworkStream ns = client.GetStream();
                     ns.Write(dades, 0, dades.Length);
+                MessageBox.Show("File send");
                 //}
             }
             catch

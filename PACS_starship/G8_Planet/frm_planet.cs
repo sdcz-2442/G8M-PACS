@@ -58,9 +58,6 @@ namespace G8_Planet
                 Listener.Start();
                 TcpClient client = new TcpClient();
                 client = null;
-
-
-
                 while (IsConnected)
                 {
 
@@ -113,8 +110,8 @@ namespace G8_Planet
                                 totalrecbytes += RecBytes;
                             }
                             Fs.Close();
-
                             ns.Close();
+
                             //Archivos.Close();
 
                             //Lb_Delegate("Alternando archivos, espere porfavor...", ConsoleBox1);
@@ -124,7 +121,6 @@ namespace G8_Planet
                             //Descomprimir
                             //ZipFile.ExtractToDirectory(filepathZIP, filepath);
                         }
-                        
                     }
                 }
             }
@@ -388,6 +384,7 @@ namespace G8_Planet
             //    comprobarConexion.Start();
             //    IsConnected = true;
             //}
+            MessageBox.Show("Listener Connected");
 
             if (!IsConnected)
             {

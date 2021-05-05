@@ -121,6 +121,7 @@ namespace G8_Starship
             this.tbx_port.Name = "tbx_port";
             this.tbx_port.Size = new System.Drawing.Size(73, 22);
             this.tbx_port.TabIndex = 2;
+            this.tbx_port.Text = "4000";
             this.tbx_port.TextChanged += new System.EventHandler(this.tbx_port_TextChanged);
             // 
             // groupBox2
@@ -261,6 +262,7 @@ namespace G8_Starship
             this.tbx_ipplanet.Name = "tbx_ipplanet";
             this.tbx_ipplanet.Size = new System.Drawing.Size(151, 22);
             this.tbx_ipplanet.TabIndex = 1;
+            this.tbx_ipplanet.Text = "127.0.0.1";
             // 
             // lbx_console
             // 

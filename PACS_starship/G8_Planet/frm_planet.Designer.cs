@@ -105,6 +105,7 @@ namespace G8_Planet
             this.txb_port.Name = "txb_port";
             this.txb_port.Size = new System.Drawing.Size(74, 20);
             this.txb_port.TabIndex = 4;
+            this.txb_port.Text = "4000";
             // 
             // btn_desconnect
             // 
