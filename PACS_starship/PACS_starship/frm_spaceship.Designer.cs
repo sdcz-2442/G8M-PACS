@@ -34,6 +34,9 @@ namespace G8_Starship
             this.label4 = new System.Windows.Forms.Label();
             this.tbx_port = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_sendfile = new System.Windows.Forms.Button();
+            this.cbx_deliverydate = new System.Windows.Forms.ComboBox();
+            this.cbx_codedelivery = new System.Windows.Forms.ComboBox();
             this.cbx_selectplanet = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -58,8 +61,8 @@ namespace G8_Starship
             this.btn_steps = new System.Windows.Forms.Button();
             this.lbx_events = new System.Windows.Forms.ListBox();
             this.btn_open = new System.Windows.Forms.Button();
-            this.cbx_codedelivery = new System.Windows.Forms.ComboBox();
-            this.cbx_deliverydate = new System.Windows.Forms.ComboBox();
+            this.btn_connectTCPIP2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.lbl_port.SuspendLayout();
@@ -118,11 +121,13 @@ namespace G8_Starship
             this.tbx_port.Name = "tbx_port";
             this.tbx_port.Size = new System.Drawing.Size(73, 22);
             this.tbx_port.TabIndex = 2;
+            this.tbx_port.Text = "4000";
             this.tbx_port.TextChanged += new System.EventHandler(this.tbx_port_TextChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.btn_sendfile);
             this.groupBox2.Controls.Add(this.cbx_deliverydate);
             this.groupBox2.Controls.Add(this.cbx_codedelivery);
             this.groupBox2.Controls.Add(this.cbx_selectplanet);
@@ -135,10 +140,45 @@ namespace G8_Starship
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(191)))), ((int)(((byte)(141)))));
             this.groupBox2.Location = new System.Drawing.Point(32, 266);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(320, 252);
+            this.groupBox2.Size = new System.Drawing.Size(354, 252);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Transmissions";
+            // 
+            // btn_sendfile
+            // 
+            this.btn_sendfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.btn_sendfile.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.btn_sendfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_sendfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_sendfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sendfile.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sendfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.btn_sendfile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_sendfile.Location = new System.Drawing.Point(246, 203);
+            this.btn_sendfile.Name = "btn_sendfile";
+            this.btn_sendfile.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_sendfile.Size = new System.Drawing.Size(102, 31);
+            this.btn_sendfile.TabIndex = 25;
+            this.btn_sendfile.Text = "2Send File";
+            this.btn_sendfile.UseVisualStyleBackColor = false;
+            this.btn_sendfile.Click += new System.EventHandler(this.btn_sendfile_Click);
+            // 
+            // cbx_deliverydate
+            // 
+            this.cbx_deliverydate.FormattingEnabled = true;
+            this.cbx_deliverydate.Location = new System.Drawing.Point(22, 141);
+            this.cbx_deliverydate.Name = "cbx_deliverydate";
+            this.cbx_deliverydate.Size = new System.Drawing.Size(218, 32);
+            this.cbx_deliverydate.TabIndex = 24;
+            // 
+            // cbx_codedelivery
+            // 
+            this.cbx_codedelivery.FormattingEnabled = true;
+            this.cbx_codedelivery.Location = new System.Drawing.Point(22, 103);
+            this.cbx_codedelivery.Name = "cbx_codedelivery";
+            this.cbx_codedelivery.Size = new System.Drawing.Size(218, 32);
+            this.cbx_codedelivery.TabIndex = 23;
             // 
             // cbx_selectplanet
             // 
@@ -182,12 +222,12 @@ namespace G8_Starship
             this.btn_sendmessages.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_sendmessages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
             this.btn_sendmessages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_sendmessages.Location = new System.Drawing.Point(246, 186);
+            this.btn_sendmessages.Location = new System.Drawing.Point(247, 166);
             this.btn_sendmessages.Name = "btn_sendmessages";
             this.btn_sendmessages.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btn_sendmessages.Size = new System.Drawing.Size(55, 31);
+            this.btn_sendmessages.Size = new System.Drawing.Size(102, 31);
             this.btn_sendmessages.TabIndex = 5;
-            this.btn_sendmessages.Text = "Send Message";
+            this.btn_sendmessages.Text = "1Send Message";
             this.btn_sendmessages.UseVisualStyleBackColor = false;
             this.btn_sendmessages.Click += new System.EventHandler(this.btn_sendmessages_Click);
             // 
@@ -222,6 +262,7 @@ namespace G8_Starship
             this.tbx_ipplanet.Name = "tbx_ipplanet";
             this.tbx_ipplanet.Size = new System.Drawing.Size(151, 22);
             this.tbx_ipplanet.TabIndex = 1;
+            this.tbx_ipplanet.Text = "127.0.0.1";
             // 
             // lbx_console
             // 
@@ -424,7 +465,7 @@ namespace G8_Starship
             this.lbx_events.Location = new System.Drawing.Point(428, 46);
             this.lbx_events.Margin = new System.Windows.Forms.Padding(1);
             this.lbx_events.Name = "lbx_events";
-            this.lbx_events.Size = new System.Drawing.Size(223, 483);
+            this.lbx_events.Size = new System.Drawing.Size(223, 522);
             this.lbx_events.TabIndex = 21;
             this.lbx_events.TabStop = false;
             // 
@@ -447,21 +488,45 @@ namespace G8_Starship
             this.btn_open.Text = "Open";
             this.btn_open.UseVisualStyleBackColor = false;
             // 
-            // cbx_codedelivery
+            // btn_connectTCPIP2
             // 
-            this.cbx_codedelivery.FormattingEnabled = true;
-            this.cbx_codedelivery.Location = new System.Drawing.Point(22, 103);
-            this.cbx_codedelivery.Name = "cbx_codedelivery";
-            this.cbx_codedelivery.Size = new System.Drawing.Size(218, 32);
-            this.cbx_codedelivery.TabIndex = 23;
+            this.btn_connectTCPIP2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_connectTCPIP2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.btn_connectTCPIP2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.btn_connectTCPIP2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_connectTCPIP2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.btn_connectTCPIP2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_connectTCPIP2.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_connectTCPIP2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.btn_connectTCPIP2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_connectTCPIP2.Location = new System.Drawing.Point(674, 429);
+            this.btn_connectTCPIP2.Name = "btn_connectTCPIP2";
+            this.btn_connectTCPIP2.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_connectTCPIP2.Size = new System.Drawing.Size(126, 31);
+            this.btn_connectTCPIP2.TabIndex = 22;
+            this.btn_connectTCPIP2.Text = "Connect";
+            this.btn_connectTCPIP2.UseVisualStyleBackColor = false;
+            this.btn_connectTCPIP2.Click += new System.EventHandler(this.btn_connectTCPIP2_Click);
             // 
-            // cbx_deliverydate
+            // button1
             // 
-            this.cbx_deliverydate.FormattingEnabled = true;
-            this.cbx_deliverydate.Location = new System.Drawing.Point(22, 141);
-            this.cbx_deliverydate.Name = "cbx_deliverydate";
-            this.cbx_deliverydate.Size = new System.Drawing.Size(218, 32);
-            this.cbx_deliverydate.TabIndex = 24;
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(216)))), ((int)(((byte)(129)))));
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(111)))), ((int)(((byte)(138)))));
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(138)))), ((int)(((byte)(94)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Dubai", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(251)))), ((int)(((byte)(225)))));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(674, 466);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(126, 31);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Disconnect";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frm_spaceship
             // 
@@ -469,6 +534,8 @@ namespace G8_Starship
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(11)))), ((int)(((byte)(25)))));
             this.ClientSize = new System.Drawing.Size(940, 578);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_connectTCPIP2);
             this.Controls.Add(this.btn_open);
             this.Controls.Add(this.lbx_events);
             this.Controls.Add(this.btn_steps);
@@ -529,5 +596,8 @@ namespace G8_Starship
         private System.Windows.Forms.ComboBox cbx_selectplanet;
         private System.Windows.Forms.ComboBox cbx_deliverydate;
         private System.Windows.Forms.ComboBox cbx_codedelivery;
+        private System.Windows.Forms.Button btn_connectTCPIP2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_sendfile;
     }
 }
