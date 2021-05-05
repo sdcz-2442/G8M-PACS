@@ -409,14 +409,15 @@ namespace G8_Planet
             //doc3 = traducirArchivos(doc3);
             //MessageBox.Show("Documentos traducidos");
 
-            generarArchivos(doc1, "doc1");
-            generarArchivos(doc2, "doc2");
-            generarArchivos(doc3, "doc3");
-            zippearArchivos();
-            desZippearArchivos();
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs";
+            generarArchivos(doc1, "doc1", path + "\\generatedDocs");
+            generarArchivos(doc2, "doc2", path + "\\generatedDocs");
+            generarArchivos(doc3, "doc3", path + "\\generatedDocs");
+
+            zippearArchivos(path + "\\generatedDocs", path + "\\zipDocs.zip");
+            desZippearArchivos(path + "\\zipDocs.zip", path + "\\extractedDocs");
+
             MessageBox.Show("Documents guardats");
-
-
         }
         string generarLetras(string doc)
         {
@@ -467,9 +468,9 @@ namespace G8_Planet
 
             return docDestraducido;
         }
-        void generarArchivos(string doc, string nombreDocumento)
+        void generarArchivos(string doc, string nombreDocumento, string path)
         {
-            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs\\" + nombreDocumento + ".txt";
+            path += "\\" + nombreDocumento + ".txt";
             if (!File.Exists(path))
             {
                 using (StreamWriter sw = File.CreateText(path))
@@ -479,15 +480,10 @@ namespace G8_Planet
             }
         }
 
-        void zippearArchivos()
-        {
-            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs";
-            ZipFile.CreateFromDirectory(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, path);
-        }
-        void desZippearArchivos()
-        {
-            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs";
-            ZipFile.ExtractToDirectory(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, path);
+        void zippearArchivos(string pathDirectory, string zipDirectory) {
+            ZipFile.CreateFromDirectory(pathDirectory, zipDirectory);
+        } void desZippearArchivos(string zipDirectory, string extractDirectory) {
+            ZipFile.ExtractToDirectory(zipDirectory, extractDirectory);
         }
 
         //private void btn_sendmessages_Click(object sender, EventArgs e)
