@@ -54,24 +54,77 @@ namespace G8_Planet
         {
             try
             {
-                Listener = new TcpListener(IPAddress.Any, Convert.ToInt32(txb_port.Text));
+                Listener = new TcpListener(IPAddress.Any, 4000);
                 Listener.Start();
                 TcpClient client = new TcpClient();
                 client = null;
+
+
 
                 while (IsConnected)
                 {
 
                     if (Listener.Pending())
                     {
+
                         client = Listener.AcceptTcpClient();
                         ns = client.GetStream();
+
                         Byte[] buffer = new byte[1024];
 
                         string data = "";
                         ns.Read(buffer, 0, buffer.Length);
                         data = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
-                        lbx_Missatges.Items.Add("La IP " + ipMissatge + " ha enviado: " + data);
+
+                        string[] ExistingFiles;
+                        bool ZipFileExists = false;
+                        byte[] RecData = new byte[buffer.Length];
+                        int RecBytes;
+
+
+                        if (data.Contains("VR"))
+                        {
+                            lbx_Missatges.Items.Add("La IP " + ipMissatge + " ha enviado: " + data);
+
+                        } else
+                        {
+                            Directory.CreateDirectory(@"C:\Fitxers");
+
+                            ZipFileExists = File.Exists(@"C:\Fitxers\pacs.zip");
+
+                            if (ZipFileExists) //Si el archivo comprimido existe, eliminalo junto a sus elementos extraidos en la carpeta seleccionada.
+                            {
+                                File.Delete(@"C:\Fitxers\pacs.zip");
+
+                                ExistingFiles = Directory.GetFiles(@"C:\Fitxers\pacs.zip");
+
+                                foreach (string file in ExistingFiles)
+                                {
+                                    File.Delete(file);
+                                }
+                            }
+
+                            int totalrecbytes = 0;
+                            FileStream Fs = new FileStream(@"C:\Fitxers\pacs.zip", FileMode.OpenOrCreate, FileAccess.Write);
+
+                            while ((RecBytes = ns.Read(RecData, 0, RecData.Length)) > 0)
+                            {
+                                Fs.Write(RecData, 0, RecBytes);
+                                totalrecbytes += RecBytes;
+                            }
+                            Fs.Close();
+
+                            ns.Close();
+                            //Archivos.Close();
+
+                            //Lb_Delegate("Alternando archivos, espere porfavor...", ConsoleBox1);
+                            //Lb_Delegate(" ", ConsoleBox1);
+                            //ConsoleBox1.Items.Add("Alternando archivos, espere porfavor...");
+
+                            //Descomprimir
+                            //ZipFile.ExtractToDirectory(filepathZIP, filepath);
+                        }
+                        
                     }
                 }
             }
@@ -329,6 +382,13 @@ namespace G8_Planet
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
+            //if (!IsConnected)
+            //{
+            //    comprobarConexion = new Thread(conectarServer);
+            //    comprobarConexion.Start();
+            //    IsConnected = true;
+            //}
+
             if (!IsConnected)
             {
                 comprobarConexion = new Thread(conectarServer);
@@ -347,9 +407,9 @@ namespace G8_Planet
             docSuma = doc1 + doc2 + doc3;
             //MessageBox.Show("Documentos generados");
 
-            doc1 = traducirArchivos(doc1);
-            doc2 = traducirArchivos(doc2);
-            doc3 = traducirArchivos(doc3);
+            //doc1 = traducirArchivos(doc1);
+            //doc2 = traducirArchivos(doc2);
+            //doc3 = traducirArchivos(doc3);
             //MessageBox.Show("Documentos traducidos");
 
             generarArchivos(doc1, "doc1");
@@ -411,73 +471,171 @@ namespace G8_Planet
 
             for (int i = 0; i < doc.Length; i += 3)
             {
-                string code = doc[i].ToString() + doc[i+1].ToString() + doc[i+2].ToString();
+                string code = doc[i].ToString() + doc[i + 1].ToString() + doc[i + 2].ToString();
                 docDestraducido += dict[code].ToString();
             }
 
             return docDestraducido;
         }
-        
+
         private void btn_sendmessages_Click(object sender, EventArgs e)
         {
-           
-                string doc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                byte[] file = File.ReadAllBytes(doc + filedir)
-                byte[] fileBuffer = new byte[file.Length];
-                TcpClient clientSocket = new TcpClient(ip, port);
-                NetworkStream networkStream = clientSocket.GetStream();
-                networkStream.Write(file.ToArray(), 0, fileBuffer.GetLength(0));
-                networkStream.Close();
-            
+
+            //string doc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //byte[] file = File.ReadAllBytes(doc + filedir)
+            //    byte[] fileBuffer = new byte[file.Length];
+            //TcpClient clientSocket = new TcpClient(ip, port);
+            //NetworkStream networkStream = clientSocket.GetStream();
+            //networkStream.Write(file.ToArray(), 0, fileBuffer.GetLength(0));
+            //networkStream.Close();
+
         }
 
-        private void button3_Click(object sender, EventArgs e)
+
+        private void btn_getfiles_Click(object sender, EventArgs e)
         {
-            OpenFileDialog file = new OpenFileDialog();
-            if (file.ShowDialog() == DialogResult.OK)
+            //seleccionar archivo zip
+
+        }
+
+        private void btn_desconnect_Click_1(object sender, EventArgs e)
+        {
+            closeServer();
+        }
+
+        private void btn_sendmessages_Click_1(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                TcpClient client = new TcpClient(tbx_ipspaceship.Text, Convert.ToInt32(tbx_port2.Text));
+                //if (txb_message.Text == "")
+                //{
+                //    MessageBox.Show("Introducir mensaje");
+                //}
+                //else
+                //{
+                Byte[] dades = Encoding.ASCII.GetBytes("Prueba");
+                NetworkStream ns = client.GetStream();
+                ns.Write(dades, 0, dades.Length);
+                //}
+            }
+            catch
+            {
+                MessageBox.Show("Servidor inaccesible");
+            }
+            ////archivo zip on hold se manda por TCP/IP
+            ////enviar mensaje VR
+            //string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs\\";
+
+            //using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            //{
+            //    openFileDialog.InitialDirectory = path;
+            //    //openFileDialog.Filter = "Xml files (*.xml)|*.xml" + "|" + "All files (*.*)|*.*";
+            //    openFileDialog.FilterIndex = 2;
+            //    openFileDialog.RestoreDirectory = true;
+
+            //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //    {
+            //        filePath = openFileDialog.FileName;
+            //        fileName = openFileDialog.SafeFileName;
+            //        Stream fileStream = openFileDialog.OpenFile();
+
+            //        using (StreamReader reader = new StreamReader(fileStream))
+            //        {
+            //            fileContent = reader.ReadToEnd();
+            //        }
+
+            //        MessageBox.Show("File " + fileName + " on hold.");
+
+            //        TcpClient client = new TcpClient("127.0.0.1", Convert.ToInt32("4000"));
+            //        //Byte[] data = File.ReadAllBytes(openFileDialog.FileName);
+
+            //        Byte[] dades = Encoding.ASCII.GetBytes(openFileDialog.FileName);
+            //        NetworkStream ns = client.GetStream();
+            //        ns.Write(dades, 0, dades.Length);
+            //    }
+            //}
+        }
+
+        private void btn_sendfile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                //if (txb_message.Text == "")
+                //{
+                //    MessageBox.Show("Introducir mensaje");
+                //}
+                //else
+                //{
+
+                //}
+                string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs\\";
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    tcP_Client1._portClient = "8000";
-                    byte[] data = File.ReadAllBytes(file.FileName);
-                    tcP_Client1.sendFile(data);
+                    openFileDialog.InitialDirectory = path;
+                    //openFileDialog.Filter = "Xml files (*.xml)|*.xml" + "|" + "All files (*.*)|*.*";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = openFileDialog.FileName;
+                        fileName = openFileDialog.SafeFileName;
+                        Stream fileStream = openFileDialog.OpenFile();
+
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            fileContent = reader.ReadToEnd();
+                        }
+
+                        MessageBox.Show("File " + fileName + " on hold.");
+
+                        TcpClient client = new TcpClient(tbx_ipspaceship.Text, Convert.ToInt32(tbx_port2.Text));
+
+                        Byte[] dades = Encoding.ASCII.GetBytes(openFileDialog.FileName);
+                        NetworkStream ns = client.GetStream();
+                        ns.Write(dades, 0, dades.Length);
+                    }
                 }
-                catch (IOException)
-                {
-                    Console.WriteLine("TCP Client Form: Error loding file");
-                }
+
 
             }
-        }
-
-        private void getListWords(int idPlanet)
-        {
-            int idInnerEncryption = database.getIdFromTable("InnerEncryption", "idInnerEncryption", "idPlanet", idPlanet);
-            DataSet dataSet;
-            string query = "select Word, Numbers from InnerEncryptionData where IdInnerEncryption = " + idInnerEncryption;
-
-            dataSet = database.portarPerConsultar(query);
-
-            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            catch
             {
-                string letra = dataSet.Tables[0].Rows[i]["Word"].ToString();
-                string numero = dataSet.Tables[0].Rows[i]["Numbers"].ToString();
-                listaFinal.Add(new Codificacion(letra, numero));
+                MessageBox.Show("Servidor inaccesible");
             }
         }
 
-        private void FileForValidate()
-        {
-            if (Directory.Exists(createfolder))
-            {
-                Directory.Delete(createfolder, true);
-            }
-            DirectoryInfo di = Directory.CreateDirectory(createfolder);
-            ZipFile.ExtractToDirectory(zipPath, rutatresficheros);
+        //private void getListWords(int idPlanet)
+        //{
+        //    int idInnerEncryption = database.getIdFromTable("InnerEncryption", "idInnerEncryption", "idPlanet", idPlanet);
+        //    DataSet dataSet;
+        //    string query = "select Word, Numbers from InnerEncryptionData where IdInnerEncryption = " + idInnerEncryption;
 
-            thrReadFile = new Thread(readFile);
-            thrReadFile.Start();
-        }
+        //    dataSet = database.portarPerConsultar(query);
+
+        //    for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+        //    {
+        //        string letra = dataSet.Tables[0].Rows[i]["Word"].ToString();
+        //        string numero = dataSet.Tables[0].Rows[i]["Numbers"].ToString();
+        //        listaFinal.Add(new Codificacion(letra, numero));
+        //    }
+        //}
+
+        //private void FileForValidate()
+        //{
+        //    if (Directory.Exists(createfolder))
+        //    {
+        //        Directory.Delete(createfolder, true);
+        //    }
+        //    DirectoryInfo di = Directory.CreateDirectory(createfolder);
+        //    ZipFile.ExtractToDirectory(zipPath, rutatresficheros);
+
+        //    thrReadFile = new Thread(readFile);
+        //    thrReadFile.Start();
+        //}
 
 
     }

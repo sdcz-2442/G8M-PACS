@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using G8_DataAccess;
 using PACS_starship;
 using System.Net.Sockets;
+using System.Net;
 
 namespace G8_Starship
 {
@@ -53,10 +54,28 @@ namespace G8_Starship
 
         byte[] encryptedText;
 
+        /// <summary>
+        /// /
+        /// 
+        /// 
+        /// </summary>
+        /// 
+
+        public string ipMissatge = "192.168.1.1";
+
+        string docSuma = "";
+
+        RSACryptoServiceProvider rsa;
+        Thread comprobarConexion;
+        Boolean IsConnected;
+        TcpClient client;
+        TcpListener Listener = null;
+        NetworkStream ns;
+
         public frm_spaceship()
         {
             InitializeComponent();
-            //Control.CheckForIllegalCrossThreadCalls = false;
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void frm_spaceship_Load(object sender, EventArgs e)
@@ -246,85 +265,87 @@ namespace G8_Starship
         private void btn_sendmessages_Click(object sender, EventArgs e)
         {
             //TODO: TIPOS DE MENSAJES
-
-            //ER - Entry Requirement
-            //(missatge VK- Validation Key)
-
-
-            ///mensajes del planeta 
-            /////(missatge VR - Validation Result)
-            ///(missatge VR - Validation Result)
-            ///(missatge VR - Validation Result)
-            //
             string messagetype = cbx_messages.Text; //seleccion de la combobox???
+
 
             try
             {
-                TcpClient client = new TcpClient("127.0.0.1", Convert.ToInt32("4000"));
-                if (messagetype == "")
-                {
-                    MessageBox.Show("El missatge no ha de estar buit");
-                }
-                else
-                {
-
-                    if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
-                    {
-                        //Select planet
-                        string entryRequirementMessage = "ER" + spaceshipCode;
-
-                        DataSet dts;
-
-                        //Selecciono planeta
-                        namePlanetDelivery = cbx_selectplanet.Text;
-
-                        dataAccess.connectToDDBB(ProjectName);
-                        dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + namePlanetDelivery + "'", "Planets", ProjectName);
-
-                        if (dts.Tables[0].Rows.Count == 0)
-                        {
-                            return;
-                        }
-                        idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
-
-                        //Selecciono delivery SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
-                        dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + spaceshipId + " AND idPlanet = " + idPlanetDelivery, "Planets", ProjectName);
-
-                        if (dts.Tables[0].Rows.Count == 0)
-                        {
-                            return;
-                        }
-                        idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
-
-                        Byte[] dades = Encoding.ASCII.GetBytes("Prueba");
-                        NetworkStream ns = client.GetStream();
-                        ns.Write(dades, 0, dades.Length);
-
-                        //SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
-
-                        //codeOwnPlanet = dts.Tables[0].Rows[0]["CodePlanet"].ToString();
-
-                        //ERSSSSSSSSSSSSCCCCCCCCCCCC
-                        //                On
-                        //                ER Tipus de missatge(Entry Requirement).És un literal(2 caràcters ER)
-                        //SSSSSSSSSSSS representa l’identificador de la nau(12 caràcters)
-                        //CCCCCCCCCCCC representa l’identificador de l’entrega(12 caràcters)
-                    }
-                    else if (messagetype == "VK - Validation Key")
-                    {
-
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error");
-                    }
-                }
+                TcpClient client = new TcpClient(tbx_ipplanet.Text, Convert.ToInt32(tbx_port.Text));
+                //if (txb_message.Text == "")
+                //{
+                //    MessageBox.Show("Introducir mensaje");
+                //}
+                //else
+                //{
+                    Byte[] dades = Encoding.ASCII.GetBytes("Prueba");
+                    NetworkStream ns = client.GetStream();
+                    ns.Write(dades, 0, dades.Length);
+                //}
             }
             catch
             {
-                MessageBox.Show("Servidor no accessible");
+                MessageBox.Show("Servidor inaccesible");
             }
+
+            //try
+            //{
+            //    TcpClient client = new TcpClient(tbx_ipplanet.Text, 4000);
+            //    if (messagetype == "")
+            //    {
+            //        MessageBox.Show("El missatge no ha de estar buit");
+            //    }
+            //    else
+            //    {
+
+            //        if (messagetype == "ER - Entry Requirement") //PONER TIPO DE MENSAJE QUE ENVÍA NAVE A PLANETA, OBTIENE CLAVES ETC
+            //        {
+            //            //Select planet
+            //            string entryRequirementMessage = "ER" + spaceshipCode;
+
+            //            DataSet dts;
+
+            //            //Selecciono planeta
+            //            namePlanetDelivery = cbx_selectplanet.Text;
+
+            //            dataAccess.connectToDDBB(ProjectName);
+            //            dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + namePlanetDelivery + "'", "Planets", ProjectName);
+
+            //            if (dts.Tables[0].Rows.Count == 0)
+            //            {
+            //                return;
+            //            }
+            //            idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+            //            //Selecciono delivery SELECT * FROM DeliveryData WHERE idSpaceShip = 4 AND idPlanet = 1
+            //            dts = dataAccess.getByQuery("SELECT * FROM DeliveryData WHERE idSpaceShip = " + spaceshipId + " AND idPlanet = " + idPlanetDelivery, "Planets", ProjectName);
+
+            //            if (dts.Tables[0].Rows.Count == 0)
+            //            {
+            //                return;
+            //            }
+            //            idPlanetDelivery = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+
+            //            Byte[] dades = Encoding.ASCII.GetBytes("Prueba");
+            //            NetworkStream ns = client.GetStream();
+            //            ns.Write(dades, 0, dades.Length);
+
+            //            MessageBox.Show("asfasd");
+            //        }
+            //        else if (messagetype == "VK - Validation Key")
+            //        {
+
+
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Error");
+            //        }
+            //    }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Servidor no accessible");
+            //}
 
 
 
@@ -464,6 +485,126 @@ namespace G8_Starship
         private void tbx_port_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_connectTCPIP2_Click(object sender, EventArgs e)
+        {
+            if (!IsConnected)
+            {
+                comprobarConexion = new Thread(conectarServer);
+                comprobarConexion.Start();
+                IsConnected = true;
+            }
+        }
+
+        public void conectarServer()
+        {
+            try
+            {
+                Listener = new TcpListener(IPAddress.Any, 8000);
+                Listener.Start();
+                TcpClient client = new TcpClient();
+                client = null;
+
+                while (IsConnected)
+                {
+
+                    if (Listener.Pending())
+                    {
+                        client = Listener.AcceptTcpClient();
+                        ns = client.GetStream();
+                        Byte[] buffer = new byte[1024];
+
+                        string data = "";
+                        ns.Read(buffer, 0, buffer.Length);
+                        data = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
+                        lbx_events.Items.Add("La IP " + ipMissatge + " ha enviado: " + data);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        public void closeServer()
+        {
+            IsConnected = false;
+            if (this.comprobarConexion != null)
+            {
+                comprobarConexion.Abort();
+            }
+
+            if (this.Listener != null)
+            {
+                Listener.Stop();
+            }
+
+            if (this.client != null)
+            {
+                client.Close();
+            }
+
+            if (this.ns != null)
+            {
+                ns.Close();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            closeServer();
+        }
+
+        private void btn_sendfile_Click(object sender, EventArgs e)
+        {
+                        string messagetype = cbx_messages.Text; //seleccion de la combobox???
+
+
+            try
+            {
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                {
+                    openFileDialog.InitialDirectory = @"C:\";
+                    //openFileDialog.Filter = "Xml files (*.xml)|*.xml" + "|" + "All files (*.*)|*.*";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = openFileDialog.FileName;
+                        fileName = openFileDialog.SafeFileName;
+                        Stream fileStream = openFileDialog.OpenFile();
+
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            fileContent = reader.ReadToEnd();
+                        }
+
+                        //tbx_routeXML.Text = filePath;
+                        MessageBox.Show("File " + fileName + " on hold.");
+                    }
+                }
+                TcpClient client = new TcpClient(tbx_ipplanet.Text, Convert.ToInt32(tbx_port.Text));
+                //if (txb_message.Text == "")
+                //{
+                //    MessageBox.Show("Introducir mensaje");
+                //}
+                //else
+                //{
+
+                    Byte[] dades = Encoding.ASCII.GetBytes(fileName);
+                    NetworkStream ns = client.GetStream();
+                    ns.Write(dades, 0, dades.Length);
+                //}
+            }
+            catch
+            {
+                MessageBox.Show("Servidor inaccesible");
+            }
         }
     }
 }
