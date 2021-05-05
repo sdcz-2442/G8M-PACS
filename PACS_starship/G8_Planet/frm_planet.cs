@@ -355,7 +355,11 @@ namespace G8_Planet
             generarArchivos(doc1, "doc1");
             generarArchivos(doc2, "doc2");
             generarArchivos(doc3, "doc3");
+            zippearArchivos();
+            desZippearArchivos();
             MessageBox.Show("Documents guardats");
+
+
         }
         string generarLetras(string doc)
         {
@@ -367,17 +371,6 @@ namespace G8_Planet
                 doc += letra;
             }
             return doc;
-        }
-        void generarArchivos(string doc, string nombreDocumento)
-        {
-            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs\\" + nombreDocumento + ".txt";
-            if (!File.Exists(path))
-            {
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    sw.Write(doc);
-                }
-            }
         }
         string traducirArchivos(string doc)
         {
@@ -417,67 +410,71 @@ namespace G8_Planet
 
             return docDestraducido;
         }
-        
-        private void btn_sendmessages_Click(object sender, EventArgs e)
+        void generarArchivos(string doc, string nombreDocumento)
         {
-           
-                string doc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                byte[] file = File.ReadAllBytes(doc + filedir)
-                byte[] fileBuffer = new byte[file.Length];
-                TcpClient clientSocket = new TcpClient(ip, port);
-                NetworkStream networkStream = clientSocket.GetStream();
-                networkStream.Write(file.ToArray(), 0, fileBuffer.GetLength(0));
-                networkStream.Close();
-            
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog file = new OpenFileDialog();
-            if (file.ShowDialog() == DialogResult.OK)
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs\\" + nombreDocumento + ".txt";
+            if (!File.Exists(path))
             {
-                try
+                using (StreamWriter sw = File.CreateText(path))
                 {
-                    tcP_Client1._portClient = "8000";
-                    byte[] data = File.ReadAllBytes(file.FileName);
-                    tcP_Client1.sendFile(data);
+                    sw.Write(doc);
                 }
-                catch (IOException)
-                {
-                    Console.WriteLine("TCP Client Form: Error loding file");
-                }
-
             }
         }
 
-        private void getListWords(int idPlanet)
+        void zippearArchivos()
         {
-            int idInnerEncryption = database.getIdFromTable("InnerEncryption", "idInnerEncryption", "idPlanet", idPlanet);
-            DataSet dataSet;
-            string query = "select Word, Numbers from InnerEncryptionData where IdInnerEncryption = " + idInnerEncryption;
-
-            dataSet = database.portarPerConsultar(query);
-
-            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-            {
-                string letra = dataSet.Tables[0].Rows[i]["Word"].ToString();
-                string numero = dataSet.Tables[0].Rows[i]["Numbers"].ToString();
-                listaFinal.Add(new Codificacion(letra, numero));
-            }
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs";
+            ZipFile.CreateFromDirectory(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, path);
         }
-
-        private void FileForValidate()
+        void desZippearArchivos()
         {
-            if (Directory.Exists(createfolder))
-            {
-                Directory.Delete(createfolder, true);
-            }
-            DirectoryInfo di = Directory.CreateDirectory(createfolder);
-            ZipFile.ExtractToDirectory(zipPath, rutatresficheros);
-
-            thrReadFile = new Thread(readFile);
-            thrReadFile.Start();
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs";
+            ZipFile.ExtractToDirectory(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, path);
         }
+
+        //private void btn_sendmessages_Click(object sender, EventArgs e)
+        //{
+        //        string doc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        //        byte[] file = File.ReadAllBytes(doc + filedir);
+        //        byte[] fileBuffer = new byte[file.Length];
+        //        TcpClient clientSocket = new TcpClient(ip, port);
+        //        NetworkStream networkStream = clientSocket.GetStream();
+        //        networkStream.Write(file.ToArray(), 0, fileBuffer.GetLength(0));
+        //        networkStream.Close();
+        //}
+
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog file = new OpenFileDialog();
+        //    if (file.ShowDialog() == DialogResult.OK)
+        //    {
+        //        try
+        //        {
+        //            tcP_Client1._portClient = "8000";
+        //            byte[] data = File.ReadAllBytes(file.FileName);
+        //            tcP_Client1.sendFile(data);
+        //        }
+        //        catch (IOException)
+        //        {
+        //            Console.WriteLine("TCP Client Form: Error loding file");
+        //        }
+
+        //    }
+        //}
+
+        //private void FileForValidate()
+        //{
+        //    if (Directory.Exists(createfolder))
+        //    {
+        //        Directory.Delete(createfolder, true);
+        //    }
+        //    DirectoryInfo di = Directory.CreateDirectory(createfolder);
+        //    ZipFile.ExtractToDirectory(zipPath, rutatresficheros);
+
+        //    thrReadFile = new Thread(readFile);
+        //    thrReadFile.Start();
+        //}
 
 
     }
