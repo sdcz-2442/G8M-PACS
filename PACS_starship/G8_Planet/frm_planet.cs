@@ -31,6 +31,7 @@ namespace G8_Planet
         string fileContent = "";
 
         string docSuma = "";
+        string defaultPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs";
 
         RSACryptoServiceProvider rsa;
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
@@ -77,6 +78,7 @@ namespace G8_Planet
                         bool ZipFileExists = false;
                         byte[] RecData = new byte[buffer.Length];
                         int RecBytes;
+                        string path = defaultPath + "\\_receivedDocs";
 
 
                         if (data.Contains("VR"))
@@ -85,15 +87,15 @@ namespace G8_Planet
 
                         } else
                         {
-                            Directory.CreateDirectory(@"C:\Fitxers");
+                            Directory.CreateDirectory(path);
 
-                            ZipFileExists = File.Exists(@"C:\Fitxers\pacs.zip");
+                            ZipFileExists = File.Exists(path + "\\pacs.zip");
 
                             if (ZipFileExists) //Si el archivo comprimido existe, eliminalo junto a sus elementos extraidos en la carpeta seleccionada.
                             {
-                                File.Delete(@"C:\Fitxers\pacs.zip");
+                                File.Delete(path + "\\pacs.zip");
 
-                                ExistingFiles = Directory.GetFiles(@"C:\Fitxers\pacs.zip");
+                                ExistingFiles = Directory.GetFiles(path + "\\pacs.zip");
 
                                 foreach (string file in ExistingFiles)
                                 {
@@ -102,7 +104,7 @@ namespace G8_Planet
                             }
 
                             int totalrecbytes = 0;
-                            FileStream Fs = new FileStream(@"C:\Fitxers\pacs.zip", FileMode.OpenOrCreate, FileAccess.Write);
+                            FileStream Fs = new FileStream(path + "\\pacs.zip", FileMode.OpenOrCreate, FileAccess.Write);
 
                             while ((RecBytes = ns.Read(RecData, 0, RecData.Length)) > 0)
                             {
@@ -409,13 +411,12 @@ namespace G8_Planet
             //doc3 = traducirArchivos(doc3);
             //MessageBox.Show("Documentos traducidos");
 
-            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs";
-            generarArchivos(doc1, "doc1", path + "\\generatedDocs");
-            generarArchivos(doc2, "doc2", path + "\\generatedDocs");
-            generarArchivos(doc3, "doc3", path + "\\generatedDocs");
+            generarArchivos(doc1, "doc1", defaultPath + "\\generatedDocs");
+            generarArchivos(doc2, "doc2", defaultPath + "\\generatedDocs");
+            generarArchivos(doc3, "doc3", defaultPath + "\\generatedDocs");
 
-            zippearArchivos(path + "\\generatedDocs", path + "\\zipDocs.zip");
-            desZippearArchivos(path + "\\zipDocs.zip", path + "\\extractedDocs");
+            zippearArchivos(defaultPath + "\\generatedDocs", defaultPath + "\\zipDocs.zip");
+            desZippearArchivos(defaultPath + "\\zipDocs.zip", defaultPath + "\\extractedDocs");
 
             MessageBox.Show("Documents guardats");
         }

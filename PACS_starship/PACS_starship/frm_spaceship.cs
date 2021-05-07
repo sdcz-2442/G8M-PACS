@@ -560,8 +560,7 @@ namespace G8_Starship
 
         private void btn_sendfile_Click(object sender, EventArgs e)
         {
-                        string messagetype = cbx_messages.Text; //seleccion de la combobox???
-
+            string messagetype = cbx_messages.Text; //seleccion de la combobox???
 
             try
             {
