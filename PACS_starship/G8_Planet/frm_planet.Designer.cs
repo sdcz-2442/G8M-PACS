@@ -166,7 +166,6 @@ namespace G8_Planet
             this.pnl_keys.Name = "pnl_keys";
             this.pnl_keys.Size = new System.Drawing.Size(502, 148);
             this.pnl_keys.TabIndex = 19;
-            this.pnl_keys.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_keys_Paint);
             // 
             // btn_generate
             // 
@@ -266,7 +265,6 @@ namespace G8_Planet
             this.lbl_port.Name = "lbl_port";
             this.lbl_port.Size = new System.Drawing.Size(1040, 23);
             this.lbl_port.TabIndex = 23;
-            this.lbl_port.Paint += new System.Windows.Forms.PaintEventHandler(this.lbl_port_Paint);
             // 
             // minimize_click
             // 
@@ -353,7 +351,6 @@ namespace G8_Planet
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1058, 529);
             this.panel1.TabIndex = 24;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // cbx_messages
             // 
