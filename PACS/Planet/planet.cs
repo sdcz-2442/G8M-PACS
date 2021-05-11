@@ -37,7 +37,7 @@ namespace Planet
         public byte[] rawData;
 
         string docSuma = "";
-        string defaultPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Planet\\bin\\Debug\\_docs";
+        string defaultPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs"/*"\\Planet\\bin\\Debug\\_docs"*/;
 
 
         public planet()
@@ -163,51 +163,46 @@ namespace Planet
             int thisRead = 0;
             int blockSize = 1024;
             Byte[] dataByte = new Byte[blockSize];
-            string data = "";
             bool VKtrue = false;
 
-            lock (this)
+
+            //Convert byteArray to string to check
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < dataByte.Length; i++)
             {
-                // Only one process can access
-                // the same file at any given time
-                Stream fileStream = File.OpenWrite(defaultPath + "\\PACSSOL.zip");
-
-                while (true)
-                {
-                    thisRead = networkStream.Read(dataByte, 0, blockSize);
-                    data = Encoding.ASCII.GetString(dataByte, 0, dataByte.Length);
-
-                    if (data.StartsWith("ER"))
-                    {
-                        lbx_Missatges.Items.Add(data);
-                        MessageBox.Show("Please check Entry Requirement");
-                    }
-                    else if (data.StartsWith("VK"))
-                    {
-                        lbx_Missatges.Items.Add(data);
-                        VKtrue = true;
-                    }
-                    else if (VKtrue)
-                    {
-                        //TODO: RECIEVE ENCRYPTED STRING, DECRYPT AND CHECK IF IT'S THE SAME PLANETKEY
-                        tbx_rawdata.Text = data;
-                        VKtrue = false;
-                    }
-                    else
-                    {
-                        //fileStream.Write(dataByte, 0, thisRead);
-                        lbx_Missatges.Items.Add("File Written...");
-                        //if (thisRead == 0) break;
-                        //fileStream.Close();
-                    }
-
-                    fileStream.Write(dataByte, 0, thisRead);
-                    if (thisRead == 0) break;
-                }
-                fileStream.Close();
+                builder.Append(dataByte[i].ToString("x2"));
             }
-            lbx_Missatges.Items.Add("File Written");
-            handlerSocket = null;
+            string strBuilder = builder.ToString();
+
+            //Check string
+            lbx_Missatges.Items.Add(strBuilder);
+            if (VKtrue)
+            {
+                tbx_rawdata.Text = strBuilder;
+                VKtrue = false;
+            } else if (strBuilder.Substring(0, 2) == "VK" && !VKtrue) {
+                VKtrue = true;
+                MessageBox.Show("Received VK");
+            }
+            else
+            {
+                lock (this)
+                {
+                    // Only one process can access the same file at any given time
+
+                    Stream fileStream = File.OpenWrite(defaultPath + "\\receivedFiles\\prueba.zip");
+
+                    while (true)
+                    {
+                        thisRead = networkStream.Read(dataByte, 0, blockSize);
+                        fileStream.Write(dataByte, 0, thisRead);
+                        if (thisRead == 0) break;
+                    }
+                    fileStream.Close();
+                }
+                lbx_Missatges.Items.Add("File received at: " + defaultPath + "\\receivedFiles"); //Show received
+                handlerSocket = null;
+            }
         }
 
         private void btn_answerTCP_Click(object sender, EventArgs e)
@@ -258,7 +253,7 @@ namespace Planet
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = defaultPath;
+                //openFileDialog.InitialDirectory = defaultPath;
                 openFileDialog.ShowDialog();
                 fileName = openFileDialog.FileName;
             }

@@ -4,3 +4,9 @@ C:\Users\saman\Documents\PACS\G8_DataAcess\obj\Debug\G8_DataAccess.csprojAssembl
 C:\Users\saman\Documents\PACS\G8_DataAcess\obj\Debug\G8_DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\saman\Documents\PACS\G8_DataAcess\obj\Debug\G8_DataAcess.dll
 C:\Users\saman\Documents\PACS\G8_DataAcess\obj\Debug\G8_DataAcess.pdb
+C:\Users\Torry\Documents\GitHub\G8M-PACS\PACS\G8_DataAcess\bin\Debug\G8_DataAcess.dll
+C:\Users\Torry\Documents\GitHub\G8M-PACS\PACS\G8_DataAcess\bin\Debug\G8_DataAcess.pdb
+C:\Users\Torry\Documents\GitHub\G8M-PACS\PACS\G8_DataAcess\obj\Debug\G8_DataAccess.csprojAssemblyReference.cache
+C:\Users\Torry\Documents\GitHub\G8M-PACS\PACS\G8_DataAcess\obj\Debug\G8_DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Torry\Documents\GitHub\G8M-PACS\PACS\G8_DataAcess\obj\Debug\G8_DataAcess.dll
+C:\Users\Torry\Documents\GitHub\G8M-PACS\PACS\G8_DataAcess\obj\Debug\G8_DataAcess.pdb
