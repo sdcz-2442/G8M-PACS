@@ -37,15 +37,28 @@ namespace Planet
         public byte[] rawData;
 
         string docSuma = "";
-        string defaultPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\_docs"/*"\\Planet\\bin\\Debug\\_docs"*/;
+        string defaultPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Planet\\bin\\Debug\\_docs";
 
+        //new
+        private const int BufferSize = 1024;
+        public string Status = string.Empty;
+        public Thread T = null;
+
+        Boolean IsConnected;
+        TcpClient client;
+        TcpListener Listener = null;
+        NetworkStream ns;
+        Thread comprobarConexion;
+        Thread recibirArchivos;
+        public bool boolForFiles = false;
+        public bool boolForEncrypt = false;
+        byte[] encryptedData;
 
         public planet()
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
         }
-
         private void planet_Load(object sender, EventArgs e)
         {
             DataSet dts;
@@ -102,107 +115,20 @@ namespace Planet
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
-            recieve_Load();
+            if (!IsConnected)
+            {
+                comprobarConexion = new Thread(conectarServer);
+                comprobarConexion.Start();
+                IsConnected = true;
+            }
+            //ThreadStart Ts = new ThreadStart(StartReceiving);
+            //T = new Thread(Ts);
+            //T.Start();
         }
 
         private void btn_desconnect_Click(object sender, EventArgs e)
         {
-
-        }
-
-        public void closeServer()
-        {
-            //quitar thread, aún no se ha implementado
-        }
-
-        private void recieve_Load()
-        {
-            IPHostEntry IPHost = Dns.GetHostByName(Dns.GetHostName());
-            //lblStatus.Text = "My IP address is " + IPHost.AddressList[0].ToString();
-            nSockets = new ArrayList();
-            Thread thdListener = new Thread(new ThreadStart(listenerThread));
-            thdListener.Start();
-        }
-
-        public void listenerThread()
-        {
-            try
-            {
-                TcpListener tcpListener = new TcpListener(8080);
-                tcpListener.Start();
-                while (true)
-                {
-                    Socket handlerSocket = tcpListener.AcceptSocket();
-                    if (handlerSocket.Connected)
-                    {
-                        Control.CheckForIllegalCrossThreadCalls = false;
-                        lbx_Missatges.Items.Add(
-
-                        handlerSocket.RemoteEndPoint.ToString() + " connected.");
-                        lock (this)
-                        {
-                            nSockets.Add(handlerSocket);
-                        }
-                        ThreadStart thdstHandler = new
-                        ThreadStart(handlerThread);
-                        Thread thdHandler = new Thread(thdstHandler);
-                        thdHandler.Start();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public void handlerThread()
-        {
-            Socket handlerSocket = (Socket)nSockets[nSockets.Count - 1];
-            NetworkStream networkStream = new NetworkStream(handlerSocket);
-            int thisRead = 0;
-            int blockSize = 1024;
-            Byte[] dataByte = new Byte[blockSize];
-            bool VKtrue = false;
-
-
-            //Convert byteArray to string to check
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < dataByte.Length; i++)
-            {
-                builder.Append(dataByte[i].ToString("x2"));
-            }
-            string strBuilder = builder.ToString();
-
-            //Check string
-            lbx_Missatges.Items.Add(strBuilder);
-            if (VKtrue)
-            {
-                tbx_rawdata.Text = strBuilder;
-                VKtrue = false;
-            } else if (strBuilder.Substring(0, 2) == "VK" && !VKtrue) {
-                VKtrue = true;
-                MessageBox.Show("Received VK");
-            }
-            else
-            {
-                lock (this)
-                {
-                    // Only one process can access the same file at any given time
-
-                    Stream fileStream = File.OpenWrite(defaultPath + "\\receivedFiles\\prueba.zip");
-
-                    while (true)
-                    {
-                        thisRead = networkStream.Read(dataByte, 0, blockSize);
-                        fileStream.Write(dataByte, 0, thisRead);
-                        if (thisRead == 0) break;
-                    }
-                    fileStream.Close();
-                }
-                lbx_Missatges.Items.Add("File received at: " + defaultPath + "\\receivedFiles"); //Show received
-                handlerSocket = null;
-            }
+            closeServer();
         }
 
         private void btn_answerTCP_Click(object sender, EventArgs e)
@@ -253,7 +179,7 @@ namespace Planet
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                //openFileDialog.InitialDirectory = defaultPath;
+                openFileDialog.InitialDirectory = defaultPath;
                 openFileDialog.ShowDialog();
                 fileName = openFileDialog.FileName;
             }
@@ -480,6 +406,15 @@ namespace Planet
         {
             //TODO IF NOT IN LINE 153:
             //RECIEVE ENCRYPTED STRING, DECRYPT AND CHECK IF IT'S THE SAME PLANETKEY
+
+            G8_Methods.Methods mt = new G8_Methods.Methods();
+            byte[] encryptedText = Encoding.ASCII.GetBytes(tbx_rawdata.Text);
+            byte[] decryptedData;
+            //convertir array de bytes en string
+
+            decryptedData = rsa.Decrypt(encryptedData, false);
+
+            textBox1.Text = ByteConverter.GetString(decryptedData);
         }
 
         private void btn_createfiles_Click(object sender, EventArgs e)
@@ -565,6 +500,149 @@ namespace Planet
             } else
             {
                 MessageBox.Show(":(");
+            }
+        }
+
+        //pruebas
+        public void RecibirArchivos()
+        {
+            bool ZipFileExists = false;
+
+            string[] ExistingFiles;
+
+            TcpListener Listener = null;
+
+            try
+            {
+                Listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8080);
+                Listener.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            byte[] RecData = new byte[BufferSize];
+            int RecBytes;
+
+            //Loop infinito (while)
+
+            for (; ; )
+            {
+                TcpClient Archivos = null;
+                NetworkStream netstream = null;
+                Status = string.Empty;
+                try
+                {
+                    string message = "Desea aceptar y recibir los archivos del planeta correspondiente?";
+                    string caption = "Petición de inserción de archivos";
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result;
+
+                    if (Listener.Pending())
+                    {
+                        Archivos = Listener.AcceptTcpClient();
+                        netstream = Archivos.GetStream();
+                        Status = "Connected to a client\n";
+                        result = MessageBox.Show(message, caption, buttons);
+                        string path = defaultPath + "\\PACSSOL.txt";
+
+                        if (result == DialogResult.Yes)
+                        {
+                            int totalrecbytes = 0;
+                            FileStream Fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+
+                            while ((RecBytes = netstream.Read(RecData, 0, RecData.Length)) > 0)
+                            {
+                                Fs.Write(RecData, 0, RecBytes);
+                                totalrecbytes += RecBytes;
+                            }
+                            Fs.Close();
+
+                            netstream.Close();
+                            Archivos.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+        public void conectarServer()
+        {
+            try
+            {
+                Listener = new TcpListener(IPAddress.Any, 8080);
+                Listener.Start();
+
+                while (IsConnected)
+                {
+                    if (Listener.Pending())
+                    {
+                        client = Listener.AcceptTcpClient();
+                        ns = client.GetStream();
+                        Byte[] buffer = new byte[1024];
+
+                        string data = "";
+                        ns.Read(buffer, 0, buffer.Length);
+                        data = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
+
+                        if (data.StartsWith("ER"))
+                        {
+                            lbx_Missatges.Items.Add(data);
+                            MessageBox.Show("Please check Entry Requirement");
+                            boolForEncrypt = false;
+                        }
+                        else if (data.StartsWith("VK"))
+                        {
+                            lbx_Missatges.Items.Add(data);
+                            boolForEncrypt = true;
+                        }
+                        else if (boolForEncrypt)
+                        {
+                            //MessageBox.Show("Please check Decryption");
+                            encryptedData = buffer;
+
+                            //Recieve string
+                            boolForEncrypt = false;
+                            
+                            tbx_rawdata.Text = data;
+
+
+                        }
+                        else
+                        {
+                            //recieve files
+                            boolForEncrypt = false;
+                            RecibirArchivos();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void closeServer()
+        {
+            IsConnected = false;
+            if (this.Listener != null)
+            {
+                Listener.Stop();
+            }
+
+            if (this.client != null)
+            {
+                client.Close();
+            }
+
+            if (this.ns != null)
+            {
+                ns.Close();
             }
         }
     }

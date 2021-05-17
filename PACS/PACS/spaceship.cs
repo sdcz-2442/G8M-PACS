@@ -239,7 +239,7 @@ namespace PACS
 
             } else if (messagetype.Contains("VK"))
             {
-                messageToPlanet = "VK" + encryptedArrayString;
+                messageToPlanet = "VK";
             } else
             {
                 messageToPlanet = "Others";
@@ -259,7 +259,7 @@ namespace PACS
                     Byte[] dades = Encoding.ASCII.GetBytes(messageToPlanet);
                     NetworkStream ns = client.GetStream();
                     ns.Write(dades, 0, dades.Length);
-                    
+
                     //envio cadena
                     //dades = encryptedArray;
                     //ns = client.GetStream();
@@ -292,12 +292,12 @@ namespace PACS
             byte[] fileBuffer = new byte[fileStream.Length];
             fileStream.Read(fileBuffer, 0, (int)fileStream.Length);
             // Open a TCP/IP Connection and send the data
-            TcpClient clientSocket = new TcpClient(tbx_ipplanet.Text, Int32.Parse(tbx_port.Text));
+            TcpClient clientSocket = new TcpClient(tbx_ipplanet.Text, 8080);
             NetworkStream networkStream = clientSocket.GetStream();
             networkStream.Write(fileBuffer, 0, fileBuffer.GetLength(0));
             networkStream.Close();
 
-            MessageBox.Show("File Send");
+            //MessageBox.Show("File Send");
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
@@ -426,7 +426,6 @@ namespace PACS
 
             G8_Methods.Methods enc = new G8_Methods.Methods();
 
-
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             byte[] dataToEncrypt = ByteConverter.GetBytes(planetValidationCode);
 
@@ -497,6 +496,36 @@ namespace PACS
             string messagetype = cbx_messages.Text;
             string spaceshipCode = codeSpaceship;
             int codeSpaceshiplength = codeSpaceship.Length;
+            DataSet dts;
+
+            dataAccess.connectToDDBB(ProjectName);
+
+            dts = dataAccess.getByQuery("SELECT * FROM Planets WHERE DescPlanet = '" + cbx_selectplanet.Text + "'", ProjectName);
+
+            idPlanet = dts.Tables[0].Rows[0]["idPlanet"].ToString();
+            namePlanet = dts.Tables[0].Rows[0]["DescPlanet"].ToString();
+
+            //Bajar código de validación del planeta destino
+            dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = '" + idPlanet + "'", ProjectName);
+
+            planetValidationCode = dts.Tables[0].Rows[0]["ValidationCode"].ToString();
+            planetIdInnerEncryption = dts.Tables[0].Rows[0]["idInnerEncryption"].ToString();
+
+            dts = dataAccess.getByQuery("SELECT * FROM PlanetKeys WHERE idPlanet = '" + idPlanet + "'", ProjectName);
+
+            string publicKey = dts.Tables[0].Rows[0]["XMLKey"].ToString();
+
+            G8_Methods.Methods enc = new G8_Methods.Methods();
+
+            UnicodeEncoding ByteConverter = new UnicodeEncoding();
+            byte[] dataToEncrypt = ByteConverter.GetBytes(planetValidationCode);
+
+            byte[] decryptedData;
+
+            encryptedData = rsaEnc.Encrypt(dataToEncrypt, false);
+
+            //textcryptosend = encryptedData;
+            encryptedArrayString = ByteConverter.GetString(encryptedData);
 
             //MIRAR QUE ESTE PUERTO SEA DE LA BBDD O DE DONDE SEA??
             try
