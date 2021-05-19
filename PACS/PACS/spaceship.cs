@@ -28,6 +28,11 @@ namespace PACS
         string defaultPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\PACS\\bin\\Debug\\_docs";
 
         Thread checkNetwork;
+        Boolean IsConnected;
+        Thread comprobarConexion;
+        TcpClient client;
+        TcpListener Listener = null;
+        NetworkStream ns;
 
         private ArrayList nSockets;
         //spaship values
@@ -44,7 +49,12 @@ namespace PACS
 
         public byte[] encryptedArray;
         public string encryptedArrayString;
-        public byte[] encryptedData;
+        public byte[] encryptedData = new byte[128];
+
+        public bool boolForFiles;
+        private const int BufferSize = 1024;
+        public string Status = string.Empty;
+        public Thread T = null;
 
         public spaceship()
         {
@@ -239,10 +249,10 @@ namespace PACS
 
             } else if (messagetype.Contains("VK"))
             {
-                messageToPlanet = "VK";
+                messageToPlanet = "VK" + spaceshipCode + cbx_codedelivery.Text; ;
             } else
             {
-                messageToPlanet = "Others";
+                messageToPlanet = "Files";
             }
 
             //MIRAR QUE ESTE PUERTO SEA DE LA BBDD O DE DONDE SEA??
@@ -297,110 +307,17 @@ namespace PACS
             networkStream.Write(fileBuffer, 0, fileBuffer.GetLength(0));
             networkStream.Close();
 
-            //MessageBox.Show("File Send");
+            lbl_events.Items.Add("File send");
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
-            recieve_Load();
-        }
-
-        private void recieve_Load()
-        {
-            IPHostEntry IPHost = Dns.GetHostByName(Dns.GetHostName());
-            //lblStatus.Text = "My IP address is " + IPHost.AddressList[0].ToString();
-            nSockets = new ArrayList();
-            Thread thdListener = new Thread(new ThreadStart(listenerThread));
-            thdListener.Start();
-        }
-
-        public void listenerThread()
-        {
-            //TODO ESCUCHAR PUERTO ESCRITO EN LA BBDD
-            try
+            if (!IsConnected)
             {
-                TcpListener tcpListener = new TcpListener(4000);
-                tcpListener.Start();
-                while (true)
-                {
-                    Socket handlerSocket = tcpListener.AcceptSocket();
-                    if (handlerSocket.Connected)
-                    {
-                        lbl_events.Items.Add(
-
-                        handlerSocket.RemoteEndPoint.ToString() + " connected.");
-                        lock (this)
-                        {
-                            nSockets.Add(handlerSocket);
-                        }
-                        ThreadStart thdstHandler = new
-                        ThreadStart(handlerThread);
-                        Thread thdHandler = new Thread(thdstHandler);
-                        thdHandler.Start();
-                    }
-                }
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                comprobarConexion = new Thread(conectarServer);
+                comprobarConexion.Start();
+                IsConnected = true;
             }
-        }
-
-        public void handlerThread()
-        {
-            Socket handlerSocket = (Socket)nSockets[nSockets.Count - 1];
-            NetworkStream networkStream = new NetworkStream(handlerSocket);
-            int thisRead = 0;
-            int blockSize = 1024;
-            Byte[] dataByte = new Byte[blockSize];
-            string data = "";
-
-            try
-            {
-                lock (this)
-                {
-                    // Only one process can access
-                    // the same file at any given time
-                    Stream fileStream = File.OpenWrite(defaultPath + "\\PACS.zip");
-
-                    while (true)
-                    {
-                        thisRead = networkStream.Read(dataByte, 0, blockSize);
-                        data = Encoding.ASCII.GetString(dataByte, 0, dataByte.Length);
-
-                        if (data.StartsWith("VR"))
-                        {
-                            //do stuff
-                            lbl_events.Items.Add(data);
-                            if (data.Contains("VP"))
-                            {
-                                MessageBox.Show("Validation in Progress");
-                            }
-                            else if (data.Contains("AD"))
-                            {
-                                MessageBox.Show("Acces Denied");
-                            }
-                        }
-                        else
-                        {
-                            //fileStream.Write(dataByte, 0, thisRead);
-                            lbl_events.Items.Add("File Written...");
-                            //if (thisRead == 0) break;
-                            //fileStream.Close();
-                        }
-
-                        fileStream.Write(dataByte, 0, thisRead);
-                        if (thisRead == 0) break;
-                    }
-                    fileStream.Close();
-                }
-                lbl_events.Items.Add("File Written");
-                handlerSocket = null;
-            } catch (Exception ex)
-            {
-                return;
-            }
-
-
         }
 
         private void btn_encryptpublickey_Click(object sender, EventArgs e)
@@ -431,31 +348,31 @@ namespace PACS
 
             byte[] decryptedData;
 
-            encryptedData = rsaEnc.Encrypt(dataToEncrypt, false);
+            encryptedData = Encryption(dataToEncrypt, rsaEnc.ExportParameters(false), false);
 
             //textcryptosend = encryptedData;
-            encryptedArrayString = ByteConverter.GetString(encryptedData);
+            //encryptedArrayString = ByteConverter.GetString(encryptedData);
 
-
-        //    UnicodeEncoding ByteConverter = new UnicodeEncoding();
-        //    byte[] plaintext;
-        //    byte[] encryptedtext;
-
-
-        //plaintext = ByteConverter.GetBytes(planetValidationCode);
-        //    encryptedtext = enc.Encryption(plaintext, rsaEnc.ExportParameters(false), false);
-        //    encryptedArray = encryptedtext;
-
-        //    //Planet.planet() = new Planet.planet();
-        //    Planet.planet planet = planet();
-
-        //    planet.rawData = encryptedArray;
-
-        //    //ByteConverter.GetString(encryptedtext);        
-        //    //MessageBox.Show(ByteConverter.GetString(encryptedtext));
             MessageBox.Show("Validation Key successful. Send Validation Key Message");
         }
-
+        static public byte[] Encryption(byte[] Data, RSAParameters RSAKey, bool DoOAEPPadding)
+        {
+            try
+            {
+                byte[] encryptedData;
+                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                {
+                    RSA.ImportParameters(RSAKey);
+                    encryptedData = RSA.Encrypt(Data, DoOAEPPadding);
+                }
+                return encryptedData;
+            }
+            catch (CryptographicException e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
         private void btn_decomp_Click(object sender, EventArgs e)
         {
             G8_Methods.FileCheck fc = new G8_Methods.FileCheck();
@@ -477,7 +394,7 @@ namespace PACS
             doc1 = fc.desTraducirArchivos(doc1, planetIdInnerEncryption, ProjectName);
             doc2 = fc.desTraducirArchivos(doc2, planetIdInnerEncryption, ProjectName);
             doc3 = fc.desTraducirArchivos(doc3, planetIdInnerEncryption, ProjectName);
-            MessageBox.Show("Documentos traducidos");
+            lbl_events.Items.Add("Documentos traducidos");
 
             //Genero un nuevo archivo con las tres strings.
             fc.generarArchivos(doc1, "PACS1", defaultPath + "\\extractedDocs\\PACS1-decoded.txt");
@@ -489,6 +406,8 @@ namespace PACS
             fc.generarArchivos(pacsSolstring, "PACSSOL", defaultPath + "\\PACSSOL\\PACSSOL.txt");
 
             fc.zippearArchivoPACSSOL(defaultPath + "\\PACSSOL", defaultPath + "\\PACSSOL");
+
+            lbl_events.Items.Add("PACCSOL created");
         }
 
         private void btn_sendvalidationcode_Click(object sender, EventArgs e)
@@ -515,12 +434,14 @@ namespace PACS
 
             string publicKey = dts.Tables[0].Rows[0]["XMLKey"].ToString();
 
+            rsaEnc.FromXmlString(publicKey);
+
             G8_Methods.Methods enc = new G8_Methods.Methods();
 
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             byte[] dataToEncrypt = ByteConverter.GetBytes(planetValidationCode);
 
-            byte[] decryptedData;
+            
 
             encryptedData = rsaEnc.Encrypt(dataToEncrypt, false);
 
@@ -531,13 +452,171 @@ namespace PACS
             try
             {
                 TcpClient client = new TcpClient(tbx_ipplanet.Text, 8080);
-                Byte[] dades = Encoding.ASCII.GetBytes(System.Text.Encoding.UTF8.GetString(encryptedData).ToCharArray());
+                //Byte[] dades = Encoding.ASCII.GetBytes(System.Text.Encoding.UTF8.GetString(encryptedData).ToCharArray());
                 NetworkStream ns = client.GetStream();
-                ns.Write(dades, 0, dades.Length);
+                ns.Write(encryptedData, 0, encryptedData.Length);
             }
             catch
             {
                 MessageBox.Show("Servidor inaccesible");
+            }
+        }
+
+        public void conectarServer()
+        {
+            try
+            {
+                Listener = new TcpListener(IPAddress.Any, 4000);
+                Listener.Start();
+
+                while (IsConnected)
+                {
+                    if (Listener.Pending())
+                    {
+                        client = Listener.AcceptTcpClient();
+                        ns = client.GetStream();
+                        byte[] buffer = new byte[1024];
+                        byte[] encryptionbuffer = new byte[128];
+
+                        if (boolForFiles)
+                        {
+                            
+                            RecibirArchivos(boolForFiles);
+                            boolForFiles = false;
+                        }
+                        {
+                            string data = "";
+                            ns.Read(buffer, 0, buffer.Length);
+
+                            data = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
+
+                            if (data.StartsWith("VR"))
+                            {
+                                lbl_events.Items.Add(data);
+                                if (data.Contains("VP"))
+                                {
+                                    lbl_events.Items.Add("Validation in Progress");
+                                }
+                                else if (data.Contains("AD"))
+                                {
+                                    lbl_events.Items.Add("Acces Denied");
+                                } else if (data.Contains("AG"))
+                                {
+                                    lbl_events.Items.Add("Acces Granted");
+                                }
+                                boolForFiles = false;
+                            }
+                            else
+                            {
+                                lbl_events.Items.Add("Files coming");
+                                boolForFiles = true;
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        //MÉTODOS Y FUNCIONES 
+
+        public void closeServer()
+        {
+            IsConnected = false;
+            if (this.Listener != null)
+            {
+                Listener.Stop();
+            }
+
+            if (this.client != null)
+            {
+                client.Close();
+            }
+
+            if (this.ns != null)
+            {
+                ns.Close();
+            }
+        }
+
+        public void RecibirArchivos(bool boolForfiles)
+        {
+
+            if (boolForfiles == false)
+            {
+                return;
+            } else
+            {
+                bool ZipFileExists = false;
+
+                string[] ExistingFiles;
+
+                TcpListener Listener = null;
+
+                try
+                {
+                    Listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 4000);
+                    Listener.Start();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                byte[] RecData = new byte[BufferSize];
+                int RecBytes;
+
+                //Loop infinito (while)
+
+                for (; ; )
+                {
+                    TcpClient Archivos = null;
+                    NetworkStream netstream = null;
+                    Status = string.Empty;
+
+                    try
+                    {
+                        string message = "Desea aceptar y recibir los archivos del planeta correspondiente?";
+                        string caption = "Petición de inserción de archivos";
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result;
+
+                        if (Listener.Pending())
+                        {
+                            Archivos = Listener.AcceptTcpClient();
+                            netstream = Archivos.GetStream();
+                            Status = "Connected to a client\n";
+                            result = MessageBox.Show(message, caption, buttons);
+                            string path = defaultPath + "\\PACS.zip";
+
+                            if (result == DialogResult.Yes)
+                            {
+                                int totalrecbytes = 0;
+                                FileStream Fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+
+                                while ((RecBytes = netstream.Read(RecData, 0, RecData.Length)) > 0)
+                                {
+                                    Fs.Write(RecData, 0, RecBytes);
+                                    totalrecbytes += RecBytes;
+                                }
+
+                                Fs.Close();
+                                netstream.Close();
+                                Archivos.Close();
+                                boolForFiles = false;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
             }
         }
     }

@@ -51,7 +51,7 @@ namespace G8_Methods
             dataAccess.connectToDDBB(ProjectName);
             string docDestraducido = "";
 
-            if (idInnerEncryption == "")
+            if (idInnerEncryption == null)
             {
                 MessageBox.Show("Error");
             } else

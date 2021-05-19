@@ -71,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="spaceship.resx">
       <DependentUpon>spaceship.cs</DependentUpon>
@@ -101,6 +102,15 @@
       <Project>{866e4f18-4b62-4733-8d8a-ee33994f9d1b}</Project>
       <Name>Planet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10850082.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backgroundspaceship.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jiFGbE.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

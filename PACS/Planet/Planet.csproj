@@ -66,6 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -89,6 +90,15 @@
       <Project>{6c41c194-df9c-4cd0-922e-719b1ee2b95c}</Project>
       <Name>G8_Methods</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\18272626c9d0e8d194bcde66ec3e2806.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\81-Technology-Wallpapers-on-WallpaperPlay.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10850082.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

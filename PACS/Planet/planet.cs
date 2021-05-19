@@ -25,14 +25,15 @@ namespace Planet
         public string validationCode;
         public string keyName;
         public byte[] decryptedData;
+        public string spaceship12char;
 
         private ArrayList nSockets;
 
         G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
 
         RSACryptoServiceProvider rsa;
-        RSACryptoServiceProvider rsad;
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
+        CspParameters cspp;
 
         public byte[] rawData;
 
@@ -111,6 +112,9 @@ namespace Planet
             {
                 validationCode = dts.Tables[0].Rows[0]["ValidationCode"].ToString();
             }
+
+            //la clave privada será la misma que el codeownplanet
+            keyName = codeOwnPlanet;
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
@@ -121,9 +125,6 @@ namespace Planet
                 comprobarConexion.Start();
                 IsConnected = true;
             }
-            //ThreadStart Ts = new ThreadStart(StartReceiving);
-            //T = new Thread(Ts);
-            //T.Start();
         }
 
         private void btn_desconnect_Click(object sender, EventArgs e)
@@ -141,13 +142,16 @@ namespace Planet
 
             if (messagetype.Contains("Validation in Progress"))
             {
-                messageToSpaceship = "VR-VP";
+                messageToSpaceship = "VR"+spaceship12char+"VP";
             }
             else if (messagetype.Contains("Access Denied"))
             {
-                messageToSpaceship = "VR-AD";
+                messageToSpaceship = "VR" + spaceship12char + "AD";
             }
-            else
+            else if (messagetype.Contains("Access Granted"))
+            {
+                messageToSpaceship = "VR" + spaceship12char + "AG";
+            } else
             {
                 messageToSpaceship = "Others";
             }
@@ -293,6 +297,7 @@ namespace Planet
 
         private void btn_generarclaus_Click(object sender, EventArgs e)
         {
+
             DataSet dts;
             dataAccess.connectToDDBB(ProjectName);
             dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = " + idOwnPlanet, ProjectName);
@@ -303,12 +308,16 @@ namespace Planet
             }
             string InnerEncryptionCode = dts.Tables[0].Rows[0]["ValidationCode"].ToString();
 
-            CspParameters cspp = new CspParameters();
-            keyName = InnerEncryptionCode;
+            //Creo contenedor de claves
+            cspp = new CspParameters();
             cspp.KeyContainerName = keyName;
+            //Crear las claves, pasándole keycontainer como parámetro
             rsa = new RSACryptoServiceProvider(cspp);
-            string publicKey = rsa.ToXmlString(false);
+
+            //Persisto clave privada
             rsa.PersistKeyInCsp = true;
+            string publicKey = rsa.ToXmlString(false);
+
             //rsa.Clear();
 
             dts = dataAccess.getByQuery("SELECT * FROM PlanetKeys WHERE idPlanet = " + idOwnPlanet, ProjectName);
@@ -330,7 +339,7 @@ namespace Planet
             //string prueba = "ER00000FC-G1SPL63OHPMXXHNC";
 
             string messagetype = deliveryData.Substring(0,2);
-            string spaceship12char = deliveryData.Substring(2, 12);
+            spaceship12char = deliveryData.Substring(2, 12);
             string codeDelivery = deliveryData.Substring(14, 12);
 
             int substringSpaceship = 0;
@@ -371,7 +380,7 @@ namespace Planet
             }
             else
             {
-                MessageBox.Show("OK");
+                lbx_Missatges.Items.Add("Delivery data is correct");
             }
         }
 
@@ -387,7 +396,7 @@ namespace Planet
             }
             else
             {
-                MessageBox.Show("Codes found.");
+                lbx_Missatges.Items.Add("Codes found");
             }
 
             dts = dataAccess.getByQuery("SELECT * FROM InnerEncryption WHERE idPlanet = '" + idOwnPlanet + "'", ProjectName);
@@ -400,21 +409,6 @@ namespace Planet
             {
                 idInnerEncryption = dts.Tables[0].Rows[0]["idInnerEncryption"].ToString();
             }
-        }
-
-        private void btn_checkpublickey_Click(object sender, EventArgs e)
-        {
-            //TODO IF NOT IN LINE 153:
-            //RECIEVE ENCRYPTED STRING, DECRYPT AND CHECK IF IT'S THE SAME PLANETKEY
-
-            G8_Methods.Methods mt = new G8_Methods.Methods();
-            byte[] encryptedText = Encoding.ASCII.GetBytes(tbx_rawdata.Text);
-            byte[] decryptedData;
-            //convertir array de bytes en string
-
-            decryptedData = rsa.Decrypt(encryptedData, false);
-
-            textBox1.Text = ByteConverter.GetString(decryptedData);
         }
 
         private void btn_createfiles_Click(object sender, EventArgs e)
@@ -430,7 +424,7 @@ namespace Planet
             doc3 = fc.generarLetras(doc3);
             docSuma = doc1 + doc2 + doc3;
 
-            MessageBox.Show("Documentos generados");
+            lbx_Missatges.Items.Add("Documentos generados");
 
             fc.generarArchivos(doc1, "PACS1", defaultPath + "\\generatedDocs\\PACS1-LLETRES.txt");
             fc.generarArchivos(doc2, "PACS2", defaultPath + "\\generatedDocs\\PACS2-LLETRES.txt");
@@ -440,7 +434,7 @@ namespace Planet
             doc1 = fc.traducirArchivos(doc1, ProjectName, idInnerEncryption);
             doc2 = fc.traducirArchivos(doc2, ProjectName, idInnerEncryption);
             doc3 = fc.traducirArchivos(doc3, ProjectName, idInnerEncryption);
-            MessageBox.Show("Documentos traducidos");
+            lbx_Missatges.Items.Add("Documentos traducidos");
 
             //Genero archivos a partir de las strings de números
             fc.generarArchivos(doc1, "PACS1", defaultPath + "\\PACS1.txt");
@@ -451,7 +445,7 @@ namespace Planet
             fc.zippearArchivos(defaultPath, defaultPath + "\\PACS.zip");
             fc.desZippearArchivos(defaultPath + "\\PACS.zip", defaultPath + "\\extractedDocs");
 
-            MessageBox.Show("Documents guardats");
+            lbx_Missatges.Items.Add("Documentos guardados");
 
         }
 
@@ -459,18 +453,15 @@ namespace Planet
         {
             MessageBox.Show("Deleting...");
             System.IO.DirectoryInfo di = new DirectoryInfo(defaultPath);
-
             foreach (FileInfo file in di.GetFiles())
             {
                 file.Delete();
             }
-
             System.IO.DirectoryInfo diExtracted = new DirectoryInfo(defaultPath+"\\extractedDocs");
             foreach (FileInfo file in diExtracted.GetFiles())
             {
                 file.Delete();
             }
-
             System.IO.DirectoryInfo diGenerated = new DirectoryInfo(defaultPath + "\\generatedDocs");
             foreach (FileInfo file in diExtracted.GetFiles())
             {
@@ -496,14 +487,134 @@ namespace Planet
 
             if (pacssol.Equals(pacsSolstring))
             {
-                MessageBox.Show(":D");
+                lbx_Missatges.Items.Add("Decryption correct.");
             } else
             {
-                MessageBox.Show(":(");
+                lbx_Missatges.Items.Add("Decryption not correct.");
             }
         }
 
-        //pruebas
+        public void conectarServer()
+        {
+            try
+            {
+                Listener = new TcpListener(IPAddress.Any, 8080);
+                Listener.Start();
+
+                while (IsConnected)
+                {
+                    if (Listener.Pending())
+                    {
+                        client = Listener.AcceptTcpClient();
+                        ns = client.GetStream();
+                        byte[] buffer = new byte[1024];
+                        byte[] encryptionbuffer = new byte[128];
+
+                        if (boolForEncrypt)
+                        {
+                            ns.Read(encryptionbuffer, 0, encryptionbuffer.Length);
+                            byte[] DecryptedData = Decryption(encryptionbuffer, false);
+    
+                            string text = ByteConverter.GetString(DecryptedData);
+
+
+                            if (text.Equals(validationCode))
+                            {
+                                MessageBox.Show("Encryption is correct.");
+                                lbx_Missatges.Items.Add("Encryption is correct");
+                            } else
+                            {
+                                MessageBox.Show("Encryption not correct.");
+                            }
+
+                            boolForEncrypt = false;
+                            boolForFiles = true;
+                        }
+                        else if (boolForFiles)
+                        {
+                            ns.Read(buffer, 0, buffer.Length);
+                            RecibirArchivos();
+                            boolForEncrypt = false;
+                            boolForFiles = false;
+                        } else 
+                        {
+                            string data = "";
+                            ns.Read(buffer, 0, buffer.Length);
+
+                            data = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
+
+                            if (data.StartsWith("ER"))
+                            {
+                                lbx_Missatges.Items.Add(data);
+                                MessageBox.Show("Please check Entry Requirement");
+                                boolForEncrypt = false;
+                                boolForFiles = false;
+                            }
+                            else if (data.StartsWith("VK"))
+                            {
+                                lbx_Missatges.Items.Add(data);
+                                boolForEncrypt = true;
+                                boolForFiles = false;
+                            }
+                            else
+                            {
+                                lbx_Missatges.Items.Add("Files coming");
+                                //RecibirArchivos();
+                                boolForEncrypt = false;
+                                boolForFiles = true;
+                            }
+                        }
+                       
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        //MÉTODOS Y FUNCIONES 
+
+        public void closeServer()
+        {
+            IsConnected = false;
+            if (this.Listener != null)
+            {
+                Listener.Stop();
+            }
+
+            if (this.client != null)
+            {
+                client.Close();
+            }
+
+            if (this.ns != null)
+            {
+                ns.Close();
+            }
+        }
+        public byte[] Decryption(byte[] Data, bool DoOAEPPadding)
+        {
+
+            cspp = new CspParameters();
+            cspp.KeyContainerName = keyName;
+            RSACryptoServiceProvider rsad = new RSACryptoServiceProvider(cspp);
+            try
+            {
+                byte[] decryptedData;
+
+                decryptedData = rsad.Decrypt(Data, DoOAEPPadding);
+                return decryptedData;
+            }
+            catch (CryptographicException e)
+            {
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+        }
+
         public void RecibirArchivos()
         {
             bool ZipFileExists = false;
@@ -545,7 +656,7 @@ namespace Planet
                         netstream = Archivos.GetStream();
                         Status = "Connected to a client\n";
                         result = MessageBox.Show(message, caption, buttons);
-                        string path = defaultPath + "\\PACSSOL.txt";
+                        string path = defaultPath + "\\PACSSOL.zip";
 
                         if (result == DialogResult.Yes)
                         {
@@ -566,83 +677,8 @@ namespace Planet
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.ToString());
                 }
-            }
-        }
-
-        public void conectarServer()
-        {
-            try
-            {
-                Listener = new TcpListener(IPAddress.Any, 8080);
-                Listener.Start();
-
-                while (IsConnected)
-                {
-                    if (Listener.Pending())
-                    {
-                        client = Listener.AcceptTcpClient();
-                        ns = client.GetStream();
-                        Byte[] buffer = new byte[1024];
-
-                        string data = "";
-                        ns.Read(buffer, 0, buffer.Length);
-                        data = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
-
-                        if (data.StartsWith("ER"))
-                        {
-                            lbx_Missatges.Items.Add(data);
-                            MessageBox.Show("Please check Entry Requirement");
-                            boolForEncrypt = false;
-                        }
-                        else if (data.StartsWith("VK"))
-                        {
-                            lbx_Missatges.Items.Add(data);
-                            boolForEncrypt = true;
-                        }
-                        else if (boolForEncrypt)
-                        {
-                            //MessageBox.Show("Please check Decryption");
-                            encryptedData = buffer;
-
-                            //Recieve string
-                            boolForEncrypt = false;
-                            
-                            tbx_rawdata.Text = data;
-
-
-                        }
-                        else
-                        {
-                            //recieve files
-                            boolForEncrypt = false;
-                            RecibirArchivos();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public void closeServer()
-        {
-            IsConnected = false;
-            if (this.Listener != null)
-            {
-                Listener.Stop();
-            }
-
-            if (this.client != null)
-            {
-                client.Close();
-            }
-
-            if (this.ns != null)
-            {
-                ns.Close();
             }
         }
     }
