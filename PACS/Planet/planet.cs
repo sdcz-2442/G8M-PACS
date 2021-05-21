@@ -16,7 +16,6 @@ namespace Planet
 {
     public partial class planet : Form
     {
-
         public string ProjectName = "Planet";
         public string nameOwnPlanet;
         public string idOwnPlanet;
@@ -26,7 +25,6 @@ namespace Planet
         public string keyName;
         public byte[] decryptedData;
         public string spaceship12char;
-
         private ArrayList nSockets;
 
         G8_DataAccess.DataAccess dataAccess = new G8_DataAccess.DataAccess();
@@ -40,7 +38,6 @@ namespace Planet
         string docSuma = "";
         string defaultPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Planet\\bin\\Debug\\_docs";
 
-        //new
         private const int BufferSize = 1024;
         public string Status = string.Empty;
         public Thread T = null;
@@ -54,7 +51,6 @@ namespace Planet
         public bool boolForFiles = false;
         public bool boolForEncrypt = false;
         byte[] encryptedData;
-
         public planet()
         {
             InitializeComponent();
@@ -83,7 +79,6 @@ namespace Planet
             //{
             //    file.Delete();
             //}
-
         }
 
         private void btn_selectplanet_Click(object sender, EventArgs e)
@@ -135,9 +130,6 @@ namespace Planet
         private void btn_answerTCP_Click(object sender, EventArgs e)
         {
             string messagetype = cbx_selectmessage.Text;
-
-            //TODO: coger los datos de la nave desde la BBDD, ahora están harcodeados
-
             string messageToSpaceship = "";
 
             if (messagetype.Contains("Validation in Progress"))
@@ -206,7 +198,6 @@ namespace Planet
                 return;
             }
         }
-
         private void btn_generarIdentificador_Click(object sender, EventArgs e)
         {
             G8_Methods.KeyGenerator vkg = new G8_Methods.KeyGenerator();
@@ -335,8 +326,6 @@ namespace Planet
         private void btn_checkERmessage_Click(object sender, EventArgs e)
         {
             string deliveryData = lbx_Missatges.Items[lbx_Missatges.Items.Count - 1].ToString();
-
-            //string prueba = "ER00000FC-G1SPL63OHPMXXHNC";
 
             string messagetype = deliveryData.Substring(0,2);
             spaceship12char = deliveryData.Substring(2, 12);
@@ -493,7 +482,6 @@ namespace Planet
                 lbx_Missatges.Items.Add("Decryption not correct.");
             }
         }
-
         public void conectarServer()
         {
             try
@@ -533,7 +521,7 @@ namespace Planet
                         else if (boolForFiles)
                         {
                             ns.Read(buffer, 0, buffer.Length);
-                            RecibirArchivos();
+                            RecieveFiles();
                             boolForEncrypt = false;
                             boolForFiles = false;
                         } else 
@@ -573,10 +561,7 @@ namespace Planet
                 MessageBox.Show(ex.Message);
             }
         }
-
-
         //MÉTODOS Y FUNCIONES 
-
         public void closeServer()
         {
             IsConnected = false;
@@ -614,8 +599,7 @@ namespace Planet
                 return null;
             }
         }
-
-        public void RecibirArchivos()
+        public void RecieveFiles()
         {
             bool ZipFileExists = false;
 
@@ -645,8 +629,8 @@ namespace Planet
                 Status = string.Empty;
                 try
                 {
-                    string message = "Desea aceptar y recibir los archivos del planeta correspondiente?";
-                    string caption = "Petición de inserción de archivos";
+                    string message = "¿Desea aceptar y recibir los archivos?";
+                    string caption = "Warning";
                     MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                     DialogResult result;
 

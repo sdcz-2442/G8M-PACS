@@ -16,13 +16,10 @@ namespace PACS
     public partial class frm_selectStarship : Form
     {
         public string projectName = "PACS_starship";
-
-
         public frm_selectStarship()
         {
             InitializeComponent();
         }
-
         private void btn_selectspaceship_Click(object sender, EventArgs e)
         {
 

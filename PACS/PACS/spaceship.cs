@@ -35,7 +35,6 @@ namespace PACS
         NetworkStream ns;
 
         private ArrayList nSockets;
-        //spaship values
         public string spaceshipIdSelected;
         public string spaceshipIP;
         public string spaceshipPort1;
@@ -64,14 +63,6 @@ namespace PACS
 
         private void spaceship_Load(object sender, EventArgs e)
         {
-            //frm_selectStarship selection = new frm_selectStarship();
-
-            //spaceshipIdSelected = selection.spaceshipIdSelected;
-            //spaceshipIP = selection.spaceshipIP;
-            //spaceshipPort1 = selection.spaceshipPort1;
-            //spaceshipPort2 = selection.spaceshipPort2;
-            //codeSpaceship = selection.codeSpaceShip;
-
             lbl_spaceshipname.Text = codeSpaceship;
 
             DataSet dts;
@@ -119,14 +110,6 @@ namespace PACS
         {
             Control.CheckForIllegalCrossThreadCalls = false;
             lbx_console.Items.Clear();
-            //btn_sendping.Enabled = false;
-            //tbx_ipplanet.Enabled = false;
-            //lbl_networkstatus.Visible = true;
-            //cbx_messages.Enabled = false;
-            //btn_sendmessages.Enabled = false;
-            //tbx_port.Enabled = false;
-            //btn_sendmessages.Enabled = false;
-            //cbx_messages.Enabled = false;
 
             bool networkStatus = false;
             int pingCount = 0;
@@ -142,11 +125,6 @@ namespace PACS
                         tbx_ipplanet.Enabled = true;
                         tbx_port.Enabled = true;
                         lbl_networkstatus.Visible = false;
-                        //cbx_messages.Enabled = true;
-                        //btn_sendmessages.Enabled = true;
-                        //btn_sendping.Enabled = true;
-                        //btn_sendmessages.Enabled = true;
-                        //cbx_messages.Enabled = true;
                     }
                 }
                 else
@@ -187,11 +165,6 @@ namespace PACS
                         lbl_networkstatus.Text = "KO";
                         tbx_port.Enabled = true;
                         tbx_ipplanet.Enabled = true;
-                        //cbx_messages.Enabled = true;
-                        //btn_sendmessages.Enabled = true;
-                        //btn_sendmessages.Enabled = false;
-                        //cbx_messages.Enabled = false;
-                        //btn_sendping.Enabled = true;
                     }
                     else if (pingCount < 5)
                     {
@@ -199,22 +172,12 @@ namespace PACS
                         lbl_networkstatus.Text = "Waiting...";
                         tbx_ipplanet.Enabled = true;
                         tbx_port.Enabled = true;
-                        //btn_sendmessages.Enabled = false;
-                        //cbx_messages.Enabled = false;
-                        //btn_sendping.Enabled = true;
-                        //cbx_messages.Enabled = true;
-                        //btn_sendmessages.Enabled = true;
                     }
                     else
                     {
                         lbl_networkstatus.Text = "OK";
                         tbx_port.Enabled = true;
                         tbx_ipplanet.Enabled = true;
-                        //btn_sendping.Enabled = true;
-                        //cbx_messages.Enabled = true;
-                        //btn_sendmessages.Enabled = true;
-                        //btn_sendmessages.Enabled = true;
-                        //cbx_messages.Enabled = true;
                     }
 
                 }
@@ -255,7 +218,6 @@ namespace PACS
                 messageToPlanet = "Files";
             }
 
-            //MIRAR QUE ESTE PUERTO SEA DE LA BBDD O DE DONDE SEA??
             try
             {
                 TcpClient client = new TcpClient(tbx_ipplanet.Text, 8080);
@@ -269,11 +231,6 @@ namespace PACS
                     Byte[] dades = Encoding.ASCII.GetBytes(messageToPlanet);
                     NetworkStream ns = client.GetStream();
                     ns.Write(dades, 0, dades.Length);
-
-                    //envio cadena
-                    //dades = encryptedArray;
-                    //ns = client.GetStream();
-                    //ns.Write(dades, 0, dades.Length);
                 } else
                 {
                 Byte[] dades = Encoding.ASCII.GetBytes(messageToPlanet);
@@ -286,7 +243,6 @@ namespace PACS
                 MessageBox.Show("Servidor inaccesible");
             }
         }
-
         private void btn_sendfiles_Click(object sender, EventArgs e)
         {
             string fileName;
@@ -309,7 +265,6 @@ namespace PACS
 
             lbl_events.Items.Add("File send");
         }
-
         private void btn_connect_Click(object sender, EventArgs e)
         {
             if (!IsConnected)
@@ -319,7 +274,6 @@ namespace PACS
                 IsConnected = true;
             }
         }
-
         private void btn_encryptpublickey_Click(object sender, EventArgs e)
         {
             DataSet dts;
@@ -409,7 +363,6 @@ namespace PACS
 
             lbl_events.Items.Add("PACCSOL created");
         }
-
         private void btn_sendvalidationcode_Click(object sender, EventArgs e)
         {
             string messagetype = cbx_messages.Text;
@@ -441,14 +394,11 @@ namespace PACS
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             byte[] dataToEncrypt = ByteConverter.GetBytes(planetValidationCode);
 
-            
-
             encryptedData = rsaEnc.Encrypt(dataToEncrypt, false);
 
             //textcryptosend = encryptedData;
             encryptedArrayString = ByteConverter.GetString(encryptedData);
 
-            //MIRAR QUE ESTE PUERTO SEA DE LA BBDD O DE DONDE SEA??
             try
             {
                 TcpClient client = new TcpClient(tbx_ipplanet.Text, 8080);
@@ -461,7 +411,6 @@ namespace PACS
                 MessageBox.Show("Servidor inaccesible");
             }
         }
-
         public void conectarServer()
         {
             try
@@ -481,7 +430,7 @@ namespace PACS
                         if (boolForFiles)
                         {
                             
-                            RecibirArchivos(boolForFiles);
+                            RecieveFiles(boolForFiles);
                             boolForFiles = false;
                         }
                         {
@@ -521,10 +470,7 @@ namespace PACS
                 MessageBox.Show(ex.Message);
             }
         }
-
-
         //MÉTODOS Y FUNCIONES 
-
         public void closeServer()
         {
             IsConnected = false;
@@ -532,19 +478,16 @@ namespace PACS
             {
                 Listener.Stop();
             }
-
             if (this.client != null)
             {
                 client.Close();
             }
-
             if (this.ns != null)
             {
                 ns.Close();
             }
         }
-
-        public void RecibirArchivos(bool boolForfiles)
+        public void RecieveFiles(bool boolForfiles)
         {
 
             if (boolForfiles == false)
@@ -581,8 +524,8 @@ namespace PACS
 
                     try
                     {
-                        string message = "Desea aceptar y recibir los archivos del planeta correspondiente?";
-                        string caption = "Petición de inserción de archivos";
+                        string message = "¿Desea aceptar y recibir los archivos del planeta?";
+                        string caption = "Warning";
                         MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                         DialogResult result;
 
@@ -604,7 +547,6 @@ namespace PACS
                                     Fs.Write(RecData, 0, RecBytes);
                                     totalrecbytes += RecBytes;
                                 }
-
                                 Fs.Close();
                                 netstream.Close();
                                 Archivos.Close();
