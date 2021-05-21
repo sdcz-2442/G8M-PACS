@@ -413,6 +413,11 @@ namespace Planet
 
         private void btn_createfiles_Click(object sender, EventArgs e)
         {
+            Thread t_create = new Thread(createFiles);
+            t_create.Start();
+        }
+
+        void createFiles() {
             G8_Methods.FileCheck fc = new G8_Methods.FileCheck();
 
             string doc1 = "", doc2 = "", doc3 = "";
@@ -446,7 +451,6 @@ namespace Planet
             fc.desZippearArchivos(defaultPath + "\\PACS.zip", defaultPath + "\\extractedDocs");
 
             lbx_Missatges.Items.Add("Documentos guardados");
-
         }
 
         private void btn_checkfiles_Click(object sender, EventArgs e)

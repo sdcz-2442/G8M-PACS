@@ -1,9 +1,0 @@
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\bin\Debug\G8_FormBase.dll
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\bin\Debug\G8_FormBase.pdb
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\obj\Debug\G8_FormBase.csprojAssemblyReference.cache
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\obj\Debug\G8_FormBase.frm_formTemplate.resources
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\obj\Debug\G8_FormBase.Properties.Resources.resources
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\obj\Debug\G8_FormBase.csproj.GenerateResource.cache
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\obj\Debug\G8_FormBase.csproj.CoreCompileInputs.cache
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\obj\Debug\G8_FormBase.dll
-C:\Users\saman\source\repos\PACS_starship\G8_FormBase\obj\Debug\G8_FormBase.pdb
