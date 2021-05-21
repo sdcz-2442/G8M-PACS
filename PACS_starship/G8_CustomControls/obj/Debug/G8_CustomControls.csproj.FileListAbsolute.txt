@@ -1,8 +1,0 @@
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\bin\Debug\G8_CustomControls.dll
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\bin\Debug\G8_CustomControls.pdb
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\obj\Debug\G8_CustomControls.csprojAssemblyReference.cache
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\obj\Debug\G8_CustomControls.cs_round_panel.resources
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\obj\Debug\G8_CustomControls.csproj.GenerateResource.cache
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\obj\Debug\G8_CustomControls.csproj.CoreCompileInputs.cache
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\obj\Debug\G8_CustomControls.dll
-C:\Users\saman\source\repos\PACS_starship\G8_CustomControls\obj\Debug\G8_CustomControls.pdb
